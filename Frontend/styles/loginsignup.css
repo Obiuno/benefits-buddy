@@ -37,7 +37,7 @@ body {
   border-right: 1px solid rgba(0,0,0,0.05);
 }
 .logo {
-  width: 220px;
+  width: 250px;
   margin-bottom: 20px;
 }
 
@@ -104,7 +104,7 @@ body {
 .form-box h1 {
   margin-bottom: 25px;
   font-size: 26px;
-  color: #d6d2dd;
+  color: #18374c;
 }
 
 /* INPUTS */
