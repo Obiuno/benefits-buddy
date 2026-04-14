@@ -1,0 +1,27 @@
+{
+  "name": "benefits-buddy",
+  "version": "1.0.0",
+  "description": "An application to help people see what benefits they can look into",
+  "homepage": "https://github.com/Obiuno/benefits-buddy#readme",
+  "bugs": {
+    "url": "https://github.com/Obiuno/benefits-buddy/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Obiuno/benefits-buddy.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.20.0"
+  }
+}
