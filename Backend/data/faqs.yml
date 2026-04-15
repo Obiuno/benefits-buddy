@@ -1,0 +1,49 @@
+faqs:
+  - benefit_slug: universal-credit # related benefits
+    category: "eligibility"
+    question: "Can I claim if I am working?"
+    answer: "Yes, Universal Credit is designed to support people on low incomes, including those in work."
+    display_order: 1
+    active: true
+  - benefit_slug:
+    category:
+    question: "I’m working at the moment, am I still eligible for any help?"
+    answer: "You’d be surprised how often the answer is yes. Many people think benefits are only for those out of work, but a huge amount of support (like Universal Credit) is actually designed to top up the income of people who are working but still find it hard to make ends meet."
+    display_order:
+    active: true
+  - benefit_slug:
+    category:
+    question: "I have some money saved away for a rainy day. Does that mean I shouldn't bother checking?"
+    answer: "Not at all. While some support looks at your savings, many other types of help (like those for children or disability) don't look at your bank balance at all. Even for the ones that do, you can often have up to £16,000 in savings before you’re unable to claim."
+    display_order:
+    active: true
+  - benefit_slug:
+    category:
+    question: "I find the whole system really confusing. Where do I even begin?"
+    answer: "It IS confusing, and that’s why many people miss out. A good first step is just talking through your situation, like whether you have children, care for someone, or have a health condition. To see which doors might be open for you try talking with our Benefits Buddy"
+    display_order:
+    active: true
+  - benefit_slug:
+    category:
+    question: "Are there ways to lower my daily bills that aren't 'official' benefits?"
+    answer: "Yes, and these are some of the most underclaimed bits of help out there. If you’re on a low income, you might be eligible for Social Tariffs, which are basically discounted rates for your broadband and water bills."
+    display_order:
+    active: true
+  - benefit_slug:
+    category:
+    question: "I’m over 65, is there anything different for me?"
+    answer: "Definitely. Once you reach state pension age, the system changes a bit. Instead of Universal Credit, you might look at things like Pension Credit to top up your income, or Attendance Allowance if you find you need a bit of extra help at home."
+    display_order:
+    active: true
+  - benefit_slug:
+    category:
+    question: "If I find a benefit that looks right, what happens next?"
+    answer: "We’ll point you directly to the right official GOV.UK page so you don't have to go hunting for it. We’ll also give you a simple list of the documents you’ll need—like your National Insurance number or bank details, so you can feel prepared before you start."
+    display_order:
+    active: true
+  - benefit_slug:
+    category:
+    question: "I'm already on some older benefits. Will checking for new ones mess that up?"
+    answer: "That's a really important question. Some older ‘legacy’ benefits are being replaced by Universal Credit. It's always worth checking if you'd be better off moving, but we'll always suggest you get a bit of expert advice before making a permanent switch."
+    display_order:
+    active: true
