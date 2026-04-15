@@ -1,72 +1,62 @@
-const items = document.querySelectorAll('.faq-item');
-const glossaryItems = document.querySelectorAll('.glossary-item');
-const searchInput = document.querySelector('.search-box input');
-const searchBtn = document.querySelector('.search-box button');
+document.addEventListener("DOMContentLoaded", () => {
+  const items = document.querySelectorAll('.faq-item');
+  const searchInput = document.querySelector('.search-box input');
+  const searchBtn = document.querySelector('.search-box button');
+  const faqList = document.querySelector('.faq-list');
 
-/* FAQ OPEN / CLOSE */
-items.forEach(item => {
-  item.querySelector('.faq-question').addEventListener('click', () => {
-    item.classList.toggle('active');
-
-    const sign = item.querySelector('span');
-    sign.textContent = item.classList.contains('active') ? '−' : '+';
-  });
-});
-
-/* CREATE NOT FOUND MESSAGE */
-const helpSections = document.querySelector('.glossary-section');
-
-const notFound = document.createElement('p');
-notFound.textContent = "No results found.";
-notFound.style.textAlign = "center";
-notFound.style.fontSize = "20px";
-notFound.style.color = "#666";
-notFound.style.margin = "30px 0";
-notFound.style.display = "none";
-
-helpSections.appendChild(notFound);
-
-/* SEARCH FUNCTION */
-function searchAll() {
-  const keyword = searchInput.value.toLowerCase().trim();
-  let found = false;
-
-  // FAQ Search
+  /* FAQ OPEN / CLOSE */
   items.forEach(item => {
-    const text = item.innerText.toLowerCase();
+    const question = item.querySelector('.faq-question');
 
-    if (text.includes(keyword) || keyword === "") {
-      item.style.display = "block";
-      found = true;
-    } else {
-      item.style.display = "none";
-    }
+    question.addEventListener('click', () => {
+      item.classList.toggle('active');
+
+      const sign = item.querySelector('span');
+      sign.textContent = item.classList.contains('active') ? '−' : '+';
+    });
   });
 
-  // Glossary Search
-  glossaryItems.forEach(item => {
-    const text = item.innerText.toLowerCase();
+  /* NOT FOUND MESSAGE */
+  const notFound = document.createElement('p');
+  notFound.textContent = "No FAQ found.";
+  notFound.style.textAlign = "center";
+  notFound.style.fontSize = "20px";
+  notFound.style.color = "#666";
+  notFound.style.marginTop = "20px";
+  notFound.style.display = "none";
+  faqList.appendChild(notFound);
 
-    if (text.includes(keyword) || keyword === "") {
-      item.style.display = "block";
-      found = true;
-    } else {
-      item.style.display = "none";
-    }
-  });
+  /* SEARCH */
+  function searchFAQ() {
+    const keyword = searchInput.value.toLowerCase().trim();
+    let found = false;
 
-  notFound.style.display = found ? "none" : "block";
-}
+    items.forEach(item => {
+      const question = item.querySelector('.faq-question').innerText.toLowerCase();
+      const answer = item.querySelector('.faq-answer').innerText.toLowerCase();
 
-/* LIVE SEARCH WHEN TYPING */
-searchInput.addEventListener('input', searchAll);
+      if (
+        keyword === "" ||
+        question.includes(keyword) ||
+        answer.includes(keyword)
+      ) {
+        item.style.display = "block";
+        found = true;
+      } else {
+        item.style.display = "none";
+      }
+    });
 
-/* SEARCH BUTTON */
-searchBtn.addEventListener('click', searchAll);
-
-/* ENTER KEY */
-searchInput.addEventListener('keypress', function(e){
-  if(e.key === "Enter"){
-    searchAll();
+    notFound.style.display = found ? "none" : "block";
   }
+
+  /* EVENTS */
+  searchInput.addEventListener("input", searchFAQ);
+  searchBtn.addEventListener("click", searchFAQ);
+
+  searchInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") searchFAQ();
+  });
 });
+
+
