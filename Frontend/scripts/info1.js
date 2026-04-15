@@ -6,21 +6,35 @@ let allFaqs = [];
 
 /* LOAD FAQS FROM BACKEND */
 async function loadFaqs() {
-  try {
-    const response = await fetch('/api/faqs');
+  try {const response = await fetch('http://localhost:3000/api/faqs');
+    if (!response.ok) {
+      throw new Error('Failed to fetch FAQs');
+    }
+
     const data = await response.json();
 
     allFaqs = data.filter(faq => faq.active);
+
     renderFaqs(allFaqs);
 
   } catch (error) {
-    faqList.innerHTML = "<p>Failed to load FAQs.</p>";
+    faqList.innerHTML = "<p class='not-found'>Failed to load FAQs.</p>";
     console.error(error);
   }
 }
 
+/* HIGHLIGHT SEARCH TEXT */
+function highlightText(text, keyword) {
+  if (!keyword) return text;
+
+  const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(`(${escaped})`, 'gi');
+
+  return text.replace(regex, '<mark>$1</mark>');
+}
+
 /* RENDER FAQS */
-function renderFaqs(faqs) {
+function renderFaqs(faqs, keyword = "") {
   faqList.innerHTML = "";
 
   if (faqs.length === 0) {
@@ -32,12 +46,12 @@ function renderFaqs(faqs) {
     faqList.innerHTML += `
       <div class="faq-item">
         <button class="faq-question">
-          ${faq.question}
+          ${highlightText(faq.question, keyword)}
           <span>+</span>
         </button>
 
         <div class="faq-answer">
-          ${faq.answer}
+          ${highlightText(faq.answer, keyword)}
         </div>
       </div>
     `;
@@ -46,7 +60,7 @@ function renderFaqs(faqs) {
   addAccordionEvents();
 }
 
-/* OPEN / CLOSE */
+/* OPEN / CLOSE FAQ */
 function addAccordionEvents() {
   const items = document.querySelectorAll('.faq-item');
 
@@ -61,26 +75,28 @@ function addAccordionEvents() {
   });
 }
 
-/* SEARCH */
+/* SEARCH FAQS */
 function searchFaqs() {
   const keyword = searchInput.value.toLowerCase().trim();
 
   const filtered = allFaqs.filter(faq =>
     faq.question.toLowerCase().includes(keyword) ||
     faq.answer.toLowerCase().includes(keyword) ||
-    faq.category.toLowerCase().includes(keyword) ||
-    faq.benefit_slug.toLowerCase().includes(keyword)
+    (faq.category || "").toLowerCase().includes(keyword) ||
+    (faq.benefit_slug || "").toLowerCase().includes(keyword)
   );
 
-  renderFaqs(filtered);
+  renderFaqs(filtered, keyword);
 }
 
 /* EVENTS */
 searchInput.addEventListener('input', searchFaqs);
 searchBtn.addEventListener('click', searchFaqs);
 
-searchInput.addEventListener('keypress', e => {
-  if (e.key === "Enter") searchFaqs();
+searchInput.addEventListener('keypress', function (e) {
+  if (e.key === "Enter") {
+    searchFaqs();
+  }
 });
 
 /* START */

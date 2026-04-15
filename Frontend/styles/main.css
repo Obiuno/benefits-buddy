@@ -1,15 +1,23 @@
 /* ================= RESET ================= */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f7fa;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
 }
+
+body{
+  background:#f5f7fa;
+  color:#222;
+  font-size:15px;
+}
+
 
 /* ================= NAVBAR ================= */
 .navbar {
   width: 100%;
   padding: 14px 40px;
-  height: 80px;          /* add this */
+  height: 80px;          
   background: #1f3c4d;
   display: flex;
   justify-content: space-between;
@@ -57,61 +65,82 @@ body {
 }
 
 /* Profile container */
-.profile {
-  position: relative;
+/* PROFILE */
+.profile{
+  position:relative;
 }
 
-/* Hide checkbox */
-#profileToggle {
-  display: none;
+#profileToggle{
+  display:none;
 }
 
-/* Profile image click area */
-.profile-img {
-  width: 42px;
-  height: 42px;
-  object-fit: cover;
-  border-radius: 50%;
+.profile-btn{
+  cursor:pointer;
+  display:block;
 }
 
-/* Dropdown menu */
-.profile-dropdown {
-  position: absolute;
-  right: 0;
-  top: 55px;
-  background: white;
-  border-radius: 10px;
-  width: 180px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  display: none;
-  flex-direction: column;
+.profile-img{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid rgba(255,255,255,0.35);
+  transition:0.2s ease;
 }
 
-/* Menu items */
-.profile-dropdown a {
-  padding: 12px;
-  text-decoration: none;
-  color: black;
-  border-bottom: 1px solid #eee;
+.profile-img:hover{
+  transform:scale(1.05);
 }
 
-.profile-dropdown a:hover {
-  background: #f3f6f9;
-}
-.profile-btn {
-  cursor: pointer;
-  display: block;
-  transition: transform 0.2s ease, filter 0.2s ease;
+/* MINI DASHBOARD */
+.profile-dropdown{
+  position:absolute;
+  top:58px;
+  right:0;
+  width:260px;
+  background:white;
+  border-radius:18px;
+  box-shadow:0 14px 35px rgba(0,0,0,0.14);
+  display:none;
+  z-index:1000;
+  overflow:hidden;
 }
 
-.profile-btn:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
+/* HEADER */
+.profile-dropdown::before{
+  content:"Account";
+  display:block;
+  padding:16px 18px;
+  background:linear-gradient(135deg,#1f3c4d,#2d5c73);
+  color:white;
+  font-size:18px;
+  font-weight:700;
 }
-.profile-btn:hover .profile-img {
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.4);
+
+/* MENU LINKS */
+.profile-dropdown a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 18px;
+  text-decoration:none;
+  color:#222;
+  font-size:15px;
+  border-bottom:1px solid #eef1f4;
+  transition:0.2s ease;
 }
-/* Show dropdown when clicked */
-#profileToggle:checked ~ .profile-dropdown {
-  display: flex;
+
+.profile-dropdown a:last-child{
+  border-bottom:none;
+}
+
+.profile-dropdown a:hover{
+  background:#f7fafc;
+  color:#1f3c4d;
+  padding-left:24px;
+}
+
+/* SHOW */
+#profileToggle:checked ~ .profile-dropdown{
+  display:block;
 }
