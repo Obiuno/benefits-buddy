@@ -1,0 +1,205 @@
+glossary:
+  - glossary_slug: advanced_education
+    term: "Advanced Education"
+    definition: "Studying a course to get a degree, diploma or qualification."
+    related_benefits:
+  - glossary_slug: assesment_period
+    term: "Assessment Period"
+    definition: "A monthly period starting on the day you first make your Universal Credit claim."
+    related_benefits:
+  - glossary_slug: assessment_phase
+    term: "Assessment Phase"
+    definition: "The first part of your claim before you have a work capability assessment."
+    related_benefits:
+  - glossary_slug: benefit_cap
+    term: "Benefit Cap"
+    definition: "A limit on the total amount of benefits you can get."
+    related_benefits:
+  - glossary_slug: common_travel_area
+    term: "Common Travel Area"
+    definition: "The UK, Channel Islands and Isle of Man and the Republic of Ireland."
+    related_benefits:
+  - glossary_slug: contributory_benefit
+    term: "Contributory Benefit"
+    definition: "A benefit you can get if you have paid enough National Insurance contributions."
+    related_benefits:
+  - glossary_slug: defer_your_state_pension
+    term: "Defer your State Pension"
+    definition: "Choosing to wait to claim State Pension after you reach State Pension age, to get a higher weekly amount when you do claim."
+    related_benefits:
+  - glossary_slug: department_for_communities_(DOC)
+    term: "Department for Communities (DCC)"
+    definition: "The government department responsible for welfare and benefits in Northern Ireland."
+    related_benefits:
+  - glossary_slug: department_for_work_and_pensions_(DWP)
+    term: "Department for Work and Pensions (DWP)"
+    definition: "The government department responsible for welfare and benefits in Great Britain."
+    related_benefits:
+  - glossary_slug: disability_benefit
+    term: "Disability Benefit"
+    definition: "A benefit you can get if you have a disability or health condition that affects your ability to work."
+    related_benefits:
+  - glossary_slug: disability_living_allowance_(DLA)
+    term: "Disability Living Allowance (DLA)"
+    definition: "A benefit for people under 16 who have a disability or health condition that affects their ability to get around or care for themselves."
+    related_benefits:
+  - glossary_slug: dwp
+    term: "Department for Work and Pensions (DWP)"
+    definition: "The government department responsible for welfare and benefits in Great Britain."
+    related_benefits:
+  - glossary_slug: employment_and_support_allowance_(ESA)
+    term: "Employment and Support Allowance (ESA)"
+    definition: "A benefit for people who have a disability or health condition that affects their ability to work, and who are not eligible for Universal Credit."
+    related_benefits:
+  - glossary_slug: european_economic_area_(EEA)
+    term: "European Economic Area (EEA)"
+    definition: "The EU member states plus Iceland, Liechtenstein and Norway."
+    related_benefits:
+  - glossary_slug: european_union_(EU)
+    term: "European Union (EU)"
+    definition: "A political and economic union of 27 member states that are located primarily in Europe."
+    related_benefits:
+  - glossary_slug: financial_assessment
+    term: "Financial Assessment"
+    definition: "An assessment of your income and savings to determine how much Universal Credit you can get."
+    related_benefits:
+  - glossary_slug: hmrc
+    term: "HMRC"
+    definition: "Her Majesty's Revenue and Customs, the UK government department responsible for tax collection and administration of certain benefits."
+    related_benefits:
+  - glossary_slug: housing_benefit
+    term: "Housing Benefit"
+    definition: "A benefit to help with rent payments for people on a low income or claiming benefits."
+    related_benefits:
+  - glossary_slug: income_support
+    term: "Income Support"
+    definition: "A benefit for people who are on a low income and not required to look for work, such as carers or single parents with young children."
+    related_benefits:
+  - glossary_slug: jobseeker's_allowance_(JSA)
+    term: "Jobseeker's Allowance (JSA)"
+    definition: "A benefit for people who are unemployed and looking for work."
+    related_benefits:
+  - glossary_slug: legacy_benefit
+    term: "Legacy Benefit"
+    definition: "A benefit that has been replaced by a Universal Credit"
+    related_benefits:
+  - glossary_slug: local_housing_allowance
+    term: "Local Housing Allowance"
+    definition: "The amount of Housing Benefit you can get if you rent from a private landlord."
+    related_benefits:
+  - glossary_slug: managed_migration
+    term: "Managed Migration"
+    definition: "The process of moving people from legacy benefits to Universal Credit."
+    related_benefits:
+  - glossary_slug: mandatory_reconsideration
+    term: "Mandatory Reconsideration"
+    definition: "The process of asking for a benefit decision to be looked at again"
+    related_benefits:
+  - glossary_slug: mandatory_reconsideration_notice
+    term: "Mandatory Reconsideration Notice"
+    definition: "A letter from the DWP that explains the decision made after a mandatory reconsideration."
+    related_benefits:
+  - glossary_slug: minimum_income_floor
+    term: "Minimum Income Floor"
+    definition: "An assumed level of income for self-employed people that is used to calculate their Universal Credit payment."
+    related_benefits:
+  - glossary_slug: mixed-age_couple
+    term: "Mixed-age Couple"
+    definition: "A couple where one partner is under State Pension age and the other is over State Pension age."
+    related_benefits:
+  - glossary_slug: national_insurance_number
+    term: "National Insurance Number"
+    definition: "A unique number that you need to work and claim benefits in the UK."
+    related_benefits:
+  - glossary_slug: non-dependant
+    term: "Non-dependant"
+    definition: "A person who lives with you but is not financially dependent on you, such as an adult child or a partner."
+    related_benefits:
+  - glossary_slug: non_means-tested_benefit
+    term: "Non means-tested Benefit"
+    definition: "A benefit that you can get regardless of your income or savings, such as the State Pension."
+    related_benefits:
+  - glossary_slug: notional_income
+    term: "Notional Income"
+    definition: "An amount of income that the DWP assumes you have, even if you don't actually receive it, for the purpose of calculating your Universal Credit payment."
+    related_benefits:
+  - glossary_slug: overlapping_benefits
+    term: "Overlapping Benefits"
+    definition: "When you receive more than one benefit at the same time, and the DWP has to decide how to calculate your Universal Credit payment."
+    related_benefits:
+  - glossary_slug: presciribed_diseases
+    term: "Prescribed Diseases"
+    definition: "A list of diseases that are considered to be severe enough to qualify for certain benefits without a work capability assessment."
+    related_benefits:
+  - glossary_slug: private_tenancy
+    term: "Private Tenancy"
+    definition: "A rental agreement between a tenant and a private landlord."
+    related_benefits:
+  - glossary_slug: qualifying_young_person
+    term: "Qualifying Young Person"
+    definition: "Someone aged 16 or over but under 20 who meets a list of conditions"
+    related_benefits:
+  - glossary_slug: relevant_education
+    term: "Relevant Education"
+    definition: "Education that is full time and not advanced"
+    related_benefits:
+  - glossary_slug: severe_conditions
+    term: "Severe Conditions"
+    definition: "Having a lifelong, unchanging condition that makes you unable to work."
+    related_benefits:
+  - glossary_slug: social_housing_landlord
+    term: "Social Housing Landlord"
+    definition: "A local authority or housing association that provides social housing."
+    related_benefits:
+  - glossary_slug: social_security_Scotland
+    term: "Social Security Scotland"
+    definition: "The Scottish government agency responsible for administering certain benefits in Scotland."
+    related_benefits:
+  - glossary_slug: social_services
+    term: "Social Services"
+    definition: "The local authority department responsible for providing support and services to people in need, such as children, elderly people and people with disabilities."
+    related_benefits:
+  - glossary_slug: state_earnings_related_pension_scheme_(SERPS)
+    term: "State Earnings Related Pension Scheme (SERPS)"
+    definition: "A pension scheme that was in place in the UK from 1978 to 2002, which provided an additional pension based on your earnings."
+    related_benefits:
+  - glossary_slug: state_pension
+    term: "State Pension"
+    definition: "A regular payment from the government that you can get when you reach State Pension age, based on your National Insurance contributions."
+    related_benefits:
+  - glossary_slug: state_pension_age
+    term: "State Pension Age"
+    definition: "The age at which you can start claiming the State Pension, which is currently 66"
+    related_benefits:
+  - glossary_slug: surplus_income
+    term: "Surplus Income"
+    definition: "The amount of income you have left after your Universal Credit payment has been calculated, which may affect your eligibility for certain benefits or support."
+    related_benefits:
+  - glossary_slug: tax_credits
+    term: "Tax Credits"
+    definition: "A benefit that provides financial support to people on a low income, which has been replaced by Universal Credit for most people."
+    related_benefits:
+  - glossary_slug: tax_year
+    term: "Tax Year"
+    definition: "The period from 6 April to 5 April the following year, which is used for tax and benefit purposes."
+    related_benefits:
+  - glossary_slug: temporary_absence
+    term: "Temporary Absence"
+    definition: "When you are temporarily away from your home, such as for a holiday or hospital stay, which may affect your eligibility for certain benefits."
+    related_benefits:
+  - glossary_slug: universal_credit
+    term: "Universal Credit"
+    definition: "A benefit for people on a low income or out of work, which replaces several legacy benefits."
+    related_benefits:
+  - glossary_slug: universal_credit_full_service
+    term: "Universal Credit Full Service"
+    definition: "The version of Universal Credit that is currently being rolled out across the UK, which includes all the features and requirements of the benefit."
+    related_benefits:
+  - glossary_slug: work_capability_assessment
+    term: "Work Capability Assessment"
+    definition: "An assessment of your ability to work, which is used to determine your eligibility for certain benefits and the amount of Universal Credit you can get."
+    related_benefits:
+  - glossary_slug: working_age
+    term: "Working Age"
+    definition: "The age range during which you are expected to work and claim benefits if you are on a low income, which is currently 16 to State Pension age."
+    related_benefits:
