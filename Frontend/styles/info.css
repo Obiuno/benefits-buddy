@@ -75,6 +75,13 @@ body::after{
   color:white;
   font-size:16px;
 }
+/* SEARCH HIGHLIGHT */
+mark{
+  background:#fff3a3;
+  color:#111827;
+  padding:0 2px;
+  border-radius:4px;
+}
 
 /* ================= FAQ SECTION ================= */
 /* FAQ SECTION */
@@ -128,6 +135,29 @@ body::after{
   align-items:center;
   cursor:pointer;
   text-align:left;
+}
+.question-text{
+  flex:1;
+}
+
+.icon{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#4da6ff;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:bold;
+  flex-shrink:0;
+}
+
+mark{
+  background:#ffe96b;
+  padding:1px 4px;
+  border-radius:4px;
 }
 
 /* PLUS ICON */
