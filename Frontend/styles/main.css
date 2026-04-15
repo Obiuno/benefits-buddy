@@ -1,0 +1,117 @@
+/* ================= RESET ================= */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+  width: 100%;
+  padding: 14px 40px;
+  height: 80px;          /* add this */
+  background: #1f3c4d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Logo */
+.logo-img {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+}
+
+/* Nav links */
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-btn {
+  text-decoration: none;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 9px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.nav-btn:hover {
+  background: #7fbcd2;
+  transform: translateY(-1px);
+}
+
+.nav-btn:hover {
+  background: #7fbcd2;
+}
+
+/* ================= RIGHT SIDE ================= */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Profile container */
+.profile {
+  position: relative;
+}
+
+/* Hide checkbox */
+#profileToggle {
+  display: none;
+}
+
+/* Profile image click area */
+.profile-img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Dropdown menu */
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 55px;
+  background: white;
+  border-radius: 10px;
+  width: 180px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: none;
+  flex-direction: column;
+}
+
+/* Menu items */
+.profile-dropdown a {
+  padding: 12px;
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-dropdown a:hover {
+  background: #f3f6f9;
+}
+.profile-btn {
+  cursor: pointer;
+  display: block;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.profile-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+.profile-btn:hover .profile-img {
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.4);
+}
+/* Show dropdown when clicked */
+#profileToggle:checked ~ .profile-dropdown {
+  display: flex;
+}
