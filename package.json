@@ -15,8 +15,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "seed-db": "node ./BackEnd/database/setup-db.js",
-    "dev": "nodemon ./BackEnd/index.js",
+    "seed-db": "node ./Backend/database/setup-db.js",
+    "dev": "nodemon ./Backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

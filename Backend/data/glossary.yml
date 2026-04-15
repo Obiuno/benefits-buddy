@@ -3,7 +3,7 @@ glossary:
     term: "Advanced Education"
     definition: "Studying a course to get a degree, diploma or qualification."
     related_benefits:
-  - glossary_slug: assesment_period
+  - glossary_slug: assessment_period
     term: "Assessment Period"
     definition: "A monthly period starting on the day you first make your Universal Credit claim."
     related_benefits:
@@ -27,7 +27,7 @@ glossary:
     term: "Defer your State Pension"
     definition: "Choosing to wait to claim State Pension after you reach State Pension age, to get a higher weekly amount when you do claim."
     related_benefits:
-  - glossary_slug: department_for_communities_(DOC)
+  - glossary_slug: department_for_communities
     term: "Department for Communities (DCC)"
     definition: "The government department responsible for welfare and benefits in Northern Ireland."
     related_benefits:
