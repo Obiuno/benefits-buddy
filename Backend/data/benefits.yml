@@ -2,7 +2,7 @@ benefits:
   - slug: universal-credit
     name: "Universal Credit"
     description: "Help with living costs if you're on low income or out of work"
-    category: "income_support" # consider adding category column
+    category: ["income_support"] # consider adding category column
     active: true
     # This section maps to your JSONB content column
     urls:
@@ -27,11 +27,11 @@ benefits:
   - slug: pension-credit
     name: "Pension Credit"
     description: "Extra money for low-income pensioners to bring weekly income up to a minimum amount."
-    category: "income_support" 
+    category: ["income_support"] 
     active: true
     urls:
       gov_url: "https://www.gov.uk/pension-credit"
-      apply_url: "https://www.gov.uk/apply-pension-credit"
+      apply_url: "https://www.gov.uk/pension-credit/how-to-claim"
     details: 
       is_legacy_replacement: false # UC is for working age; this is for pension age
       eligibility:
@@ -50,7 +50,7 @@ benefits:
   - slug: child-benefit
     name: "Child Benefit"
     description: "Monthly payments to people responsible for bringing up a child."
-    category: "families_and_children"
+    category: ["families_and_children"]
     active: true
     urls:
       gov_url: "https://www.gov.uk/child-benefit"
@@ -70,7 +70,7 @@ benefits:
   - slug: carers-allowance
     name: "Carer's Allowance"
     description: "Money for people who spend at least 35 hours a week caring for someone with a disability."
-    category: "help_for_carers"
+    category: ["help_for_carers"]
     active: true
     urls:
       gov_url: "https://www.gov.uk/carers-allowance"
@@ -88,7 +88,7 @@ benefits:
   - slug: free-school-meals
     name: "Free School Meals"
     description: "Ensures children in state-funded schools receive a free midday meal."
-    category: "families_and_children"
+    category: ["families_and_children"]
     active: true
     urls:
       gov_url: "https://www.gov.uk/apply-free-school-meals"
@@ -104,7 +104,7 @@ benefits:
   - slug: attendance-allowance
     name: "Attendance Allowance"
     description: "Support for people of pension age who have care needs due to disability."
-    category: "disability_and_health"
+    category: ["disability_and_health"]
     active: true
     urls:
       gov_url: "https://www.gov.uk/attendance-allowance"
@@ -122,7 +122,7 @@ benefits:
   - slug: pip
     name: "Personal Independence Payment"
     description: "Help with extra costs caused by a long-term illness or disability."
-    category: "disability_and_health"
+    category: ["disability_and_health"]
     active: true
     urls:
       gov_url: "https://www.gov.uk/pip"
@@ -142,7 +142,7 @@ benefits:
   - slug: healthy-start
     name: "Healthy Start"
     description: "A prepaid card to help buy milk, fruit, and vegetables for young families."
-    category: "families_and_children"
+    category: ["families_and_children"]
     active: true
     urls:
       gov_url: "https://www.gov.uk/healthy-start"
@@ -161,7 +161,7 @@ benefits:
   - slug: budgeting-loan
     name: "Budgeting Loan"
     description: "An interest-free loan for essentials like clothes or furniture."
-    category: "emergency_one_off"
+    category: ["emergency_one_off"]
     active: true
     urls:
       gov_url: "https://www.gov.uk/budgeting-help-benefits"
