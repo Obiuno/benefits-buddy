@@ -368,3 +368,203 @@ body{
   font-size:14px;
   color:#d6e1e8;
 }
+
+/* =====================================
+   TABLET DEVICES (max-width: 992px)
+===================================== */
+@media (max-width: 992px){
+
+  .nav-links{
+    gap: 14px;
+  }
+
+  .hero h1{
+    font-size: 42px;
+  }
+
+  .hero p{
+    font-size: 16px;
+  }
+
+  .search-box{
+    width: 90%;
+  }
+
+  .benefit-grid,
+  .cards-grid,
+  .faq-grid{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .modal-box{
+    width: 90%;
+  }
+}
+
+
+/* =====================================
+   MOBILE DEVICES (max-width: 768px)
+===================================== */
+@media (max-width: 768px){
+
+  /* NAVBAR */
+  .navbar{
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .nav-left{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-links{
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .nav-btn{
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .profile{
+    position: static;
+  }
+
+  /* HERO */
+  .hero{
+    padding: 45px 15px 55px;
+  }
+
+  .hero h1{
+    font-size: 34px;
+    line-height: 1.2;
+  }
+
+  .hero p{
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  /* SEARCH */
+  .search-box{
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .search-box input{
+    font-size: 15px;
+    padding: 13px 16px;
+  }
+
+  .search-btn{
+    width: 58px;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  /* GRID */
+  .benefit-grid,
+  .cards-grid,
+  .faq-grid{
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 14px;
+  }
+
+  /* CARD */
+  .benefit-card{
+    border-radius: 16px;
+  }
+
+  .benefit-card img{
+    height: 170px;
+  }
+
+  .card-content{
+    padding: 16px;
+  }
+
+  .benefit-card h2{
+    font-size: 22px;
+  }
+
+  .benefit-card p{
+    font-size: 14px;
+  }
+
+  .card-actions{
+    flex-direction: column;
+  }
+
+  .btn{
+    width: 100%;
+    text-align: center;
+  }
+
+  /* MODAL */
+  .modal-box{
+    width: 95%;
+    padding: 18px;
+    max-height: 85vh;
+  }
+
+  .modal-box h2{
+    font-size: 26px;
+  }
+
+  .modal-box h3{
+    font-size: 18px;
+  }
+
+  .modal-box p,
+  .modal-box li{
+    font-size: 14px;
+  }
+}
+
+
+/* =====================================
+   SMALL PHONES (max-width: 480px)
+===================================== */
+@media (max-width: 480px){
+
+  .hero h1{
+    font-size: 28px;
+  }
+
+  .hero p{
+    font-size: 14px;
+  }
+
+  .logo-img{
+    width: 70px;
+  }
+
+  .nav-btn{
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .benefit-card img{
+    height: 150px;
+  }
+
+  .benefit-card h2{
+    font-size: 20px;
+  }
+
+  .search-box{
+    border-radius: 30px;
+  }
+
+  .search-btn{
+    width: 52px;
+  }
+}
