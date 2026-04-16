@@ -1,0 +1,177 @@
+benefits:
+  - slug: universal-credit
+    name: "Universal Credit"
+    description: "Help with living costs if you're on low income or out of work"
+    category: "income_support" # consider adding category column
+    active: true
+    # This section maps to your JSONB content column
+    urls:
+	    # gov url in the details for frontend, leave apply URL leave there
+      gov_url: "https://www.gov.uk/universal-credit"
+      apply_url: "https://www.gov.uk/apply-universal-credit"
+    details: #change to learn_more for Sania
+      is_legacy_replacement: true # consider fadding out flag as well
+      eligibility:
+        age_min: 18
+        age_max: 66
+        savings_threshold: 16000
+        residency: "habitual_residence"
+      documents_required: ["National Insurance number", "Bank account details", "Housing costs evidence"]
+      gotchas: ["LISA counts toward savings threshold", "Partner income included if living together"]
+      preparation_tips: ["Have last 3 payslips ready", "Check your NI number on a P60"]
+      related_benefits: ["council_tax_reduction", "free_school_meals", "broadband_social_tariff"]
+      questions_to_ask:
+        - { id: housing_status, question: "Do you pay rent or have a mortgage?", type: "boolean" }
+        - { id: savings_check, question: "Do you have more than £16,000 in savings?", type: "boolean" }
+      glossary_terms: ["habitual_residence", "means_tested", "savings_threshold"]
+  - slug: pension-credit
+    name: "Pension Credit"
+    description: "Extra money for low-income pensioners to bring weekly income up to a minimum amount."
+    category: "income_support" 
+    active: true
+    urls:
+      gov_url: "https://www.gov.uk/pension-credit"
+      apply_url: "https://www.gov.uk/apply-pension-credit"
+    details: 
+      is_legacy_replacement: false # UC is for working age; this is for pension age
+      eligibility:
+        age_min: 66 # State Pension age
+        age_max: null # No upper limit once you reach state pension age
+        savings_threshold: 10000 # Savings over this may reduce the amount, but no hard £16k cutoff
+        residency: "habitual_residence"
+      documents_required: ["National Insurance number", "Information about income and savings", "Bank details"]
+      gotchas: ["Mixed-age couples (one partner under 66) usually claim Universal Credit instead"]
+      preparation_tips: ["Have details of any private pensions ready"]
+      related_benefits: ["warm_home_discount", "winter_fuel_payment", "housing_benefit"]
+      questions_to_ask:
+        - { id: age_check, question: "Are you or your partner at State Pension age (66)?", type: "boolean" }
+      glossary_terms: ["state_pension_age", "guarantee_credit", "mixed-age_couple"]
+  # 3. CHILD BENEFIT (Support for parents/guardians)
+  - slug: child-benefit
+    name: "Child Benefit"
+    description: "Monthly payments to people responsible for bringing up a child."
+    category: "families_and_children"
+    active: true
+    urls:
+      gov_url: "https://www.gov.uk/child-benefit"
+      apply_url: "https://www.gov.uk/child-benefit/how-to-claim"
+    details:
+      is_legacy_replacement: false
+      eligibility:
+        child_age_max: 16 # or 20 if in education/training
+        income_tax_threshold: 60000 # Tax applies over this amount
+      documents_required: ["Child's birth certificate", "National Insurance number"]
+      gotchas: ["If you earn over £80,000 you lose all benefit through tax"]
+      related_benefits: ["guardian_allowance", "free_school_meals"]
+      questions_to_ask:
+        - { id: child_responsibility, question: "Are you responsible for a child under 16 (or 20 in education)?", type: "boolean" }
+      glossary_terms: ["qualifying_young_person", "hmrc"]
+  # 4. CARER'S ALLOWANCE (Support for regular carers)
+  - slug: carers-allowance
+    name: "Carer's Allowance"
+    description: "Money for people who spend at least 35 hours a week caring for someone with a disability."
+    category: "help_for_carers"
+    active: true
+    urls:
+      gov_url: "https://www.gov.uk/carers-allowance"
+      apply_url: "https://www.gov.uk/carers-allowance/how-to-claim"
+    details:
+      is_legacy_replacement: false
+      eligibility:
+        hours_per_week_min: 35
+        earnings_limit_after_tax: 204 # Weekly earnings limit
+      gotchas: ["The person you care for may see their own benefits reduce if you claim this"]
+      questions_to_ask:
+        - { id: caring_hours, question: "Do you provide care for at least 35 hours a week?", type: "boolean" }
+      glossary_terms: ["habitual_residence", "severe_disability_premium"]
+  # 5. FREE SCHOOL MEALS (Nutrition for students)
+  - slug: free-school-meals
+    name: "Free School Meals"
+    description: "Ensures children in state-funded schools receive a free midday meal."
+    category: "families_and_children"
+    active: true
+    urls:
+      gov_url: "https://www.gov.uk/apply-free-school-meals"
+      apply_url: "https://www.gov.uk/apply-free-school-meals"
+    details:
+      is_legacy_replacement: false
+      eligibility:
+        is_on_means_tested_benefits: true
+      gotchas: ["Infants (Reception to Year 2) usually get these regardless of income"]
+      questions_to_ask:
+        - { id: schooling_child, question: "Do you have a child in a state-funded school?", type: "boolean" }
+  # 6. ATTENDANCE ALLOWANCE (Care needs for over-65s)
+  - slug: attendance-allowance
+    name: "Attendance Allowance"
+    description: "Support for people of pension age who have care needs due to disability."
+    category: "disability_and_health"
+    active: true
+    urls:
+      gov_url: "https://www.gov.uk/attendance-allowance"
+      apply_url: "https://www.gov.uk/attendance-allowance/how-to-claim"
+    details:
+      is_legacy_replacement: false
+      eligibility:
+        age_min: 66
+        care_needs_duration_months: 6 # Unless terminally ill
+      gotchas: ["You cannot claim this if you already get PIP or DLA"]
+      questions_to_ask:
+        - { id: daily_help_needs, question: "Do you need frequent help with personal care or supervision?", type: "boolean" }
+      glossary_terms: ["state_pension_age", "disability_benefit"]
+  # 7. PIP - PERSONAL INDEPENDENCE PAYMENT (Disability support for adults)
+  - slug: pip
+    name: "Personal Independence Payment"
+    description: "Help with extra costs caused by a long-term illness or disability."
+    category: "disability_and_health"
+    active: true
+    urls:
+      gov_url: "https://www.gov.uk/pip"
+      apply_url: "https://www.gov.uk/pip/how-to-claim"
+    details:
+      is_legacy_replacement: false
+      eligibility:
+        age_min: 16
+        age_max: 66
+        condition_duration_months: 3
+        expected_duration_months: 9
+      gotchas: ["The amount depends on how your condition affects you, not the condition itself"]
+      questions_to_ask:
+        - { id: mobility_issues, question: "Does your condition make it hard for you to move around or daily tasks?", type: "boolean" }
+      glossary_terms: ["work_capability_assessment", "mandatory_reconsideration"]
+  # 8. HEALTHY START (Food and milk for families)
+  - slug: healthy-start
+    name: "Healthy Start"
+    description: "A prepaid card to help buy milk, fruit, and vegetables for young families."
+    category: "families_and_children"
+    active: true
+    urls:
+      gov_url: "https://www.gov.uk/healthy-start"
+      apply_url: "https://www.healthystart.nhs.uk/how-to-apply/"
+    details:
+      is_legacy_replacement: false
+      eligibility:
+        pregnancy_weeks_min: 10
+        child_age_max: 4
+        income_threshold_uc: 408 # Monthly threshold for UC claimants
+      documents_required: ["National Insurance number", "Proof of children's identities"]
+      gotchas: ["Not available in Scotland—use Best Start Foods instead"]
+      questions_to_ask:
+        - { id: income_check, question: "Is your monthly take-home pay £408 or less?", type: "boolean" }
+  # 9. BUDGETING LOAN (Emergency essentials)
+  - slug: budgeting-loan
+    name: "Budgeting Loan"
+    description: "An interest-free loan for essentials like clothes or furniture."
+    category: "emergency_one_off"
+    active: true
+    urls:
+      gov_url: "https://www.gov.uk/budgeting-help-benefits"
+      apply_url: "https://www.gov.uk/budgeting-help-benefits/how-to-apply"
+    details:
+      is_legacy_replacement: false
+      eligibility:
+        qualifying_benefit_duration_months: 6 # Must be on specific benefits for 6 months
+      gotchas: ["You cannot get this if you are on Universal Credit—apply for a Budgeting Advance instead"]
+      preparation_tips: ["Check for existing Social Fund debt as this affects your loan amount"]
+      questions_to_ask:
+        - { id: uc_check, question: "Are you currently claiming Universal Credit?", type: "boolean" }
+      glossary_terms: ["social_fund", "budgeting_advance"]
