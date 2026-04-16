@@ -2,20 +2,16 @@ let allBenefits = [];
 
 async function loadBenefits() {
   try {
-    const response = await fetch("http://localhost:3000/api/benefits");
+    const response = await fetch("http://localhost:3000/api/benefits/frontend");
     const data = await response.json();
 
-    console.log(data); // check backend result
-
     allBenefits = data.benefits || data || [];
-
     renderBenefits(allBenefits);
 
   } catch (error) {
     console.error("Error loading benefits:", error);
   }
 }
-
 
 function renderBenefits(list, searchText = "") {
   const grid = document.getElementById("benefitGrid");
@@ -30,7 +26,7 @@ function renderBenefits(list, searchText = "") {
     noResult.style.display = "none";
   }
 
-  list.forEach(item => {
+  list.forEach((item, index) => {
     const name = highlight(item.name, searchText);
     const desc = highlight(item.description || "", searchText);
 
@@ -50,32 +46,23 @@ function renderBenefits(list, searchText = "") {
           <p>${desc}</p>
 
           <div class="card-actions">
+
             <button class="btn secondary"
-              onclick="openModal('${item.slug}')">
+              onclick="openModal(${index})">
               Learn More
             </button>
 
-            <a href="${item.urls.apply_url}"
+            <a href="${item.urls?.apply_url || '#'}"
                target="_blank"
                class="btn primary">
                Apply
             </a>
+
           </div>
         </div>
       </article>
     `;
   });
-}
-
-function highlight(text, search) {
-  if (!search) return text;
-
-  const regex = new RegExp(`(${search})`, "gi");
-  return text.replace(regex, `<mark>$1</mark>`);
-}
-
-function formatCategory(text) {
-  return text.replaceAll("_", " ");
 }
 
 function searchBenefits() {
@@ -94,36 +81,60 @@ function searchBenefits() {
   renderBenefits(filtered, text);
 }
 
-function openModal(slug) {
-  const item = allBenefits.find(b => b.slug === slug);
-  const info = item.learn_more;
+
+function highlight(text, search) {
+  if (!search) return text;
+
+  const regex = new RegExp(`(${search})`, "gi");
+  return text.replace(regex, `<mark>$1</mark>`);
+}
+
+
+function formatCategory(text = "") {
+  return text.replaceAll("_", " ");
+}
+
+/* LEARN MORE MODEL*/
+function openModal(index) {
+  const item = allBenefits[index];
+  const info = item.learn_more || {};
 
   document.getElementById("modalContent").innerHTML = `
     <h2>${item.name}</h2>
 
     <h3>Eligibility</h3>
     <ul>
-      <li>Age: ${info.eligibility.age_min} - ${info.eligibility.age_max}</li>
-      <li>Savings: £${info.eligibility.savings_threshold}</li>
-      <li>Residency: ${info.eligibility.residency}</li>
+      <li>Age: ${info.eligibility?.age_min || "-"} - ${info.eligibility?.age_max || "-"}</li>
+      <li>Savings Threshold: £${info.eligibility?.savings_threshold || "-"}</li>
+      <li>Residency: ${info.eligibility?.residency || "-"}</li>
     </ul>
 
     <h3>Documents Required</h3>
     <ul>
-      ${info.documents_required.map(x => `<li>${x}</li>`).join("")}
+      ${(info.documents_required || []).map(x => `<li>${x}</li>`).join("")}
     </ul>
 
     <h3>Things To Know</h3>
     <ul>
-      ${info.gotchas.map(x => `<li>${x}</li>`).join("")}
+      ${(info.gotchas || []).map(x => `<li>${x}</li>`).join("")}
     </ul>
 
     <h3>Preparation Tips</h3>
     <ul>
-      ${info.preparation_tips.map(x => `<li>${x}</li>`).join("")}
+      ${(info.preparation_tips || []).map(x => `<li>${x}</li>`).join("")}
     </ul>
 
-    <a href="${item.urls.gov_url}"
+    <h3>Related Benefits</h3>
+    <ul>
+      ${(info.related_benefits || []).map(x => `<li>${formatCategory(x)}</li>`).join("")}
+    </ul>
+
+    <h3>Questions To Ask</h3>
+    <ul>
+      ${(info.questions_to_ask || []).map(x => `<li>${x.question}</li>`).join("")}
+    </ul>
+
+    <a href="${info.gov_url || '#'}"
        target="_blank"
        class="gov-btn">
        Visit GOV.UK
@@ -133,8 +144,23 @@ function openModal(slug) {
   document.getElementById("modal").style.display = "flex";
 }
 
+
 function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
 
-loadBenefits();
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadBenefits();
+
+  document
+    .getElementById("searchInput")
+    .addEventListener("input", searchBenefits);
+});
+
+function submitFeedback(answer){
+  document.getElementById("feedbackMessage").innerText =
+    "Thank you for your feedback.";
+
+  console.log("User selected:", answer);
+}

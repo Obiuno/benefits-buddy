@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Browse Benefits</title>
+
 <link rel="stylesheet" href="../Frontend/styles/benefits.css">
 <link rel="stylesheet" href="../Frontend/styles/main.css">
 <link rel="stylesheet" href="../Frontend/styles/info.css">
-<script src="../Frontend/scripts/benefits.js"></script>
+<script src="../Frontend/scripts/benefits.js" defer></script>
 </head>
 
 <body>
@@ -52,7 +53,6 @@
       type="text"
       id="searchInput"
       placeholder="Search benefits..."
-      onkeyup="searchBenefits()"
     >
     <button class="search-btn" onclick="searchBenefits()">🔍</button>
   </div>
@@ -60,12 +60,11 @@
 
 <!-- NO RESULT -->
 <div id="noResult" class="no-result" style="display:none;">
-  No result found
+  No results found
 </div>
 
 <!-- BENEFITS GRID -->
 <section class="benefit-grid" id="benefitGrid"></section>
-<p id="noResult" class="no-results" style="display:none;">No results found.</p>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
@@ -74,7 +73,16 @@
     <div id="modalContent"></div>
   </div>
 </div>
+<section class="page-feedback">
+  <h3>Is this page useful?</h3>
 
+  <div class="feedback-buttons">
+    <button onclick="submitFeedback('Yes')">Yes</button>
+    <button onclick="submitFeedback('No')">No</button>
+  </div>
+
+  <p id="feedbackMessage"></p>
+</section>
 
 </body>
 </html>

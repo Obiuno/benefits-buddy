@@ -38,7 +38,7 @@ body{
   text-decoration:none;
   color:white;
   padding:9px 16px;
-  border:none;                 /* remove border */
+  border:none;                
   border-radius:8px;
   transition:0.25s ease;
 }
@@ -208,7 +208,7 @@ body{
   padding:0 20px;
 
   display:grid;
-  grid-template-columns:repeat(4, 1fr); /* 4 cards in one row */
+  grid-template-columns:repeat(4, 1fr); 
   gap:25px;
 }
 

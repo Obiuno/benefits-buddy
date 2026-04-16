@@ -5,7 +5,7 @@ const termsBox = document.getElementById('terms');
 let allTerms = [];
 let currentLetter = "";
 
-/* NOT FOUND MESSAGE */
+
 const notFound = document.createElement('p');
 notFound.textContent = "No results found.";
 notFound.style.textAlign = "center";
@@ -16,7 +16,7 @@ notFound.style.display = "none";
 
 termsBox.appendChild(notFound);
 
-/* CREATE A-Z BUTTONS */
+
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 alphabet.forEach(letter => {
@@ -36,7 +36,7 @@ alphabet.forEach(letter => {
   lettersBox.appendChild(btn);
 });
 
-/* LOAD FROM BACKEND */
+
 async function loadGlossary() {
   try {
     const response = await fetch("http://localhost:3000/api/glossary");
@@ -56,7 +56,7 @@ async function loadGlossary() {
   }
 }
 
-/* HIGHLIGHT */
+
 function highlightText(text, keyword) {
   if (!keyword) return text;
 
@@ -66,7 +66,7 @@ function highlightText(text, keyword) {
   return text.replace(regex, "<mark>$1</mark>");
 }
 
-/* RENDER */
+
 function renderTerms(list, keyword = "") {
   termsBox.innerHTML = "";
 
@@ -92,7 +92,6 @@ function renderTerms(list, keyword = "") {
   termsBox.appendChild(notFound);
 }
 
-/* FILTER LETTER + SEARCH */
 function filterTerms() {
   const keyword = search.value.toLowerCase().trim();
 
@@ -113,7 +112,7 @@ function filterTerms() {
   renderTerms(filtered, keyword);
 }
 
-/* SEARCH INPUT */
+
 search.addEventListener("input", () => {
   currentLetter = "";
   document.querySelectorAll('.letters button')
@@ -122,7 +121,7 @@ search.addEventListener("input", () => {
   filterTerms();
 });
 
-/* ENTER KEY */
+
 search.addEventListener("keypress", function(e) {
   if (e.key === "Enter") {
     filterTerms();
@@ -130,5 +129,12 @@ search.addEventListener("keypress", function(e) {
   
 });
 
-/* START */
+
 loadGlossary();
+
+function submitFeedback(answer){
+  document.getElementById("feedbackMessage").innerText =
+    "Thank you for your feedback.";
+
+  console.log("User selected:", answer);
+}
