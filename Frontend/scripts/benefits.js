@@ -5,13 +5,17 @@ async function loadBenefits() {
     const response = await fetch("http://localhost:3000/api/benefits");
     const data = await response.json();
 
-    allBenefits = data.benefits;
+    console.log(data); // check backend result
+
+    allBenefits = data.benefits || data || [];
+
     renderBenefits(allBenefits);
 
   } catch (error) {
     console.error("Error loading benefits:", error);
   }
 }
+
 
 function renderBenefits(list, searchText = "") {
   const grid = document.getElementById("benefitGrid");

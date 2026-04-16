@@ -127,6 +127,7 @@ search.addEventListener("keypress", function(e) {
   if (e.key === "Enter") {
     filterTerms();
   }
+  
 });
 
 /* START */
