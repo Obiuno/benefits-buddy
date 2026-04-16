@@ -6,7 +6,10 @@ CREATE TABLE benefits (
     benefits_id SERIAL PRIMARY KEY,
     slug VARCHAR(100) UNIQUE NOT NULL,
     name VARCHAR(255) NOT NULL,
-    content JSONB NOT NULL,
+    description VARCHAR(100) UNIQUE NOT NULL,
+    category VARCHAR(100),
+    urls JSONB UNIQUE NOt NULL,
+    details JSONB NOT NULL,
     active BOOLEAN DEFAULT TRUE,
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -23,6 +26,7 @@ CREATE TABLE faqs (
 
 CREATE TABLE glossary (
     glossary_id SERIAL PRIMARY KEY,
+    slug VARCHAR(255) UNIQUE NOT NULL,
     term VARCHAR(255) UNIQUE NOT NULL,
     definition TEXT NOT NULL,
     related_benefits JSONB,
