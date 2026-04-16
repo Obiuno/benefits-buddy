@@ -1,0 +1,240 @@
+.hero{
+  padding:70px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#1f3c4d,#2d5c73);
+  color:white;
+}
+
+.hero h1{
+  font-size:35px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  font-size:18px;
+  margin-bottom:20px;
+}
+
+/* SEARCH */
+.search-box{
+  width:650px;
+  max-width:92%;
+  margin:auto;
+  display:flex;
+  overflow:hidden;
+  border-radius:40px;
+  background:white;
+  box-shadow:0 10px 25px rgba(0,0,0,0.18);
+}
+
+.search-box input{
+  flex:1;
+  border:none;
+  padding:16px 22px;
+  font-size:18px;
+  outline:none;
+}
+
+.search-btn{
+  width:70px;
+  border:none;
+  background:#4da6ff;
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.search-btn:hover{
+  background:#2e8fff;
+}
+
+.search-btn:active{
+  transform:scale(.96);
+}
+
+/* GRID */
+.benefit-grid{
+  max-width:1300px;
+  margin:40px auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:24px;
+}
+
+/* CARD */
+.benefit-card{
+  background:rgba(255,255,255,.95);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,.12);
+  transition:0.3s;
+}
+
+.benefit-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 35px rgba(0,0,0,.18);
+}
+
+.card-img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.card-content{
+  padding:20px;
+}
+
+.tag{
+  display:inline-block;
+  background:#eef4ff;
+  color:#1f3c4d;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+.benefit-card h2{
+  font-size:22px;
+  color:#1f3c4d;
+  margin:10px 0;
+}
+
+.benefit-card p{
+  color:#55606d;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+/* BUTTONS */
+.card-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:none;
+  padding:11px 18px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+  text-decoration:none;
+  transition:0.25s;
+}
+
+.btn.secondary{
+  background:#eef3f7;
+  color:#1f3c4d;
+}
+
+.btn.primary{
+  background:#4da6ff;
+  color:white;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.btn.secondary:hover{
+  background:#dde7ef;
+}
+
+.btn.primary:hover{
+  background:#2e8fff;
+}
+
+.btn:active{
+  transform:scale(.97);
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  padding:20px;
+}
+
+.modal-box{
+  width:520px;
+  max-width:95%;
+  max-height:80vh;
+  overflow-y:auto;
+  background:white;
+  border-radius:16px;
+  padding:26px;
+  box-shadow:0 18px 40px rgba(0,0,0,.22);
+  position:relative;
+}
+
+.close-btn{
+  position:absolute;
+  top:14px;
+  right:16px;
+  font-size:28px;
+  cursor:pointer;
+  color:#64748b;
+}
+
+.close-btn:hover{
+  color:red;
+}
+
+.modal-box h2{
+  font-size:30px;
+  color:#1f3c4d;
+  margin-bottom:18px;
+}
+
+.modal-box h3{
+  color:#2563eb;
+  margin-top:16px;
+  margin-bottom:8px;
+}
+
+.modal-box li,
+.modal-box p{
+  line-height:1.7;
+  color:#374151;
+}
+
+.gov-btn{
+  display:inline-block;
+  margin-top:18px;
+  background:#1f3c4d;
+  color:white;
+  text-decoration:none;
+  padding:11px 18px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.gov-btn:hover{
+  background:#4da6ff;
+}
+
+/* SEARCH HIGHLIGHT */
+mark{
+  background:yellow;
+  padding:0 2px;
+}
+
+/* NO RESULT */
+.no-result{
+  text-align:center;
+  font-size:22px;
+  color:white;
+  margin-top:30px;
+  font-weight:700;
+}
