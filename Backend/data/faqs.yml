@@ -1,6 +1,6 @@
 faqs:
   - benefit_slug: universal-credit # related benefits
-    category: "eligibility"
+    category: ["eligibility"]
     question: "Can I claim if I am working?"
     answer: "Yes, Universal Credit is designed to support people on low incomes, including those in work."
     display_order: 1
