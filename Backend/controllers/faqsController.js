@@ -1,6 +1,12 @@
 import Faqs from "../models/faqModel.js";
 
 /**
+ * @swagger
+ * /api/faqs:
+ *  get:
+ *    description: Fetches FAQ data frp, the knowledgebase, filtered by active status and sorted by display order
+ *    responses:
+ *      200:
  * Get all active FAQs
  * @param {import("express").Request} req
  * @param {import("express").Response} res
