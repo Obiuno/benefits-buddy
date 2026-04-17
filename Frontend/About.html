@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Benefit Buddy</title>
+  <link rel="stylesheet" href="../Frontend/styles/main.css">
+  <link rel="stylesheet" href="../Frontend/styles/about.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+  <div class="nav-left">
+    <img src="../Frontend/Images/BENEFIT BUDDY.png" alt="Logo" class="logo-img">
+  </div>
+
+  <div class="nav-links">
+    <a href="main.html" class="nav-btn">Home</a>
+    <a href="buddy.html" class="nav-btn">Chat with Buddy</a>
+    <a href="info.html" class="nav-btn">Help Center</a>
+    <a href="benefits.html" class="nav-btn">Browse Benefits</a>
+    <a href="About.html" class="nav-btn">About Us</a>
+  </div>
+
+  <div class="profile">
+    <input type="checkbox" id="profileToggle">
+
+    <label for="profileToggle" class="profile-btn">
+      <img src="../Frontend/Images/user.jpg" alt="User" class="profile-img">
+    </label>
+
+    <div class="profile-dropdown">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Create new account</a>
+      <a href="#">Settings</a>
+      <a href="main.html">Logout</a>
+    </div>
+  </div>
+
+</nav>
+
+  <main class="about-page">
+  <section class="hero">
+    <div class="hero-text">
+      <h1>About Us</h1>
+      <p>Benefit Buddy makes benefits guidance simple, clear and stress-free. We help people understand support options, eligibility and next steps with confidence.</p>
+    </div>
+    <div class="hero-image">
+      <img src="../Frontend/Images/about.jpg" alt="About us">
+    </div>
+  </section>
+
+  <section class="mission">
+    <div class="card">
+      <h2>Our Mission</h2>
+      <p>We help people understand support options, eligibility and next steps faster.</p>
+    </div>
+    <div class="card">
+      <h2>Why Benefit Buddy?</h2>
+      <p>Friendly tools, trusted information and a cleaner path to support.</p>
+    </div>
+  </section>
+
+  <section class="contact-wrap">
+    <h2>Contact Us</h2>
+    <form id="contactForm" class="contact-form">
+      <div class="grid2">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+      </div>
+      <input type="text" placeholder="Subject" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+      <p id="successMsg"></p>
+    </form>
+  </section>
+</main>
+<script src="about.js"></script>
+</body>
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-brand">
+      
+      <h1>Benefit Buddy</h1>
+      <p>Helping users find the right benefits, support, and guidance with confidence.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <a href="main.html">Home</a>
+      <a href="buddy.html">Chat with Buddy</a>
+      <a href="info.html">Help Center</a>
+      <a href="benefits.html">Browse Benefits</a>
+      <a href="about.html">About Us</a>
+
+    </div>
+
+    <div class="footer-social">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Benefit Buddy | Team Prestige.</p>
+  </div>
+</footer>
+</html>
+</html>

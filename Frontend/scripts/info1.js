@@ -4,7 +4,7 @@ const searchBtn = document.querySelector('.search-box button');
 
 let allFaqs = [];
 
-/* LOAD FAQS FROM BACKEND */
+
 async function loadFaqs() {
   try {const response = await fetch('http://localhost:3000/api/faqs');
     if (!response.ok) {
@@ -23,7 +23,7 @@ async function loadFaqs() {
   }
 }
 
-/* HIGHLIGHT SEARCH TEXT */
+
 function highlightText(text, keyword) {
   if (!keyword) return text;
 
@@ -33,7 +33,7 @@ function highlightText(text, keyword) {
   return text.replace(regex, '<mark>$1</mark>');
 }
 
-/* RENDER FAQS */
+
 function renderFaqs(faqs, keyword = "") {
   faqList.innerHTML = "";
 
@@ -60,7 +60,7 @@ function renderFaqs(faqs, keyword = "") {
   addAccordionEvents();
 }
 
-/* OPEN / CLOSE FAQ */
+
 function addAccordionEvents() {
   const items = document.querySelectorAll('.faq-item');
 
@@ -75,7 +75,7 @@ function addAccordionEvents() {
   });
 }
 
-/* SEARCH FAQS */
+
 function searchFaqs() {
   const keyword = searchInput.value.toLowerCase().trim();
 
@@ -89,7 +89,7 @@ function searchFaqs() {
   renderFaqs(filtered, keyword);
 }
 
-/* EVENTS */
+
 searchInput.addEventListener('input', searchFaqs);
 searchBtn.addEventListener('click', searchFaqs);
 
@@ -99,5 +99,10 @@ searchInput.addEventListener('keypress', function (e) {
   }
 });
 
-/* START */
 loadFaqs();
+function submitFeedback(answer){
+  document.getElementById("feedbackMessage").innerText =
+    "Thank you for your feedback.";
+
+  console.log("User selected:", answer);
+}
