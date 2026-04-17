@@ -33,7 +33,7 @@ const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 async function generateAIResponse(chat, benefitsData, glossaryData) {
   try {
     const result = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-2.5-flash",
       config: {
         responseMimeType: "application/json",
         systemInstruction: `
@@ -65,8 +65,9 @@ async function generateAIResponse(chat, benefitsData, glossaryData) {
          
         `,
       },
+ 
       contents: chat.map((m) => ({
-        role: m.role === "assistant" ? "assitant" : "user",
+        role: m.role === "assistant" ? "assistant" : "user",
         parts: [{ text: m.content }],
       })),
     });
@@ -75,6 +76,10 @@ async function generateAIResponse(chat, benefitsData, glossaryData) {
   } catch (err) {
     console.error("SDK error: ", err);
   }
+   return {
+      success: false,
+      error: error.message || "AI request failed"
+    };
 }
 
 export default generateAIResponse;

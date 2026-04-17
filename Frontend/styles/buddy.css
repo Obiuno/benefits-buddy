@@ -122,45 +122,68 @@ body{
 }
 
 /* INPUT */
+/* ===============================
+   IMPROVED SEARCH BAR
+   (same functionality)
+================================= */
+
 .composer-wrap{
-  display:flex;
-  align-items:flex-end;
-  gap:12px;
-  background:white;
-  border:1px solid #dbeafe;
-  border-radius:20px;
-  padding:14px;
-  box-shadow:0 10px 25px rgba(0,0,0,.05);
+  width: 92%;
+  margin: 22px auto 28px;
+  background: #ffffff;
+  border: 1px solid #d9e5f0;
+  border-radius: 18px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
-#chatInput{
-  flex:1;
-  border:none;
-  resize:none;
-  outline:none;
-  background:transparent;
-  font-size:16px;
-  min-height:55px;
-  max-height:180px;
+#messageInput{
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  font-size: 16px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #17384d;
+  padding: 12px 10px;
+  min-height: 24px;
+  max-height: 120px;
+  line-height: 1.5;
+}
+
+#messageInput::placeholder{
+  color: #8ea0b2;
 }
 
 .send-btn{
-  width:52px;
-  height:52px;
-  border:none;
-  border-radius:14px;
-  background:#4da6ff;
-  color:white;
-  font-size:28px;
-  cursor:pointer;
-  transition:.25s;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 14px;
+  background: #4da6ff;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s ease;
+  flex-shrink: 0;
 }
 
 .send-btn:hover{
-  background:#2589f5;
-  transform:scale(1.05);
+  background: #2d8cff;
+  transform: translateY(-1px);
 }
 
+.send-btn:active{
+  transform: scale(0.96);
+}
 /* MOBILE */
 @media(max-width:900px){
   .buddy-app{

@@ -5,16 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Benefit Buddy</title>
 
-<link rel="stylesheet" href="../Frontend/styles/main.css"/>
-<link rel="stylesheet" href="../Frontend/styles/buddy.css"/>
+<link rel="stylesheet" href="../Frontend/styles/main.css">
+<link rel="stylesheet" href="../Frontend/styles/buddy.css">
 </head>
 
 <body>
 
-<!-- NAVBAR (UNCHANGED) -->
+<!-- NAVBAR -->
 <nav class="navbar">
+
   <div class="nav-left">
-    <img src="Images/BENEFIT BUDDY.png" class="logo-img">
+    <img src="../Frontend/Images/BENEFIT BUDDY.png" alt="Logo" class="logo-img">
   </div>
 
   <div class="nav-links">
@@ -29,7 +30,7 @@
     <input type="checkbox" id="profileToggle">
 
     <label for="profileToggle" class="profile-btn">
-      <img src="../Frontend/Images/user.jpg" class="profile-img">
+      <img src="../Frontend/Images/user.jpg" alt="User" class="profile-img">
     </label>
 
     <div class="profile-dropdown">
@@ -39,31 +40,49 @@
       <a href="main.html">Logout</a>
     </div>
   </div>
+
 </nav>
 
+<!-- CHAT APP -->
 <div class="buddy-app">
+
+  <!-- LEFT PANEL -->
   <aside class="left-panel">
-    <button class="new-chat">+ New Chat</button>
+    <button class="new-chat" onclick="newChat()">+ New Chat</button>
     <button class="history-btn" onclick="toggleHistory()">View History</button>
+
     <div id="historyBox" class="history-box"></div>
   </aside>
+
+  <!-- MAIN CHAT -->
   <main class="chatgpt-main">
-    <div id="chatMessages" class="chat-stream">
+
+    <!-- CHAT MESSAGES -->
+    <div id="chatBox" class="chat-stream">
+
       <div class="welcome-title">
         <h1>Hello 👋 I am Benefit Buddy</h1>
         <h2>How can I assist you today?</h2>
       </div>
+
     </div>
+
+    <!-- INPUT -->
     <div class="composer-wrap">
-      <textarea id="chatInput" placeholder="Message Benefit Buddy..."></textarea>
+      <textarea
+        id="messageInput"
+        placeholder="Message Benefit Buddy..."
+        rows="1"
+      ></textarea>
+
       <button class="send-btn" onclick="sendMessage()">↑</button>
     </div>
+
   </main>
 </div>
-<script src="../Frontend/scripts/buddy.js"></script>
-</body>
-</html>
 
+<!-- SCRIPT -->
 <script src="../Frontend/scripts/buddy.js"></script>
+
 </body>
 </html>

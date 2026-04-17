@@ -1,66 +1,143 @@
+
+const chatBox = document.getElementById("chatBox");
+const input = document.getElementById("messageInput");
+
 let chatHistory = [];
-  if (chatBox.querySelector('.welcome-title')) chatBox.innerHTML = '';
 
-  addMessage('user', text);
-  chatHistory.push({ role:'user', content:text, timestamp:new Date().toISOString() });
-  input.value = '';
+/*ADD MESSAGE TO CHAT*/
 
-  const loading = addMessage('bot', 'Typing...');
+function addMessage(sender, text) {
+  const msg = document.createElement("div");
+  msg.className = sender === "user" ? "user-message" : "bot-message";
+  msg.innerHTML = text;
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+  return msg;
+}
+/*send message*/
+async function sendMessage() {
+  const text = input.value.trim();
+
+  if (!text) return;
+
+
+  const welcome = chatBox.querySelector(".welcome-title");
+  if (welcome) welcome.remove();
+
+
+  addMessage("user", text);
+
+  chatHistory.push({
+    role: "user",
+    content: text,
+    timestamp: new Date().toISOString()
+  });
+
+  input.value = "";
+
+
+  const loading = addMessage("bot", "Typing...");
 
   try {
-    const response = await fetch('http://localhost:3000/api/chat', {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json' },
-      body: JSON.stringify({ messages: chatHistory })
+    const response = await fetch("http://localhost:3000/api/ai/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        messages: chatHistory
+      })
     });
 
     const data = await response.json();
+
     loading.remove();
+
     renderAssistantResponse(data);
-    chatHistory.push({ role:'assistant', content:data, timestamp:new Date().toISOString() });
-  } catch (err) {
+
+    chatHistory.push({
+      role: "assistant",
+      content: data.message,
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    console.error(error);
     loading.remove();
-    addMessage('bot', 'Sorry, something went wrong.');
+    addMessage("bot", "❌ Server error. Make sure backend is running.");
   }
 }
 
+/*Render bot response*/
+// 
 function renderAssistantResponse(data) {
-  addMessage('bot', data.message || 'No response.');
+  addMessage("bot", data.message || "No response.");
 
-  if (data.benefits_suggested?.length) {
-    const wrap = document.createElement('div');
-    wrap.className = 'benefit-results';
+  // benefits cards
+  if (data.benefits_suggested && data.benefits_suggested.length > 0) {
+    const wrap = document.createElement("div");
+    wrap.className = "benefit-results";
 
     data.benefits_suggested.forEach(item => {
-      wrap.innerHTML += `
-        <div class="benefit-mini-card">
-          <h3>${item.name}</h3>
-          <p>${item.reason}</p>
-          <a href="${item.gov_url}" target="_blank">Apply / Learn More</a>
-        </div>`;
+      const card = document.createElement("div");
+      card.className = "benefit-mini-card";
+
+      card.innerHTML = `
+        <h3>${item.name}</h3>
+        <p>${item.reason}</p>
+        <a href="${item.gov_url}" target="_blank">Apply / Learn More</a>
+      `;
+
+      wrap.appendChild(card);
     });
+
     chatBox.appendChild(wrap);
   }
 
-  if (data.glossary_terms?.length) {
-    addMessage('bot', '<strong>Helpful Terms:</strong> ' + data.glossary_terms.join(', '));
+  
+  if (data.glossary_terms && data.glossary_terms.length > 0) {
+    addMessage(
+      "bot",
+      "<strong>Helpful Terms:</strong><br>" +
+        data.glossary_terms.join(", ")
+    );
   }
 
   if (data.next_question) {
-    addMessage('bot', '<strong>Next Question:</strong><br>' + data.next_question);
+    addMessage(
+      "bot",
+      "<strong>Next Question:</strong><br>" +
+        data.next_question
+    );
   }
+
+  chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function newChat(){
+/*NEW CHAT*/
+function newChat() {
   chatHistory = [];
-  chatBox.innerHTML = `<div class="welcome-title"><h1>Hello 👋 I am Benefit Buddy</h1><h2>How can I assist you today?</h2></div>`;
-  input.value='';
+
+  chatBox.innerHTML = `
+    <div class="welcome-title">
+      <h1>Hello 👋 I am Benefit Buddy</h1>
+      <h2>How can I assist you today?</h2>
+    </div>
+  `;
+
+  input.value = "";
 }
 
-function toggleHistory(){
- document.getElementById('historyBox').classList.toggle('show');
+
+function toggleHistory() {
+  const history = document.getElementById("historyBox");
+  if (history) history.classList.toggle("show");
 }
 
-input.addEventListener('keydown', e => {
- if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+
+input.addEventListener("keydown", function (e) {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
 });
