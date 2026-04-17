@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { GoogleGenAI } from "@google/genai";
-
+/*
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -23,32 +23,20 @@ const glossaryFile = fs.readFileSync(
 const glossaryTest = yaml.load(glossaryFile);
 
 const user_input = "I am 65 and earn and I am struggling to afford my bills";
-
+*/
 // AI testing
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
-/*
-async function main() {
-  const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
-    contents: "Explain how AI works in a few words",
-  });
-  console.log(response.text);
-}
-*/
-
-async function test() {
+async function generateAIResponse(chat, benefitsData, glossaryData) {
   try {
     const result = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       config: {
         responseMimeType: "application/json",
-      },
-      contents: ` 
-        Please ask follow up questions before giving the full list, you should have at least 2 user inputs before filling in other parts other than message or next question
+        systemInstruction: `
         You are a helpful and friendly assistant helping users understand UK government benefits.
         - Match the user's situation to relevant benefits 
         - Explain eligibility clearly
@@ -69,21 +57,24 @@ async function test() {
         "next_question": "str",
         "your_reasoning": "give me your reason for keys, formatsm fields and why you arranged the JSON like this, this part is for developer understanding",
         "feedback": "give the developer any feedback they could use to make this more effective for the chatbot and suggest changes they could do"
-        }	
+        }
+        Available benefits data: ${JSON.stringify(benefitsData, null, 2)}
+        Available glossary data: ${JSON.stringify(glossaryData, null, 2)}
+        Suggest at most 5 benefits
+        Use simple clear language
          
-        Use simple, clear language.
-        I have shared the benefits to look at and a list of glossary items.
-        You should suggest at most 5 benefits and list the glossary items related to those benefits as well
-        
-        User situation: ${user_input}
-
-        Available data: ${JSON.stringify(benefitsTest)} and ${JSON.stringify(glossaryTest)}
         `,
+      },
+      contents: chat.map((m) => ({
+        role: m.role === "assistant" ? "assitant" : "user",
+        parts: [{ text: m.content }],
+      })),
     });
     console.log("Response: ", result.text);
+    return JSON.parse(result.text);
   } catch (err) {
     console.error("SDK error: ", err);
   }
 }
 
-test();
+export default generateAIResponse;

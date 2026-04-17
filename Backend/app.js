@@ -1,13 +1,15 @@
 import express from "express";
 import cors from "cors";
 import { fileURLToPath } from "node:url";
+import path, { join } from "node:path";
 
 import { apiReference } from "@scalar/express-api-reference";
 
 import faqsRouter from "./routes/faqRoutes.js";
 import glossaryRouter from "./routes/gloassaryRoutes.js";
 import benefitsRouter from "./routes/benefitsRoutes.js";
-import path, { join } from "node:path";
+
+import aiRouter from "./routes/aiRoutes.js";
 
 const app = express();
 
@@ -30,5 +32,6 @@ app.use("/static", express.static(path.join(__dirname, "assets/images")));
 app.use("/api/faqs", faqsRouter);
 app.use("/api/glossary", glossaryRouter);
 app.use("/api/benefits", benefitsRouter);
+app.use("/api/ai", aiRouter);
 
 export default app;
