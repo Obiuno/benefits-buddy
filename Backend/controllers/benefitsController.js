@@ -16,6 +16,9 @@ const getAllBenefits = async (req, res) => {
 };
 
 const getBenefitsForFrontend = async (req, res) => {
+  const protocol = req.protocol; //http or https
+  const host = req.get("host");
+  const baseURL = `${protocol}://${host}`;
   try {
     const rawBenefits = await Benefits.getAllBenefits();
 
@@ -23,6 +26,9 @@ const getBenefitsForFrontend = async (req, res) => {
       // 1. Destructure the top-level fields from the benefit record
       // 2. Destructure the nested fields from the 'details' JSONB column
       const { name, category, description, slug, urls, details } = benefit;
+
+      // 3. image prep
+      const imgURL = `${baseURL}/static/${benefit.slug}.jpg`;
 
       // Destructure only what the frontend needs from details
       const {
@@ -40,7 +46,7 @@ const getBenefitsForFrontend = async (req, res) => {
         category,
         description,
         // Dynamically generate the image path
-        //image: `Images/${slug}.jpg`,
+        image: imgURL,
         urls: {
           apply_url: urls.apply_url,
         },
@@ -52,7 +58,15 @@ const getBenefitsForFrontend = async (req, res) => {
           gotchas,
           preparation_tips,
           related_benefits,
-          questions_to_ask,
+          questions_to_ask: [
+            ...questions_to_ask,
+            {
+              id: "shameless_plug",
+              question:
+                "for more information consider using our Benefits Buddy of visiting GOV.UK",
+              type: null,
+            },
+          ],
           gov_url: urls.gov_url,
         },
       };
