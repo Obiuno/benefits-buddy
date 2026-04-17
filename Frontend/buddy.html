@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Benefit Buddy Help Center</title>
-  <link rel="stylesheet" href="../Frontend/styles/main.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Benefit Buddy</title>
 
+<link rel="stylesheet" href="../Frontend/styles/main.css"/>
+<link rel="stylesheet" href="../Frontend/styles/buddy.css"/>
 </head>
+
 <body>
 
+<!-- NAVBAR (UNCHANGED) -->
+<nav class="navbar">
+  <div class="nav-left">
+    <img src="Images/BENEFIT BUDDY.png" class="logo-img">
+  </div>
 
-  <nav class="navbar">
-  <div class="nav-left"><img src="Images/BENEFIT BUDDY.png" class="logo-img"></div>
   <div class="nav-links">
     <a href="main.html" class="nav-btn">Home</a>
     <a href="buddy.html" class="nav-btn">Chat with Buddy</a>
@@ -19,19 +24,46 @@
     <a href="benefits.html" class="nav-btn">Browse Benefits</a>
     <a href="About.html" class="nav-btn">About Us</a>
   </div>
+
   <div class="profile">
+    <input type="checkbox" id="profileToggle">
 
-  <input type="checkbox" id="profileToggle">
+    <label for="profileToggle" class="profile-btn">
+      <img src="../Frontend/Images/user.jpg" class="profile-img">
+    </label>
 
-  <label for="profileToggle" class="profile-btn">
-    <img src="../Frontend/Images/user.jpg" alt="User" class="profile-img">
-  </label>
-
-  <div class="profile-dropdown">
-    <a href="login.html">Login</a>
-    <a href="signup.html">Add new account</a>
-    <a href="#">Settings</a>
-    <a href="main.html">Logout</a>
+    <div class="profile-dropdown">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Add new account</a>
+      <a href="#">Settings</a>
+      <a href="main.html">Logout</a>
+    </div>
   </div>
-
 </nav>
+
+<div class="buddy-app">
+  <aside class="left-panel">
+    <button class="new-chat">+ New Chat</button>
+    <button class="history-btn" onclick="toggleHistory()">View History</button>
+    <div id="historyBox" class="history-box"></div>
+  </aside>
+  <main class="chatgpt-main">
+    <div id="chatMessages" class="chat-stream">
+      <div class="welcome-title">
+        <h1>Hello 👋 I am Benefit Buddy</h1>
+        <h2>How can I assist you today?</h2>
+      </div>
+    </div>
+    <div class="composer-wrap">
+      <textarea id="chatInput" placeholder="Message Benefit Buddy..."></textarea>
+      <button class="send-btn" onclick="sendMessage()">↑</button>
+    </div>
+  </main>
+</div>
+<script src="../Frontend/scripts/buddy.js"></script>
+</body>
+</html>
+
+<script src="../Frontend/scripts/buddy.js"></script>
+</body>
+</html>
