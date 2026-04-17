@@ -90,8 +90,10 @@ function highlight(text, search) {
 }
 
 
-function formatCategory(text = "") {
-  return text.replaceAll("_", " ");
+function formatCategory(text) {
+  if (!text) return "General";
+
+  return String(text).replace(/_/g, " ");
 }
 
 /* LEARN MORE MODEL*/
