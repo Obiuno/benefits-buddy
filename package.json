@@ -21,6 +21,7 @@
     "docs:dev": "mintlify dev"
   },
   "dependencies": {
+    "@google/genai": "^1.50.1",
     "@scalar/express-api-reference": "^0.9.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
