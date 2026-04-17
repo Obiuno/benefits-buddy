@@ -17,17 +17,22 @@
   "scripts": {
     "seed-db": "node ./Backend/database/setup-db.js",
     "dev": "nodemon ./Backend/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "mintlify dev"
   },
   "dependencies": {
+    "@google/genai": "^1.50.1",
+    "@scalar/express-api-reference": "^0.9.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "js-yaml": "^4.1.1",
     "jsonwebtoken": "^9.0.3",
-    "pg": "^8.20.0"
-    },
+    "pg": "^8.20.0",
+    "swagger-jsdoc": "^6.2.8"
+  },
   "devDependencies": {
+    "mintlify": "^4.2.515",
     "nodemon": "^3.1.14"
   }
 }
