@@ -66,27 +66,32 @@ function renderBenefits(list, searchText = "") {
 }
 
 function searchBenefits() {
-  const text = document
+  const keyword = document
     .getElementById("searchInput")
     .value
     .toLowerCase()
     .trim();
 
-  const filtered = allBenefits.filter(item =>
-    item.name.toLowerCase().includes(text) ||
-    item.category.toLowerCase().includes(text) ||
-    (item.description || "").toLowerCase().includes(text)
-  );
+  const filtered = allBenefits.filter(item => {
+    const text = `
+      ${item.name}
+      ${item.category}
+      ${item.description || ""}
+    `.toLowerCase();
 
-  renderBenefits(filtered, text);
+    return text.includes(keyword);
+  });
+
+  renderBenefits(filtered, keyword);
 }
 
+function highlight(text, keyword) {
+  if (!keyword) return text;
 
-function highlight(text, search) {
-  if (!search) return text;
+  const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(`(${escaped})`, "gi");
 
-  const regex = new RegExp(`(${search})`, "gi");
-  return text.replace(regex, `<mark>$1</mark>`);
+  return text.replace(regex, "<mark>$1</mark>");
 }
 
 
@@ -152,12 +157,14 @@ function closeModal() {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
   loadBenefits();
 
-  document
-    .getElementById("searchInput")
-    .addEventListener("input", searchBenefits);
+  const input = document.getElementById("searchInput");
+
+  if (input) {
+    input.addEventListener("input", searchBenefits);
+  }
 });
 
 function submitFeedback(answer){

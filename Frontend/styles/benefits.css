@@ -268,11 +268,11 @@
   box-shadow:0 8px 18px rgba(77,166,255,0.28);
 }
 
-
 mark{
-  background:yellow;
-  padding:0 2px;
-  border-radius:3px;
+  background: yellow;
+  color: black;
+  padding: 0 2px;
+  border-radius: 3px;
 }
 
 

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../Frontend/styles/benefits.css">
 <link rel="stylesheet" href="../Frontend/styles/main.css">
 <link rel="stylesheet" href="../Frontend/styles/info.css">
-<script src="../Frontend/scripts/benefits.js" defer></script>
+
 </head>
 
 <body>
@@ -28,19 +28,20 @@
   </div>
 
   <div class="profile">
-    <input type="checkbox" id="profileToggle">
+  <input type="checkbox" id="profileToggle">
 
-    <label for="profileToggle" class="profile-btn">
-      <img src="../Frontend/Images/user.jpg" class="profile-img">
-    </label>
+  <label for="profileToggle" class="profile-btn">
+    <img src="../Frontend/Images/user.jpg" class="profile-img">
+  </label>
 
-    <div class="profile-dropdown">
-      <a href="login.html">Login</a>
-      <a href="signup.html">Add new account</a>
-      <a href="#">Settings</a>
-      <a href="main.html">Logout</a>
-    </div>
+  <div class="profile-dropdown">
+    <a href="login.html">Login</a>
+    <a href="signup.html">Add new account</a>
+    <a href="#">Settings</a>
+    <a href="main.html">Logout</a>
   </div>
+</div>
+  
 </nav>
 
 <!-- HERO -->
@@ -49,13 +50,12 @@
   <p>Search, compare and learn how to apply.</p>
 
   <div class="search-box">
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search benefits..."
-    >
-    <button class="search-btn" onclick="searchBenefits()">🔍</button>
-  </div>
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search benefits...">
+  <button class="search-btn" onclick="searchBenefits()">🔍</button>
+</div>
 </header>
 
 <!-- NO RESULT -->
@@ -83,6 +83,6 @@
 
   <p id="feedbackMessage"></p>
 </section>
-
+<script src="../Frontend/scripts/benefits.js" defer></script>
 </body>
 </html>
