@@ -11,11 +11,10 @@ html,body{
 }
 
 body{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background:#f8f8f6;
-  color:#17384d;
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#7a7b7e,#dcecff,#a8b6c9);
 }
-
 
 .about-page{
   width:100%;

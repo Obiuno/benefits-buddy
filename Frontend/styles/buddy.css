@@ -7,10 +7,10 @@ body{
   margin:0;
   font-family:'Segoe UI',sans-serif;
   background:
-    radial-gradient(circle at top left,#ffffff 0%,#eef5fc 35%,#dbeaf8 100%);
-  color:#17384d;
+    radial-gradient(circle at top left,#4da6ff33,transparent 30%),
+    radial-gradient(circle at bottom right,#1f3c4d33,transparent 30%),
+    linear-gradient(135deg,#eef5ff,#dcecff,#f7fbff);
 }
-
 /* MAIN LAYOUT */
 .buddy-app{
   display:flex;
