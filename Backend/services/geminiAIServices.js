@@ -18,7 +18,7 @@ const benefitsTest = yaml.load(benefitsFile);
 
 const glossaryFile = fs.readFileSync(
   path.join(__dirname, "../data/glossary.yml"),
-  "utf8",
+  "utf8",s
 );
 const glossaryTest = yaml.load(glossaryFile);
 
