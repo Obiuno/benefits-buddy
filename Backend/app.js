@@ -20,12 +20,14 @@ const __dirname = path.dirname(__filename);
 app.use(cors());
 app.use(express.json());
 
+/*
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Benefits Buddy Operational!" });
 });
+*/
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../Frontend/main.htm"));
+  res.sendFile(path.join(__dirname, "../Frontend/main.html"));
 });
 //Uncomment when spec is up and running
 //app.use("/reference", apiReference({ spec: { content: specs } }));
