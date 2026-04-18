@@ -16,12 +16,12 @@ body{
   color:#17384d;
 }
 
-/* FULL PAGE */
+
 .about-page{
   width:100%;
 }
 
-/* ================= HERO ================= */
+
 .about-hero{
   width:100%;
   min-height:620px;
@@ -40,7 +40,7 @@ body{
   background-repeat:no-repeat;
 }
 
-/* TEXT */
+
 .hero-overlay{
   width:100%;
   max-width:900px;
@@ -81,9 +81,7 @@ body{
   background:#c7853b;
 }
 
-/* ===================================================
-   INTRO SECTION
-=================================================== */
+
 
 .about-intro{
     position: relative;
@@ -114,9 +112,7 @@ body{
     margin-bottom: 22px;
     color: rgba(255,255,255,0.92);
 }
-/* ===================================================
-   INFO GRID
-=================================================== */
+
 
 .info-grid{
   max-width:1300px;
@@ -159,9 +155,7 @@ body{
   font-size:16px;
 }
 
-/* ===================================================
-   IMAGE CARDS
-=================================================== */
+
 
 .feature-grid{
   max-width:1300px;
@@ -183,7 +177,7 @@ body{
 }
 
 .feature-card.one{
-  background-image:url("../Images/21.jpg");
+  background-image:url("../Images/4.webp");
 }
 
 .feature-card.two{
@@ -207,78 +201,103 @@ body{
   font-weight:700;
 }
 
-/* ===================================================
-   CONTACT FORM
-=================================================== */
+
 
 .contact-wrap{
-  max-width:1100px;
-  margin:0 auto 90px;
-  background:#fff;
-  padding:55px;
-  border-radius:20px;
-  box-shadow:0 14px 30px rgba(0,0,0,0.06);
+  max-width: 950px;
+  margin: 80px auto;
+  padding: 55px 45px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.08);
+  border: 1px solid #eef2f6;
 }
 
 .contact-wrap h2{
-  text-align:center;
-  font-size:44px;
-  margin-bottom:30px;
+  text-align: center;
+  font-size: 46px;
+  font-weight: 800;
+  color: #17384d;
+  margin-bottom: 10px;
 }
+
 
 .contact-form{
-  display:grid;
-  gap:18px;
+  display: grid;
+  gap: 18px;
 }
 
+
 .grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
 }
+
 
 .contact-form input,
 .contact-form textarea{
-  width:100%;
-  padding:16px;
-  border:1px solid #d8e0e8;
-  border-radius:12px;
-  font-size:16px;
-  outline:none;
-  transition:0.3s;
+  width: 100%;
+  padding: 16px 18px;
+  font-size: 16px;
+  border: 1px solid #d7e2ea;
+  border-radius: 14px;
+  background: #f9fbfd;
+  transition: all 0.25s ease;
+  outline: none;
 }
+
 
 .contact-form input:focus,
 .contact-form textarea:focus{
-  border-color:#4da6ff;
-  box-shadow:0 0 0 4px rgba(77,166,255,0.12);
+  border-color: #4da6ff;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(77,166,255,0.14);
 }
 
 .contact-form textarea{
-  min-height:180px;
-  resize:vertical;
+  min-height: 180px;
+  resize: vertical;
 }
 
+
 .contact-form button{
-  background:#17384d;
-  color:#fff;
-  border:none;
-  padding:16px;
-  font-size:17px;
-  border-radius:12px;
-  font-weight:700;
-  cursor:pointer;
-  transition:0.3s;
+  border: none;
+  padding: 16px;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 14px;
+  background: linear-gradient(135deg,#17384d,#285c7d);
+  color: white;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .contact-form button:hover{
-  background:#285c7d;
-  transform:translateY(-2px);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(23,56,77,0.25);
 }
 
-/* ===================================================
-   FOOTER
-=================================================== */
+@media(max-width:768px){
+
+  .contact-wrap{
+    margin: 50px 15px;
+    padding: 30px 20px;
+    border-radius: 18px;
+  }
+
+  .contact-wrap h2{
+    font-size: 34px;
+  }
+
+  .grid2{
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form textarea{
+    min-height: 150px;
+  }
+}
 
 .footer{
   background:#17384d;
@@ -334,9 +353,6 @@ body{
   font-size:14px;
 }
 
-/* ===================================================
-   RESPONSIVE
-=================================================== */
 
 @media(max-width:1100px){
 
