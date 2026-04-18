@@ -20,10 +20,15 @@ const __dirname = path.dirname(__filename);
 app.use(cors());
 app.use(express.json());
 
+/*
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Benefits Buddy Operational!" });
 });
+*/
 
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../Frontend/main.html"));
+});
 //Uncomment when spec is up and running
 //app.use("/reference", apiReference({ spec: { content: specs } }));
 
@@ -35,17 +40,8 @@ app.use("/api/glossary", glossaryRouter);
 app.use("/api/benefits", benefitsRouter);
 app.use("/api/ai", aiRouter);
 
-// localhost set routes so our frontend can work locally and it is what we will need for render deploy as well
-/*
-app.use("/Images", express.static(path.join(__dirname, "../Frontend/Images")));
-app.use(
-  "/scripts",
-  express.static(path.join(__dirname, "../Frontend/scripts")),
-);
-app.use("/styles", express.static(path.join(__dirname, "../Frontend/styles")));
-
 app.get((req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/main.html"));
 });
-*/
+
 export default app;
