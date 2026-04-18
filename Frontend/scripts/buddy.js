@@ -348,30 +348,112 @@ function loadChat(id) {
 }
 
 function deleteChat(id) {
-  const confirmDelete = confirm("Delete this chat?");
-  if (!confirmDelete) return;
+  const chat = allChats.find(c => c.id === id);
+  if (!chat) return;
 
-  allChats = allChats.filter(chat => chat.id !== id);
+  const overlay = document.createElement("div");
+  overlay.className = "rename-overlay";
 
-  if (allChats.length === 0) {
-    createNewChatSession();
-  } else {
-    currentChatId = allChats[0].id;
-    renderCurrentChat();
-  }
+  overlay.innerHTML = `
+    <div class="rename-modal delete-modal">
+      <h2>Delete chat?</h2>
+      <p class="delete-text">
+        This will permanently delete <strong>${chat.title}</strong>.
+      </p>
 
-  saveAllChats();
+      <div class="rename-actions">
+        <button class="cancel-btn">Cancel</button>
+        <button class="delete-btn">Delete</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  const cancelBtn = overlay.querySelector(".cancel-btn");
+  const deleteBtn = overlay.querySelector(".delete-btn");
+
+  cancelBtn.onclick = () => overlay.remove();
+
+  deleteBtn.onclick = () => {
+    allChats = allChats.filter(c => c.id !== id);
+
+    if (allChats.length === 0) {
+      createNewChatSession();
+    } else {
+      currentChatId = allChats[0].id;
+      renderCurrentChat();
+    }
+
+    saveAllChats();
+    overlay.remove();
+  };
+
+  overlay.addEventListener("click", e => {
+    if (e.target === overlay) overlay.remove();
+  });
+
+  document.addEventListener("keydown", function esc(e) {
+    if (e.key === "Escape") {
+      overlay.remove();
+      document.removeEventListener("keydown", esc);
+    }
+  });
 }
 
 function renameChat(id) {
   const chat = allChats.find(c => c.id === id);
   if (!chat) return;
 
-  const name = prompt("Rename chat:", chat.title);
-  if (!name) return;
+  const overlay = document.createElement("div");
+  overlay.className = "rename-overlay";
 
-  chat.title = name.trim();
-  saveAllChats();
+  overlay.innerHTML = `
+    <div class="rename-modal">
+      <h2>Rename chat</h2>
+
+      <input 
+        type="text" 
+        id="renameInput" 
+        value="${chat.title}" 
+        maxlength="40"
+      >
+
+      <div class="rename-actions">
+        <button class="cancel-btn">Cancel</button>
+        <button class="save-btn">Save</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  const inputBox = overlay.querySelector("#renameInput");
+  const cancelBtn = overlay.querySelector(".cancel-btn");
+  const saveBtn = overlay.querySelector(".save-btn");
+
+  inputBox.focus();
+  inputBox.select();
+
+  cancelBtn.onclick = () => overlay.remove();
+
+  saveBtn.onclick = () => {
+    const newName = inputBox.value.trim();
+    if (!newName) return;
+
+    chat.title = newName;
+    saveAllChats();
+    overlay.remove();
+  };
+
+  inputBox.addEventListener("keydown", e => {
+    if (e.key === "Enter") saveBtn.click();
+    if (e.key === "Escape") overlay.remove();
+  });
+
+  overlay.addEventListener("click", e => {
+    if (e.target === overlay) overlay.remove();
+  });
 }
 
 function pinChat(id) {
@@ -401,8 +483,7 @@ function newChat() {
 
 /* =====================================================
    DOWNLOAD CHAT AS PDF
-   Requires:
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 ===================================================== */
 function downloadChat() {
   const current = getCurrentChat();

@@ -12,8 +12,12 @@ html,body{
 
 body{
   margin:0;
-  font-family:'Segoe UI',sans-serif;
-  background:linear-gradient(135deg,#7a7b7e,#dcecff,#a8b6c9);
+  font-family:'Segoe UI', sans-serif;
+  background-image: url("../Images/4.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .about-page{
@@ -31,8 +35,7 @@ body{
   padding:40px 20px;
 
   background-image:
-  linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-  url("../Images/images.jpg");
+  url("../Images/image.jpg");
 
   background-size:cover;
   background-position:center;
