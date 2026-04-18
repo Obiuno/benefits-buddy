@@ -15,7 +15,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "seed-db": "node ./Backend/database/setup-db.js",
+    "seed-db": "node ./Backend/db/setup-db.js",
     "dev": "nodemon ./Backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "mintlify dev"
