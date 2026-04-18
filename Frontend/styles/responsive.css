@@ -1,6 +1,3 @@
-/* =====================================
-   MOBILE RESPONSIVE FIX
-===================================== */
 
 /* TABLET */
 @media (max-width: 992px){
@@ -151,6 +148,110 @@
 
   .nav-btn{
     font-size:14px;
+  }
+
+}
+
+
+@media (max-width: 768px){
+
+  body{
+    overflow-x: hidden;
+  }
+
+  /* Main container */
+  .auth-container,
+  .login-container,
+  .signup-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  /* LEFT SIDE */
+  .left-panel,
+  .auth-left,
+  .login-left,
+  .signup-left{
+    width: 100%;
+    min-height: 260px;
+    padding: 30px 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left-panel img,
+  .auth-left img,
+  .login-left img,
+  .signup-left img{
+    max-width: 160px;
+    height: auto;
+  }
+
+  /* RIGHT SIDE FORM */
+  .right-panel,
+  .auth-right,
+  .login-right,
+  .signup-right{
+    width: 100%;
+    padding: 30px 20px;
+  }
+
+  /* FORM BOX */
+  .form-box,
+  .login-box,
+  .signup-box{
+    width: 100%;
+    max-width: 100%;
+    padding: 25px 20px;
+    border-radius: 14px;
+  }
+
+  /* Inputs */
+  input,
+  select,
+  textarea{
+    width: 100%;
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  /* Buttons */
+  button,
+  .btn{
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  h1,h2{
+    font-size: 28px;
+    text-align: center;
+  }
+
+}
+
+
+/* SMALL PHONES */
+@media (max-width: 480px){
+
+  .left-panel,
+  .auth-left,
+  .login-left,
+  .signup-left{
+    min-height: 220px;
+    padding: 20px;
+  }
+
+  h1,h2{
+    font-size: 24px;
+  }
+
+  input{
+    font-size: 15px;
   }
 
 }
