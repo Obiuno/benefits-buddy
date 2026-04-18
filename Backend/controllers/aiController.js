@@ -18,17 +18,19 @@ const aiChat = async (req, res) => {
     );
     console.log("🟥 this is the response shape: ", response);
 
-    const { your_reasoning, feedback, ...frontendResponse } = response;
+    const { developer_meta, ...frontendResponse } = response;
 
-    console.log(
-      JSON.stringify({
-        timestamp: new Date().toISOString,
-        resoning: your_reasoning,
-        feedback,
-      }),
-    );
+    if (response.developer_meta) {
+      console.log(
+        JSON.stringify({
+          timestamp: new Date().toISOString(),
+          reasoning: developer_meta.reasoning,
+          feedback: developer_meta.feedback,
+        }),
+      );
+    }
 
-    res.status(200).send(frontendResponse);
+    res.status(200).json(frontendResponse);
   } catch (err) {
     console.error("Error talking to Benefits Buddy: ", err);
     res.status(500).send({ error: err.message });

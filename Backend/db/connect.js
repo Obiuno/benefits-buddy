@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 
 dotenv.config({ path: resolve(__dirname, "../../.env") });
 
-console.log("Connecting to:", process.env.DB_URL); // Remove once working
+//console.log("Connecting to:", process.env.DB_URL); // Remove once working
 
 const db = new Pool({
   connectionString: process.env.DB_URL,
