@@ -2,7 +2,7 @@ let allBenefits = [];
 
 async function loadBenefits() {
   try {
-    const response = await fetch("http://localhost:3000/api/benefits/frontend");
+    const response = await fetch("/api/benefits/frontend");
     const data = await response.json();
 
     allBenefits = data.benefits || data || [];

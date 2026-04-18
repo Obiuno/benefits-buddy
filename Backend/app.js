@@ -36,6 +36,7 @@ app.use("/api/benefits", benefitsRouter);
 app.use("/api/ai", aiRouter);
 
 // localhost set routes so our frontend can work locally and it is what we will need for render deploy as well
+/*
 app.use("/Images", express.static(path.join(__dirname, "../Frontend/Images")));
 app.use(
   "/scripts",
@@ -46,5 +47,5 @@ app.use("/styles", express.static(path.join(__dirname, "../Frontend/styles")));
 app.get((req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/main.html"));
 });
-
+*/
 export default app;
