@@ -1,6 +1,3 @@
-/* ===================================================
-   ABOUT PAGE - UPDATED PROFESSIONAL DESIGN
-=================================================== */
 
 *{
   margin:0;
@@ -123,7 +120,7 @@ body{
 
 .info-grid{
   max-width:1300px;
-  margin:0 auto 90px;
+  margin:50px auto 90px;
   padding:0 20px;
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -186,11 +183,11 @@ body{
 }
 
 .feature-card.one{
-  background-image:url("../Frontend/Images/about1.jpg");
+  background-image:url("../Images/21.jpg");
 }
 
 .feature-card.two{
-  background-image:url("../Frontend/Images/about2.jpg");
+  background-image:url("../Images/14.webp");
 }
 
 .overlay{
