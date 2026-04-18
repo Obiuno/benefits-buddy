@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Benefit Buddy</title>
 
 <link rel="stylesheet" href="../Frontend/styles/main.css">
 <link rel="stylesheet" href="../Frontend/styles/buddy.css">
+<link rel="stylesheet" href="../Frontend/styles/responsive.css">
 </head>
 
 <body>
@@ -50,6 +51,7 @@
   <aside class="left-panel">
     <button class="new-chat" onclick="newChat()">+ New Chat</button>
     <button class="history-btn" onclick="toggleHistory()">View History</button>
+    <button class="history-btn" onclick="downloadChat()">Download Chat</button>
 
     <div id="historyBox" class="history-box"></div>
   </aside>
@@ -83,6 +85,8 @@
 
 <!-- SCRIPT -->
 <script src="../Frontend/scripts/buddy.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 
 </body>
 </html>
