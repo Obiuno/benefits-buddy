@@ -1,7 +1,9 @@
-DROP TABLE IF EXISTS glossary
-DROP TABLE IF EXISTS faqs
-DROP TABLE IF EXISTS benefits
-DROP TABLE IF EXISTS users
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS conversations;
+DROP TABLE IF EXISTS glossary;
+DROP TABLE IF EXISTS faqs;
+DROP TABLE IF EXISTS benefits;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE benefits (
     benefits_id SERIAL PRIMARY KEY,
@@ -9,7 +11,7 @@ CREATE TABLE benefits (
     name VARCHAR(250) NOT NULL,
     description TEXT NOT NULL,
     category JSONB,
-    urls JSONB UNIQUE NOt NULL,
+    urls JSONB UNIQUE NOT NULL,
     details JSONB NOT NULL,
     active BOOLEAN DEFAULT TRUE,
     updated_at TIMESTAMP DEFAULT NOW()

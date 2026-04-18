@@ -1,11 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="./styles/loginsignup.css" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="../Frontend/styles/responsive.css">
 </head>
 
 <body>
@@ -25,17 +27,14 @@
 
     <!-- RIGHT -->
     <div class="right">
-      <form class="form-box">
-        <h1>Welcome Back!</h1>
+    <form class="form-box" id="loginForm">
+  <h1>Welcome Back!</h1>
 
-        <input type="text" placeholder="Username" required />
+  <input type="text" id="loginField" placeholder="Username or Email" required />
+  <input type="password" id="Password" placeholder="Password" required />
 
-        <div class="password-field">
-          <input type="password" placeholder="Password" required />
-          
-        </div>
+  <button class="main-btn">Login</button>
 
-        <button class="main-btn">Login</button>
 
         <p class="switch-text">
           Don't have an account?
@@ -45,5 +44,7 @@
     </div>
 
   </div>
+  
+<script src="../Frontend/scripts/login.js"></script>
 </body>
 </html>
