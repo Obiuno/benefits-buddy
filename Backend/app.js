@@ -28,10 +28,24 @@ app.get("/", (req, res) => {
 //app.use("/reference", apiReference({ spec: { content: specs } }));
 
 app.use("/static", express.static(path.join(__dirname, "assets/images")));
+app.use(express.static(path.join(__dirname, "../Frontend")));
 
 app.use("/api/faqs", faqsRouter);
 app.use("/api/glossary", glossaryRouter);
 app.use("/api/benefits", benefitsRouter);
 app.use("/api/ai", aiRouter);
 
+// localhost set routes so our frontend can work locally and it is what we will need for render deploy as well
+/*
+app.use("/Images", express.static(path.join(__dirname, "../Frontend/Images")));
+app.use(
+  "/scripts",
+  express.static(path.join(__dirname, "../Frontend/scripts")),
+);
+app.use("/styles", express.static(path.join(__dirname, "../Frontend/styles")));
+
+app.get((req, res) => {
+  res.sendFile(path.join(__dirname, "../Frontend/main.html"));
+});
+*/
 export default app;
