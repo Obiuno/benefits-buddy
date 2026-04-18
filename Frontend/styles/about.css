@@ -11,11 +11,14 @@ html,body{
 }
 
 body{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background:#f8f8f6;
-  color:#17384d;
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background-image: url("../Images/4.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
-
 
 .about-page{
   width:100%;
@@ -32,8 +35,7 @@ body{
   padding:40px 20px;
 
   background-image:
-  linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-  url("../Images/images.jpg");
+  url("../Images/image.jpg");
 
   background-size:cover;
   background-position:center;
