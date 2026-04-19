@@ -2,12 +2,11 @@ let allBenefits = [];
 
 async function loadBenefits() {
   try {
-    const response = await fetch("http://localhost:3000/api/benefits/frontend");
+    const response = await fetch("/api/benefits/frontend");
     const data = await response.json();
 
     allBenefits = data.benefits || data || [];
     renderBenefits(allBenefits);
-
   } catch (error) {
     console.error("Error loading benefits:", error);
   }
@@ -34,7 +33,7 @@ function renderBenefits(list, searchText = "") {
       <article class="benefit-card">
 
         <img
-          src="${item.image || 'Images/default.jpg'}"
+          src="${item.image || "Images/default.jpg"}"
           class="card-img"
           alt="${item.name}"
         >
@@ -52,7 +51,7 @@ function renderBenefits(list, searchText = "") {
               Learn More
             </button>
 
-            <a href="${item.urls?.apply_url || '#'}"
+            <a href="${item.urls?.apply_url || "#"}"
                target="_blank"
                class="btn primary">
                Apply
@@ -68,11 +67,10 @@ function renderBenefits(list, searchText = "") {
 function searchBenefits() {
   const keyword = document
     .getElementById("searchInput")
-    .value
-    .toLowerCase()
+    .value.toLowerCase()
     .trim();
 
-  const filtered = allBenefits.filter(item => {
+  const filtered = allBenefits.filter((item) => {
     const text = `
       ${item.name}
       ${item.category}
@@ -93,7 +91,6 @@ function highlight(text, keyword) {
 
   return text.replace(regex, "<mark>$1</mark>");
 }
-
 
 function formatCategory(text) {
   if (!text) return "General";
@@ -118,30 +115,30 @@ function openModal(index) {
 
     <h3>Documents Required</h3>
     <ul>
-      ${(info.documents_required || []).map(x => `<li>${x}</li>`).join("")}
+      ${(info.documents_required || []).map((x) => `<li>${x}</li>`).join("")}
     </ul>
 
     <h3>Things To Know</h3>
     <ul>
-      ${(info.gotchas || []).map(x => `<li>${x}</li>`).join("")}
+      ${(info.gotchas || []).map((x) => `<li>${x}</li>`).join("")}
     </ul>
 
     <h3>Preparation Tips</h3>
     <ul>
-      ${(info.preparation_tips || []).map(x => `<li>${x}</li>`).join("")}
+      ${(info.preparation_tips || []).map((x) => `<li>${x}</li>`).join("")}
     </ul>
 
     <h3>Related Benefits</h3>
     <ul>
-      ${(info.related_benefits || []).map(x => `<li>${formatCategory(x)}</li>`).join("")}
+      ${(info.related_benefits || []).map((x) => `<li>${formatCategory(x)}</li>`).join("")}
     </ul>
 
     <h3>Questions To Ask</h3>
     <ul>
-      ${(info.questions_to_ask || []).map(x => `<li>${x.question}</li>`).join("")}
+      ${(info.questions_to_ask || []).map((x) => `<li>${x.question}</li>`).join("")}
     </ul>
 
-    <a href="${info.gov_url || '#'}"
+    <a href="${info.gov_url || "#"}"
        target="_blank"
        class="gov-btn">
        Visit GOV.UK
@@ -151,11 +148,9 @@ function openModal(index) {
   document.getElementById("modal").style.display = "flex";
 }
 
-
 function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
-
 
 document.addEventListener("DOMContentLoaded", function () {
   loadBenefits();
@@ -167,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function submitFeedback(answer){
+function submitFeedback(answer) {
   document.getElementById("feedbackMessage").innerText =
     "Thank you for your feedback.";
 

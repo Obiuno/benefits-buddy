@@ -6,16 +6,16 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value.trim();
 
   try {
-    const response = await fetch("http://localhost:3000/api/auth/register", {
+    const response = await fetch("/api/auth/register", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username,
         email,
-        password
-      })
+        password,
+      }),
     });
 
     const data = await response.json();
@@ -27,7 +27,6 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
 
     alert("Account created successfully!");
     window.location.href = "login.html";
-
   } catch (error) {
     console.error(error);
     alert("Server error. Please try again.");
