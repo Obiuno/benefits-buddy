@@ -1,3 +1,9 @@
-.env
+# Block all .env variations
+.env*
+
+# But allow the example .env
+!.env.template
+
+# other files to block
 node_modules
 package-lock.json

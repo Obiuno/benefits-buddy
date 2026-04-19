@@ -52,7 +52,7 @@ function getStorage() {
 function getTime() {
   return new Date().toLocaleTimeString([], {
     hour: "2-digit",
-    minute: "2-digit"
+    minute: "2-digit",
   });
 }
 
@@ -85,7 +85,7 @@ function createNewChatSession() {
     title: "New Chat",
     pinned: false,
     createdAt: new Date().toISOString(),
-    messages: []
+    messages: [],
   };
 
   allChats.unshift(chat);
@@ -96,7 +96,7 @@ function createNewChatSession() {
 }
 
 function getCurrentChat() {
-  return allChats.find(chat => chat.id === currentChatId);
+  return allChats.find((chat) => chat.id === currentChatId);
 }
 
 /* =====================================================
@@ -119,12 +119,8 @@ function renderCurrentChat() {
     return;
   }
 
-  current.messages.forEach(msg => {
-    addMessage(
-      msg.role === "user" ? "user" : "bot",
-      msg.content,
-      msg.time
-    );
+  current.messages.forEach((msg) => {
+    addMessage(msg.role === "user" ? "user" : "bot", msg.content, msg.time);
   });
 
   chatBox.scrollTop = chatBox.scrollHeight;
@@ -202,7 +198,7 @@ async function sendMessage() {
   const userMsg = {
     role: "user",
     content: text,
-    time: getTime()
+    time: getTime(),
   };
 
   current.messages.push(userMsg);
@@ -218,11 +214,11 @@ async function sendMessage() {
     const response = await fetch("/api/ai/chat", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        messages: current.messages
-      })
+        messages: current.messages,
+      }),
     });
 
     const data = await response.json();
@@ -234,11 +230,10 @@ async function sendMessage() {
     current.messages.push({
       role: "assistant",
       content: data.message || "No response.",
-      time: getTime()
+      time: getTime(),
     });
 
     saveAllChats();
-
   } catch (error) {
     console.error(error);
 
@@ -249,7 +244,7 @@ async function sendMessage() {
     current.messages.push({
       role: "assistant",
       content: "❌ Server error.",
-      time: getTime()
+      time: getTime(),
     });
 
     saveAllChats();
@@ -270,7 +265,7 @@ function renderAssistantResponse(data) {
     const wrap = document.createElement("div");
     wrap.className = "cards-wrap";
 
-    data.benefits_suggested.forEach(item => {
+    data.benefits_suggested.forEach((item) => {
       const card = document.createElement("div");
       card.className = "info-card";
 
@@ -290,7 +285,7 @@ function renderAssistantResponse(data) {
     const wrap = document.createElement("div");
     wrap.className = "cards-wrap";
 
-    data.glossary_terms.forEach(term => {
+    data.glossary_terms.forEach((term) => {
       const card = document.createElement("div");
       card.className = "info-card glossary-card";
 
@@ -327,9 +322,23 @@ function renderHistoryList() {
 
   const sorted = [...allChats].sort((a, b) => b.pinned - a.pinned);
 
-  sorted.forEach(chat => {
-    const item = document.createElement("div");
-    item.className = "history-item";
+  sorted
+    .filter((chat) => chat.title.toLowerCase().includes(query))
+    .forEach((chat) => {
+      const item = document.createElement("div");
+      item.className = "history-item";
+
+      item.innerHTML = `
+        <div>
+          <strong>${chat.pinned ? "📌 " : ""}${chat.title}</strong>
+        </div>
+
+        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+          <button onclick="event.stopPropagation(); renameChat(${chat.id})">✏️</button>
+          <button onclick="event.stopPropagation(); deleteChat(${chat.id})">🗑️</button>
+          <button onclick="event.stopPropagation(); pinChat(${chat.id})">📌</button>
+        </div>
+      `;
 
     item.innerHTML = `
       <div>
@@ -354,31 +363,84 @@ function loadChat(id) {
 }
 
 function deleteChat(id) {
-  allChats = allChats.filter(c => c.id !== id);
+  const chat = allChats.find((c) => c.id === id);
+  if (!chat) return;
 
-  if (allChats.length === 0) {
-    createNewChatSession();
-  } else {
-    currentChatId = allChats[0].id;
-    renderCurrentChat();
-  }
+  const overlay = document.createElement("div");
+  overlay.className = "rename-overlay";
+
+  overlay.innerHTML = `
+    <div class="rename-modal delete-modal">
+      <h2>Delete chat?</h2>
+      <p class="delete-text">
+        This will permanently delete <strong>${chat.title}</strong>.
+      </p>
+
+      <div class="rename-actions">
+        <button class="cancel-btn">Cancel</button>
+        <button class="delete-btn">Delete</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  const cancelBtn = overlay.querySelector(".cancel-btn");
+  const deleteBtn = overlay.querySelector(".delete-btn");
+
+  cancelBtn.onclick = () => overlay.remove();
+
+  deleteBtn.onclick = () => {
+    allChats = allChats.filter((c) => c.id !== id);
+
+    if (allChats.length === 0) {
+      createNewChatSession();
+    } else {
+      currentChatId = allChats[0].id;
+      renderCurrentChat();
+    }
+
+    saveAllChats();
+    overlay.remove();
+  };
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) overlay.remove();
+  });
 
   saveAllChats();
 }
 
 function renameChat(id) {
-  const chat = allChats.find(c => c.id === id);
+  const chat = allChats.find((c) => c.id === id);
   if (!chat) return;
 
   const newName = prompt("Rename chat:", chat.title);
   if (!newName) return;
 
-  chat.title = newName.trim();
-  saveAllChats();
+  cancelBtn.onclick = () => overlay.remove();
+
+  saveBtn.onclick = () => {
+    const newName = inputBox.value.trim();
+    if (!newName) return;
+
+    chat.title = newName;
+    saveAllChats();
+    overlay.remove();
+  };
+
+  inputBox.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") saveBtn.click();
+    if (e.key === "Escape") overlay.remove();
+  });
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) overlay.remove();
+  });
 }
 
 function pinChat(id) {
-  const chat = allChats.find(c => c.id === id);
+  const chat = allChats.find((c) => c.id === id);
   if (!chat) return;
 
   chat.pinned = !chat.pinned;
@@ -428,7 +490,7 @@ function downloadChat() {
   y += 12;
   doc.setFontSize(11);
 
-  current.messages.forEach(msg => {
+  current.messages.forEach((msg) => {
     const sender = msg.role === "user" ? "You" : "Benefit Buddy";
     const line = `[${msg.time}] ${sender}: ${msg.content}`;
 
@@ -445,3 +507,12 @@ function downloadChat() {
 
   doc.save(`${current.title}.pdf`);
 }
+
+/* =====================================================
+   ENTER KEY
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});

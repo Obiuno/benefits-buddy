@@ -5,15 +5,15 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value.trim();
 
   try {
-    const response = await fetch("http://localhost:3000/api/auth/login", {
+    const response = await fetch("/api/auth/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         login,
-        password
-      })
+        password,
+      }),
     });
 
     const data = await response.json();
@@ -23,14 +23,10 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
       return;
     }
 
-    localStorage.setItem(
-      "buddyLoggedInUser",
-      JSON.stringify(data.user)
-    );
+    localStorage.setItem("buddyLoggedInUser", JSON.stringify(data.user));
 
     alert("Login successful!");
     window.location.href = "buddy.html";
-
   } catch (error) {
     console.error(error);
     alert("Server error. Please try again.");
