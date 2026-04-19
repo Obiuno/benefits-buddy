@@ -18,7 +18,7 @@ class Benefits {
    * @param {string} benefit.slug - computer readable version of name containing _
    * @param {string} benefit.name - the name of the benefit item to de defined
    * @param {string} benefit.description - decription of benefit
-   * @param {string} benefit.category - category of benefit
+   * @param {array} benefit.category - category of benefit
    * @param {object} benefit.urls - URLs to GOV.UK and application
    * @param {object} benefit.details - all details pertaining to benefit
    * @param {boolean} benefit.active - active toggle

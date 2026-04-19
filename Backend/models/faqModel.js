@@ -17,8 +17,8 @@ class Faqs {
    * @param {string} faq.question - the FAQ question text
    * @param {string} faq.answer - the FAQ answer text
    * @param {string} faq.benefit_slug - FK referencing benefits(slug)
-   * @param {string} [faq.category] - optional grouping category
-   * @param {number} [faq.active=0] - Sorting prioirty
+   * @param {array} [faq.category] - optional grouping category
+   * @param {number} [faq.display_order=0] - Sorting prioirty
    * @param {boolean} [faq.active=true] - active toggle
    */
   constructor(faq) {
@@ -26,8 +26,8 @@ class Faqs {
     this.question = faq.question ?? "test question ?";
     this.answer = faq.answer ?? "test answer";
     this.benefit_slug = faq.benefit_slug ?? "bnefit slug";
-    this.category = faq.category ?? "category";
-    this.display_order = faq.display_order ?? 0;
+    this.category = faq.category ?? ["category"];
+    this.display_order = faq.display_order ?? 999;
     this.active = faq.active ?? true;
   }
   /**Get all FAQs from the faq.yml

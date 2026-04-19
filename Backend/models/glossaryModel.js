@@ -1,32 +1,27 @@
-import db from "../db/connect.js";
+//import db from "../db/connect.js";
 
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
+import { GlossaryYAMLSchema } from "../schemas/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 class Glossary {
   /**
-   * Represents an glossary item from the database
-   * @constructor glossary
-   * @param {Object} glossary - the row object from the glossary table
-   * @param {number} [glossary.glossary_id] - PK (auto incremented)
-   * @param {string} glossary.term - the glossary term to be defined
-   * @param {string} glossary.definition
-   * @param {JSON} [glossary.related_benefits] - the benefits that reference this glossary item
-   * @param {boolean} [glossary.active=true] - active toggle
-   * @param {string} glossary.glossary_slug - slug for glossary term
+   * Represents a glossary item
+   * @constructor
+   * @param {z.infer<typeof GlossaryYAMLSchema>} item
    */
   constructor(item) {
-    this.id = item.glossary_id ?? 99;
-    this.term = item.term ?? "placement term";
-    this.definition = item.definition ?? "placement def.";
-    this.related_benefits = item.related_benefits ?? ["test 1", "test 2"];
+    this.id = item.glossary_id ?? 999;
+    this.term = item.term;
+    this.definition = item.definition;
+    this.related_benefits = item.related_benefits ?? [];
     this.active = item.active ?? true;
-    this.slug = item.glossary_slug ?? "no_slug_term";
+    this.slug = item.glossary_slug;
   }
   /**Get all glossary items from the glossary.yml
    * @static
@@ -35,21 +30,20 @@ class Glossary {
    */
   static async getAllGlossaryItems() {
     try {
-      const glossaryFile = fs.readFileSync(
+      const file = fs.readFileSync(
         path.join(__dirname, "../data/glossary.yml"),
         "utf8",
       );
-      const glossaryData = yaml.load(glossaryFile);
-      console.log("raw data", JSON.stringify(glossaryData.glossary, null, 2));
-      return (
-        glossaryData.glossary
-          // .filter((i) => i.active) // no active in file version
-          .sort((a, b) => (a.display_order || 99) - (b.display_order || 99))
-          .map((i) => new Glossary(i))
-          .filter((i) => i.active)
-      );
+      const data = yaml.load(file);
+
+      return data.glossary
+        .map((i) => GlossaryYAMLSchema.parse(i)) // Zod validates each item
+        .filter((i) => i.active)
+        .sort((a, b) => (a.display_order || 99) - (b.display_order || 99))
+        .map((i) => new Glossary(i));
     } catch (err) {
-      console.error("Failed to read Glossary: ", err);
+      console.error("Failed to load Glossary:", err);
+      throw err; // rethrow so errorHandler catches it
     }
   }
 }
