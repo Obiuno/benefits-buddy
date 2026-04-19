@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -62,33 +62,28 @@
     <!-- CHAT MESSAGES -->
     <div id="chatBox" class="chat-stream">
 
-      <div class="welcome-title">
-        <h1>Hello 👋 I am Benefit Buddy</h1>
-        <h2>How can I assist you today?</h2>
+      <div class="nav-links">
+        <a href="/main.html" class="nav-btn">Home</a>
+        <a href="/buddy.html" class="nav-btn">Chat with Buddy</a>
+        <a href="/info.html" class="nav-btn">Help Center</a>
+        <a href="/benefits.html" class="nav-btn">Browse Benefits</a>
+        <a href="/About.html" class="nav-btn">About Us</a>
       </div>
 
-    </div>
+      <div class="profile">
+        <input type="checkbox" id="profileToggle" />
 
-    <!-- INPUT -->
-    <div class="composer-wrap">
-      <textarea
-        id="messageInput"
-        placeholder="Message Benefit Buddy..."
-        rows="1"
-      ></textarea>
+        <label for="profileToggle" class="profile-btn">
+          <img src="/Images/user.jpg" alt="User" class="profile-img" />
+        </label>
 
       <button class="send-btn" onclick="sendMessage()">
   <i class="fa-solid fa-paper-plane"></i>
 </button>
     </div>
 
-  </main>
-</div>
-
-<!-- SCRIPT -->
-<script src="/scripts/buddy.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-
-</body>
+    <!-- SCRIPT -->
+    <script src="/scripts/buddy.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </body>
 </html>
