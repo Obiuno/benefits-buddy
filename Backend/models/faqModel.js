@@ -46,7 +46,7 @@ class Faqs {
         "utf8",
       );
       const faqData = yaml.load(faqFile);
-      console.log("raw data", JSON.stringify(faqData.faqs, null, 2));
+      //console.log("raw data", JSON.stringify(faqData.faqs, null, 2));
       return faqData.faqs
         .filter((f) => f.active)
         .sort((a, b) => (a.display_order || 99) - (b.display_order || 99))

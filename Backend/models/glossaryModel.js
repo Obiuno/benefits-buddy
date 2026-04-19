@@ -18,6 +18,7 @@ class Glossary {
    * @param {string} glossary.definition
    * @param {JSON} [glossary.related_benefits] - the benefits that reference this glossary item
    * @param {boolean} [glossary.active=true] - active toggle
+   * @param {string} glossary.glossary_slug - slug for glossary term
    */
   constructor(item) {
     this.id = item.glossary_id ?? 99;
@@ -25,6 +26,7 @@ class Glossary {
     this.definition = item.definition ?? "placement def.";
     this.related_benefits = item.related_benefits ?? ["test 1", "test 2"];
     this.active = item.active ?? true;
+    this.slug = item.glossary_slug ?? "no_slug_term";
   }
   /**Get all glossary items from the glossary.yml
    * @static
