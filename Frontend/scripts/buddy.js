@@ -1,15 +1,33 @@
-const chatBox = document.getElementById("chatBox");
-const input = document.getElementById("messageInput");
-const historyBox = document.getElementById("historyBox");
+let chatBox;
+let input;
+let historyBox;
 
 let waitingForReply = false;
 let allChats = [];
 let currentChatId = null;
 
 /* =====================================================
+   INIT
+===================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  chatBox = document.getElementById("chatBox");
+  input = document.getElementById("messageInput");
+  historyBox = document.getElementById("historyBox");
+
+  loadAllChats();
+
+  if (input) {
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+  }
+});
+
+/* =====================================================
    USER MODE
-   Guest  -> sessionStorage (clears when browser closes)
-   Login  -> localStorage per user
 ===================================================== */
 function getCurrentUser() {
   return JSON.parse(localStorage.getItem("buddyLoggedInUser")) || null;
@@ -29,13 +47,6 @@ function getStorage() {
 }
 
 /* =====================================================
-   INIT
-===================================================== */
-window.onload = () => {
-  loadAllChats();
-};
-
-/* =====================================================
    TIME
 ===================================================== */
 function getTime() {
@@ -51,11 +62,7 @@ function getTime() {
 function loadAllChats() {
   const saved = getStorage().getItem(getStorageKey());
 
-  if (saved) {
-    allChats = JSON.parse(saved);
-  } else {
-    allChats = [];
-  }
+  allChats = saved ? JSON.parse(saved) : [];
 
   if (allChats.length === 0) {
     createNewChatSession();
@@ -96,6 +103,8 @@ function getCurrentChat() {
    CHAT UI
 ===================================================== */
 function renderCurrentChat() {
+  if (!chatBox) return;
+
   chatBox.innerHTML = "";
 
   const current = getCurrentChat();
@@ -125,6 +134,8 @@ function renderCurrentChat() {
    MESSAGE BUBBLES
 ===================================================== */
 function addMessage(sender, text, time = getTime()) {
+  if (!chatBox) return;
+
   const row = document.createElement("div");
   row.className = `chat-row ${sender}`;
 
@@ -149,6 +160,8 @@ function addMessage(sender, text, time = getTime()) {
    TYPING ANIMATION
 ===================================================== */
 function addTyping() {
+  if (!chatBox) return;
+
   const row = document.createElement("div");
   row.className = "chat-row bot typing-row";
 
@@ -172,7 +185,7 @@ function addTyping() {
    SEND MESSAGE
 ===================================================== */
 async function sendMessage() {
-  if (waitingForReply) return;
+  if (waitingForReply || !input) return;
 
   const text = input.value.trim();
   if (!text) return;
@@ -214,7 +227,7 @@ async function sendMessage() {
 
     const data = await response.json();
 
-    loading.remove();
+    if (loading) loading.remove();
 
     renderAssistantResponse(data);
 
@@ -229,7 +242,8 @@ async function sendMessage() {
   } catch (error) {
     console.error(error);
 
-    loading.remove();
+    if (loading) loading.remove();
+
     addMessage("bot", "❌ Server error.");
 
     current.messages.push({
@@ -252,7 +266,6 @@ async function sendMessage() {
 function renderAssistantResponse(data) {
   addMessage("bot", data.message || "No response.");
 
-  /* Benefits Cards */
   if (data.benefits_suggested?.length > 0) {
     const wrap = document.createElement("div");
     wrap.className = "cards-wrap";
@@ -273,7 +286,6 @@ function renderAssistantResponse(data) {
     chatBox.appendChild(wrap);
   }
 
-  /* Glossary Cards */
   if (data.glossary_terms?.length > 0) {
     const wrap = document.createElement("div");
     wrap.className = "cards-wrap";
@@ -293,7 +305,6 @@ function renderAssistantResponse(data) {
     chatBox.appendChild(wrap);
   }
 
-  /* Next Question */
   if (data.next_question) {
     addMessage("bot", `<strong>Next:</strong> ${data.next_question}`);
   }
@@ -302,13 +313,12 @@ function renderAssistantResponse(data) {
 }
 
 /* =====================================================
-   HISTORY SIDEBAR
+   HISTORY
 ===================================================== */
 function renderHistoryList() {
-  historyBox.innerHTML = "";
+  if (!historyBox) return;
 
-  const searchInput = document.getElementById("searchChats");
-  const query = searchInput ? searchInput.value.toLowerCase() : "";
+  historyBox.innerHTML = "";
 
   if (allChats.length === 0) {
     historyBox.innerHTML = "<p style='color:white'>No chats yet</p>";
@@ -317,29 +327,25 @@ function renderHistoryList() {
 
   const sorted = [...allChats].sort((a, b) => b.pinned - a.pinned);
 
-  sorted
-    .filter(chat =>
-      chat.title.toLowerCase().includes(query)
-    )
-    .forEach(chat => {
-      const item = document.createElement("div");
-      item.className = "history-item";
+  sorted.forEach(chat => {
+    const item = document.createElement("div");
+    item.className = "history-item";
 
-      item.innerHTML = `
-        <div>
-          <strong>${chat.pinned ? "📌 " : ""}${chat.title}</strong>
-        </div>
+    item.innerHTML = `
+      <div>
+        <strong>${chat.pinned ? "📌 " : ""}${chat.title}</strong>
+      </div>
 
-        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
-          <button onclick="event.stopPropagation(); renameChat(${chat.id})">✏️</button>
-          <button onclick="event.stopPropagation(); deleteChat(${chat.id})">🗑️</button>
-          <button onclick="event.stopPropagation(); pinChat(${chat.id})">📌</button>
-        </div>
-      `;
+      <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+        <button onclick="event.stopPropagation(); renameChat(${chat.id})">✏️</button>
+        <button onclick="event.stopPropagation(); deleteChat(${chat.id})">🗑️</button>
+        <button onclick="event.stopPropagation(); pinChat(${chat.id})">📌</button>
+      </div>
+    `;
 
-      item.onclick = () => loadChat(chat.id);
-      historyBox.appendChild(item);
-    });
+    item.onclick = () => loadChat(chat.id);
+    historyBox.appendChild(item);
+  });
 }
 
 function loadChat(id) {
@@ -348,112 +354,27 @@ function loadChat(id) {
 }
 
 function deleteChat(id) {
-  const chat = allChats.find(c => c.id === id);
-  if (!chat) return;
+  allChats = allChats.filter(c => c.id !== id);
 
-  const overlay = document.createElement("div");
-  overlay.className = "rename-overlay";
+  if (allChats.length === 0) {
+    createNewChatSession();
+  } else {
+    currentChatId = allChats[0].id;
+    renderCurrentChat();
+  }
 
-  overlay.innerHTML = `
-    <div class="rename-modal delete-modal">
-      <h2>Delete chat?</h2>
-      <p class="delete-text">
-        This will permanently delete <strong>${chat.title}</strong>.
-      </p>
-
-      <div class="rename-actions">
-        <button class="cancel-btn">Cancel</button>
-        <button class="delete-btn">Delete</button>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(overlay);
-
-  const cancelBtn = overlay.querySelector(".cancel-btn");
-  const deleteBtn = overlay.querySelector(".delete-btn");
-
-  cancelBtn.onclick = () => overlay.remove();
-
-  deleteBtn.onclick = () => {
-    allChats = allChats.filter(c => c.id !== id);
-
-    if (allChats.length === 0) {
-      createNewChatSession();
-    } else {
-      currentChatId = allChats[0].id;
-      renderCurrentChat();
-    }
-
-    saveAllChats();
-    overlay.remove();
-  };
-
-  overlay.addEventListener("click", e => {
-    if (e.target === overlay) overlay.remove();
-  });
-
-  document.addEventListener("keydown", function esc(e) {
-    if (e.key === "Escape") {
-      overlay.remove();
-      document.removeEventListener("keydown", esc);
-    }
-  });
+  saveAllChats();
 }
 
 function renameChat(id) {
   const chat = allChats.find(c => c.id === id);
   if (!chat) return;
 
-  const overlay = document.createElement("div");
-  overlay.className = "rename-overlay";
+  const newName = prompt("Rename chat:", chat.title);
+  if (!newName) return;
 
-  overlay.innerHTML = `
-    <div class="rename-modal">
-      <h2>Rename chat</h2>
-
-      <input 
-        type="text" 
-        id="renameInput" 
-        value="${chat.title}" 
-        maxlength="40"
-      >
-
-      <div class="rename-actions">
-        <button class="cancel-btn">Cancel</button>
-        <button class="save-btn">Save</button>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(overlay);
-
-  const inputBox = overlay.querySelector("#renameInput");
-  const cancelBtn = overlay.querySelector(".cancel-btn");
-  const saveBtn = overlay.querySelector(".save-btn");
-
-  inputBox.focus();
-  inputBox.select();
-
-  cancelBtn.onclick = () => overlay.remove();
-
-  saveBtn.onclick = () => {
-    const newName = inputBox.value.trim();
-    if (!newName) return;
-
-    chat.title = newName;
-    saveAllChats();
-    overlay.remove();
-  };
-
-  inputBox.addEventListener("keydown", e => {
-    if (e.key === "Enter") saveBtn.click();
-    if (e.key === "Escape") overlay.remove();
-  });
-
-  overlay.addEventListener("click", e => {
-    if (e.target === overlay) overlay.remove();
-  });
+  chat.title = newName.trim();
+  saveAllChats();
 }
 
 function pinChat(id) {
@@ -464,12 +385,8 @@ function pinChat(id) {
   saveAllChats();
 }
 
-function searchChats() {
-  renderHistoryList();
-}
-
 function toggleHistory() {
-  historyBox.classList.toggle("show");
+  if (historyBox) historyBox.classList.toggle("show");
 }
 
 /* =====================================================
@@ -477,13 +394,15 @@ function toggleHistory() {
 ===================================================== */
 function newChat() {
   createNewChatSession();
-  input.value = "";
-  input.focus();
+
+  if (input) {
+    input.value = "";
+    input.focus();
+  }
 }
 
 /* =====================================================
-   DOWNLOAD CHAT AS PDF
-
+   DOWNLOAD PDF
 ===================================================== */
 function downloadChat() {
   const current = getCurrentChat();
@@ -525,16 +444,4 @@ function downloadChat() {
   });
 
   doc.save(`${current.title}.pdf`);
-}
-
-/* =====================================================
-   ENTER KEY
-===================================================== */
-if (input) {
-  input.addEventListener("keydown", e => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
 }

@@ -13,7 +13,7 @@ body{
   color:#17384d;
   background:
     linear-gradient(rgba(3,10,15,0.65), rgba(12,32,48,0.65)),
-    url("../Images/chat-bg.jpg") center/cover no-repeat fixed;
+    url("./Images/chat-bg.jpg") center/cover no-repeat fixed;
 }
 
 /* =========================
