@@ -46,7 +46,7 @@ class Benefits {
         "utf8",
       );
       const benefitsData = yaml.load(benefitsFile);
-      console.log("raw data", JSON.stringify(benefitsData.benefits, null, 2));
+      //console.log("raw data", JSON.stringify(benefitsData.benefits, null, 2));
 
       return benefitsData.benefits
         .sort((a, b) => (a.display_order || 99) - (b.display_order || 99))

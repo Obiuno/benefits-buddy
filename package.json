@@ -17,13 +17,13 @@
   "scripts": {
     "seed-db": "node ./Backend/db/setup-db.js",
     "dev": "nodemon ./Backend/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "docs:dev": "mintlify dev",
     "start": "node ./Backend/index.js"
   },
   "dependencies": {
     "@google/genai": "^1.50.1",
-    "@scalar/express-api-reference": "^0.9.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
@@ -31,11 +31,15 @@
     "jsonwebtoken": "^9.0.3",
     "openai": "^6.34.0",
     "pg": "^8.20.0",
-    "swagger-jsdoc": "^6.2.8",
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@scalar/express-api-reference": "^0.9.7",
+    "@vitest/coverage-v8": "^4.1.4",
     "mintlify": "^4.2.515",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2",
+    "swagger-jsdoc": "^6.2.8",
+    "vitest": "^4.1.4"
   }
 }
