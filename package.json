@@ -18,7 +18,8 @@
     "seed-db": "node ./Backend/db/setup-db.js",
     "dev": "nodemon ./Backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs:dev": "mintlify dev"
+    "docs:dev": "mintlify dev",
+    "start": "node ./Backend/index.js"
   },
   "dependencies": {
     "@google/genai": "^1.50.1",

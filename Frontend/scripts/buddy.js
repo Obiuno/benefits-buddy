@@ -41,7 +41,7 @@ window.onload = () => {
 function getTime() {
   return new Date().toLocaleTimeString([], {
     hour: "2-digit",
-    minute: "2-digit"
+    minute: "2-digit",
   });
 }
 
@@ -78,7 +78,7 @@ function createNewChatSession() {
     title: "New Chat",
     pinned: false,
     createdAt: new Date().toISOString(),
-    messages: []
+    messages: [],
   };
 
   allChats.unshift(chat);
@@ -89,7 +89,7 @@ function createNewChatSession() {
 }
 
 function getCurrentChat() {
-  return allChats.find(chat => chat.id === currentChatId);
+  return allChats.find((chat) => chat.id === currentChatId);
 }
 
 /* =====================================================
@@ -110,12 +110,8 @@ function renderCurrentChat() {
     return;
   }
 
-  current.messages.forEach(msg => {
-    addMessage(
-      msg.role === "user" ? "user" : "bot",
-      msg.content,
-      msg.time
-    );
+  current.messages.forEach((msg) => {
+    addMessage(msg.role === "user" ? "user" : "bot", msg.content, msg.time);
   });
 
   chatBox.scrollTop = chatBox.scrollHeight;
@@ -189,7 +185,7 @@ async function sendMessage() {
   const userMsg = {
     role: "user",
     content: text,
-    time: getTime()
+    time: getTime(),
   };
 
   current.messages.push(userMsg);
@@ -202,14 +198,14 @@ async function sendMessage() {
   const loading = addTyping();
 
   try {
-    const response = await fetch("http://localhost:3000/api/ai/chat", {
+    const response = await fetch("/api/ai/chat", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        messages: current.messages
-      })
+        messages: current.messages,
+      }),
     });
 
     const data = await response.json();
@@ -221,11 +217,10 @@ async function sendMessage() {
     current.messages.push({
       role: "assistant",
       content: data.message || "No response.",
-      time: getTime()
+      time: getTime(),
     });
 
     saveAllChats();
-
   } catch (error) {
     console.error(error);
 
@@ -235,7 +230,7 @@ async function sendMessage() {
     current.messages.push({
       role: "assistant",
       content: "❌ Server error.",
-      time: getTime()
+      time: getTime(),
     });
 
     saveAllChats();
@@ -257,7 +252,7 @@ function renderAssistantResponse(data) {
     const wrap = document.createElement("div");
     wrap.className = "cards-wrap";
 
-    data.benefits_suggested.forEach(item => {
+    data.benefits_suggested.forEach((item) => {
       const card = document.createElement("div");
       card.className = "info-card";
 
@@ -278,7 +273,7 @@ function renderAssistantResponse(data) {
     const wrap = document.createElement("div");
     wrap.className = "cards-wrap";
 
-    data.glossary_terms.forEach(term => {
+    data.glossary_terms.forEach((term) => {
       const card = document.createElement("div");
       card.className = "info-card glossary-card";
 
@@ -318,10 +313,8 @@ function renderHistoryList() {
   const sorted = [...allChats].sort((a, b) => b.pinned - a.pinned);
 
   sorted
-    .filter(chat =>
-      chat.title.toLowerCase().includes(query)
-    )
-    .forEach(chat => {
+    .filter((chat) => chat.title.toLowerCase().includes(query))
+    .forEach((chat) => {
       const item = document.createElement("div");
       item.className = "history-item";
 
@@ -348,7 +341,7 @@ function loadChat(id) {
 }
 
 function deleteChat(id) {
-  const chat = allChats.find(c => c.id === id);
+  const chat = allChats.find((c) => c.id === id);
   if (!chat) return;
 
   const overlay = document.createElement("div");
@@ -376,7 +369,7 @@ function deleteChat(id) {
   cancelBtn.onclick = () => overlay.remove();
 
   deleteBtn.onclick = () => {
-    allChats = allChats.filter(c => c.id !== id);
+    allChats = allChats.filter((c) => c.id !== id);
 
     if (allChats.length === 0) {
       createNewChatSession();
@@ -389,7 +382,7 @@ function deleteChat(id) {
     overlay.remove();
   };
 
-  overlay.addEventListener("click", e => {
+  overlay.addEventListener("click", (e) => {
     if (e.target === overlay) overlay.remove();
   });
 
@@ -402,7 +395,7 @@ function deleteChat(id) {
 }
 
 function renameChat(id) {
-  const chat = allChats.find(c => c.id === id);
+  const chat = allChats.find((c) => c.id === id);
   if (!chat) return;
 
   const overlay = document.createElement("div");
@@ -446,18 +439,18 @@ function renameChat(id) {
     overlay.remove();
   };
 
-  inputBox.addEventListener("keydown", e => {
+  inputBox.addEventListener("keydown", (e) => {
     if (e.key === "Enter") saveBtn.click();
     if (e.key === "Escape") overlay.remove();
   });
 
-  overlay.addEventListener("click", e => {
+  overlay.addEventListener("click", (e) => {
     if (e.target === overlay) overlay.remove();
   });
 }
 
 function pinChat(id) {
-  const chat = allChats.find(c => c.id === id);
+  const chat = allChats.find((c) => c.id === id);
   if (!chat) return;
 
   chat.pinned = !chat.pinned;
@@ -509,7 +502,7 @@ function downloadChat() {
   y += 12;
   doc.setFontSize(11);
 
-  current.messages.forEach(msg => {
+  current.messages.forEach((msg) => {
     const sender = msg.role === "user" ? "You" : "Benefit Buddy";
     const line = `[${msg.time}] ${sender}: ${msg.content}`;
 
@@ -530,7 +523,7 @@ function downloadChat() {
 /* =====================================================
    ENTER KEY
 ===================================================== */
-input.addEventListener("keydown", e => {
+input.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     sendMessage();
