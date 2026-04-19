@@ -1,21 +1,67 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Benefit Buddy</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benefit Buddy</title>
 
-    <link rel="stylesheet" href="/styles/main.css" />
-    <link rel="stylesheet" href="/styles/buddy.css" />
-    <link rel="stylesheet" href="/styles/responsive.css" />
-  </head>
+<link rel="stylesheet" href="../Frontend/styles/main.css">
+<link rel="stylesheet" href="../Frontend/styles/buddy.css">
+<link rel="stylesheet" href="../Frontend/styles/responsive.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
 
-  <body>
-    <!-- NAVBAR -->
-    <nav class="navbar">
-      <div class="nav-left">
-        <img src="/Images/BENEFIT BUDDY.png" alt="Logo" class="logo-img" />
-      </div>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+  <div class="nav-left">
+    <img src="../Frontend/Images/BENEFIT BUDDY.png" alt="Logo" class="logo-img">
+  </div>
+
+  <div class="nav-links">
+    <a href="main.html" class="nav-btn">Home</a>
+    <a href="buddy.html" class="nav-btn">Chat with Buddy</a>
+    <a href="info.html" class="nav-btn">Help Center</a>
+    <a href="benefits.html" class="nav-btn">Browse Benefits</a>
+    <a href="About.html" class="nav-btn">About Us</a>
+  </div>
+
+  <div class="profile">
+    <input type="checkbox" id="profileToggle">
+
+    <label for="profileToggle" class="profile-btn">
+      <img src="../Frontend/Images/user.jpg" alt="User" class="profile-img">
+    </label>
+
+    <div class="profile-dropdown">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Add new account</a>
+      <a href="#">Settings</a>
+      <a href="main.html">Logout</a>
+    </div>
+  </div>
+
+</nav>
+
+<!-- CHAT APP -->
+<div class="buddy-app">
+
+  <!-- LEFT PANEL -->
+  <aside class="left-panel">
+    <button class="new-chat" onclick="newChat()">+ New Chat</button>
+    <button class="history-btn" onclick="toggleHistory()">View History</button>
+    <button class="history-btn" onclick="downloadChat()">Download Chat</button>
+
+    <div id="historyBox" class="history-box"></div>
+  </aside>
+
+  <!-- MAIN CHAT -->
+  <main class="chatgpt-main">
+
+    <!-- CHAT MESSAGES -->
+    <div id="chatBox" class="chat-stream">
 
       <div class="nav-links">
         <a href="/main.html" class="nav-btn">Home</a>
@@ -32,51 +78,9 @@
           <img src="/Images/user.jpg" alt="User" class="profile-img" />
         </label>
 
-        <div class="profile-dropdown">
-          <a href="/login.html">Login</a>
-          <a href="/signup.html">Add new account</a>
-          <a href="#">Settings</a>
-          <a href="/main.html">Logout</a>
-        </div>
-      </div>
-    </nav>
-
-    <!-- CHAT APP -->
-    <div class="buddy-app">
-      <!-- LEFT PANEL -->
-      <aside class="left-panel">
-        <button class="new-chat" onclick="newChat()">+ New Chat</button>
-        <button class="history-btn" onclick="toggleHistory()">
-          View History
-        </button>
-        <button class="history-btn" onclick="downloadChat()">
-          Download Chat
-        </button>
-
-        <div id="historyBox" class="history-box"></div>
-      </aside>
-
-      <!-- MAIN CHAT -->
-      <main class="chatgpt-main">
-        <!-- CHAT MESSAGES -->
-        <div id="chatBox" class="chat-stream">
-          <div class="welcome-title">
-            <h1>Hello 👋 I am Benefit Buddy</h1>
-            <h2>How can I assist you today?</h2>
-          </div>
-        </div>
-
-        <!-- INPUT -->
-        <div class="composer-wrap">
-          <textarea
-            id="messageInput"
-            placeholder="Message Benefit Buddy..."
-            rows="1"
-          ></textarea>
-
-          <button class="send-btn" onclick="sendMessage()">↑</button>
-        </div>
-      </main>
+      <button class="send-btn" onclick="sendMessage()">
+  <i class="fa-solid fa-paper-plane"></i>
+</button>
     </div>
 
     <!-- SCRIPT -->
