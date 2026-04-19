@@ -202,7 +202,7 @@ async function sendMessage() {
   const loading = addTyping();
 
   try {
-    const response = await fetch("http://localhost:3000/api/ai/chat", {
+    const response = await fetch("/api/ai/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -530,9 +530,11 @@ function downloadChat() {
 /* =====================================================
    ENTER KEY
 ===================================================== */
-input.addEventListener("keydown", e => {
-  if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
-});
+if (input) {
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+}
