@@ -8,15 +8,15 @@ const aiChat = async (req, res) => {
 
     const glossaryData = await Glossary.getAllGlossaryItems();
     const benefitsData = await Benefits.getAllBenefits();
-    console.log("message recieved:", messages);
-    console.log("messages type:", typeof messages);
+    //console.log("message recieved:", messages);
+    //console.log("messages type:", typeof messages);
 
     const response = await generateAIResponse(
       messages,
       benefitsData,
       glossaryData,
     );
-    console.log("🟥 this is the response shape: ", response);
+    //console.log("🟥 this is the response shape: ", response);
 
     const { developer_meta, ...frontendResponse } = response;
 
