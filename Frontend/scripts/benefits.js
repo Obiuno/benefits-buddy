@@ -48,7 +48,7 @@ function renderBenefits(list, searchText = "") {
 
             <button class="btn secondary"
               onclick="openModal(${index})">
-              learn more
+              Learn More
             </button>
 
             <a href="${item.urls?.apply_url || "#"}"
@@ -95,7 +95,11 @@ function highlight(text, keyword) {
 function formatCategory(text) {
   if (!text) return "General";
 
-  return String(text).replace(/_/g, " ");
+  const formatted = String(text)
+    .replace(/_/g, " ")
+    .toLowerCase();
+
+  return formatted.charAt(0).toUpperCase() + formatted.slice(1);
 }
 
 /* LEARN MORE MODEL*/
