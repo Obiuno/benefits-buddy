@@ -23,6 +23,7 @@
     "start": "node ./Backend/index.js"
   },
   "dependencies": {
+    "@scalar/express-api-reference": "^0.9.7",
     "@google/genai": "^1.50.1",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
@@ -34,7 +35,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@scalar/express-api-reference": "^0.9.7",
     "@vitest/coverage-v8": "^4.1.4",
     "mintlify": "^4.2.515",
     "nodemon": "^3.1.14",
