@@ -21,15 +21,18 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  position:relative;
 }
 
 .logo-img{
   width:300px;
   height:auto;
   object-fit:contain;
-  margin-left:-80px;
-  margin-top:12px;   /* pushes logo down */
+  margin-left:-100px;
+  margin-top:12px;
 }
+
+
 .nav-links{
   display:flex;
   gap:15px;
@@ -203,6 +206,7 @@ body{
   transform:translateY(-3px);
 }
 
+/* ================= FEATURES ================= */
 /* ================= FEATURES ================= */
 .features{
   max-width:1400px;
@@ -475,7 +479,7 @@ body{
     text-align: center;
   }
 
-  /* MODAL */
+  /* MODEL */
   .modal-box{
     width: 95%;
     padding: 18px;
@@ -540,10 +544,19 @@ body{
     gap:15px;
   }
 
+  .logo-img{
+    width:220px;
+    height:auto;
+    margin-left:0;
+    margin-top:0;
+  }
+
   .nav-links{
-    flex-wrap:wrap;
+    position:static;
+    transform:none;
     justify-content:center;
-    gap:8px;
+    flex-wrap:wrap;
+    gap:10px;
   }
 
   .nav-btn{
@@ -651,7 +664,20 @@ body{
 }
 
 @media (max-width: 480px){
+.logo-img{
+    width:180px;
+    height:auto;
+    margin-left:0;
+    margin-top:0;
+  }
 
+  .nav-links{
+    position:static;
+    transform:none;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+  }
   .hero-inner h1{
     font-size:26px;
   }
@@ -663,11 +689,6 @@ body{
   .nav-btn{
     width:100%;
     text-align:center;
-  }
-
-  .logo-img{
-    width:55px;
-    height:55px;
   }
 
   .profile-img{
@@ -682,3 +703,30 @@ body{
     max-width:260px;
   }
 }
+
+@media (max-width: 768px){
+  .logo-img{
+    width:220px !important;
+    height:auto !important;
+    margin-left:0 !important;
+    margin-top:0 !important;
+  }
+}
+
+@media (max-width: 480px){
+  .logo-img{
+    width:200px !important;
+    height:auto !important;
+    margin-left:0 !important;
+    margin-top:0 !important;
+  }
+}
+/* Large Tablets */
+@media (max-width: 1024px){
+  .logo-img{
+    width:240px !important;
+    margin-left:0 !important;
+    margin-top:0 !important;
+  }
+}
+
