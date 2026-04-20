@@ -1,48 +1,57 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Sign Up</title>
-  <link rel="stylesheet" href="./styles/loginsignup.css" />
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-</head>
-<body>
-  <div class="container">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/styles/loginsignup.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/styles/responsive.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- LEFT -->
+      <div class="left">
+        <div class="logo-box">
+          <img
+            src="/Images/BENEFIT BUDDY.png"
+            alt="Benefit Buddy Logo"
+            class="logo"
+          />
 
-    <!-- LEFT -->
-    <div class="left">
-      <div class="logo-box">
-     <img src="../Frontend/Images/BENEFIT BUDDY.png" alt="Benefit Buddy Logo" class="logo" />
-       
-        <p class="tagline">
-          A simple way to discover unclaimed income<br>
-          and tax related benefits in the UK
-        </p>
+          <p class="tagline">
+            A simple way to discover unclaimed income<br />
+            and tax related benefits in the UK
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right">
+        <form class="form-box" id="signupForm">
+          <h1>Create Account!</h1>
+
+          <input type="text" id="username" placeholder="Username" required />
+          <input type="email" id="email" placeholder="Email" required />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+
+          <button class="main-btn">Register</button>
+
+          <p class="switch-text">
+            Already have an account?
+            <a href="/login.html">Login</a>
+          </p>
+        </form>
       </div>
     </div>
-
-    <!-- RIGHT -->
-    <div class="right">
-      <form class="form-box">
-        <h1>Create Account!</h1>
-
-        <input type="text" placeholder="Username" required />
-
-        <div class="password-field">
-          <input type="password" placeholder="Password" required />
-        
-        </div>
-
-        <button class="main-btn">Register</button>
-
-        <p class="switch-text">
-          Already have an account?
-          <a href="login.html">Login</a>
-        </p>
-      </form>
-    </div>
-
-  </div>
-</body>
+    <script src="/scripts/signup.js"></script>
+  </body>
 </html>

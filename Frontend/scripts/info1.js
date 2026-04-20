@@ -1,39 +1,36 @@
-const faqList = document.querySelector('.faq-list');
-const searchInput = document.querySelector('.search-box input');
-const searchBtn = document.querySelector('.search-box button');
+const faqList = document.querySelector(".faq-list");
+const searchInput = document.querySelector(".search-box input");
+const searchBtn = document.querySelector(".search-box button");
 
 let allFaqs = [];
 
-/* LOAD FAQS FROM BACKEND */
 async function loadFaqs() {
-  try {const response = await fetch('http://localhost:3000/api/faqs');
+  try {
+    const response = await fetch("/api/faqs");
     if (!response.ok) {
-      throw new Error('Failed to fetch FAQs');
+      throw new Error("Failed to fetch FAQs");
     }
 
     const data = await response.json();
 
-    allFaqs = data.filter(faq => faq.active);
+    allFaqs = data.filter((faq) => faq.active);
 
     renderFaqs(allFaqs);
-
   } catch (error) {
     faqList.innerHTML = "<p class='not-found'>Failed to load FAQs.</p>";
     console.error(error);
   }
 }
 
-/* HIGHLIGHT SEARCH TEXT */
 function highlightText(text, keyword) {
   if (!keyword) return text;
 
-  const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const regex = new RegExp(`(${escaped})`, 'gi');
+  const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(`(${escaped})`, "gi");
 
-  return text.replace(regex, '<mark>$1</mark>');
+  return text.replace(regex, "<mark>$1</mark>");
 }
 
-/* RENDER FAQS */
 function renderFaqs(faqs, keyword = "") {
   faqList.innerHTML = "";
 
@@ -42,7 +39,7 @@ function renderFaqs(faqs, keyword = "") {
     return;
   }
 
-  faqs.forEach(faq => {
+  faqs.forEach((faq) => {
     faqList.innerHTML += `
       <div class="faq-item">
         <button class="faq-question">
@@ -60,44 +57,46 @@ function renderFaqs(faqs, keyword = "") {
   addAccordionEvents();
 }
 
-/* OPEN / CLOSE FAQ */
 function addAccordionEvents() {
-  const items = document.querySelectorAll('.faq-item');
+  const items = document.querySelectorAll(".faq-item");
 
-  items.forEach(item => {
-    item.querySelector('.faq-question').addEventListener('click', () => {
-      item.classList.toggle('active');
+  items.forEach((item) => {
+    item.querySelector(".faq-question").addEventListener("click", () => {
+      item.classList.toggle("active");
 
-      const sign = item.querySelector('span');
-      sign.textContent =
-        item.classList.contains('active') ? '−' : '+';
+      const sign = item.querySelector("span");
+      sign.textContent = item.classList.contains("active") ? "−" : "+";
     });
   });
 }
 
-/* SEARCH FAQS */
 function searchFaqs() {
   const keyword = searchInput.value.toLowerCase().trim();
 
-  const filtered = allFaqs.filter(faq =>
-    faq.question.toLowerCase().includes(keyword) ||
-    faq.answer.toLowerCase().includes(keyword) ||
-    (faq.category || "").toLowerCase().includes(keyword) ||
-    (faq.benefit_slug || "").toLowerCase().includes(keyword)
+  const filtered = allFaqs.filter(
+    (faq) =>
+      faq.question.toLowerCase().includes(keyword) ||
+      faq.answer.toLowerCase().includes(keyword) ||
+      (faq.category || "").toLowerCase().includes(keyword) ||
+      (faq.benefit_slug || "").toLowerCase().includes(keyword),
   );
 
   renderFaqs(filtered, keyword);
 }
 
-/* EVENTS */
-searchInput.addEventListener('input', searchFaqs);
-searchBtn.addEventListener('click', searchFaqs);
+searchInput.addEventListener("input", searchFaqs);
+searchBtn.addEventListener("click", searchFaqs);
 
-searchInput.addEventListener('keypress', function (e) {
+searchInput.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     searchFaqs();
   }
 });
 
-/* START */
 loadFaqs();
+function submitFeedback(answer) {
+  document.getElementById("feedbackMessage").innerText =
+    "Thank you for your feedback.";
+
+  console.log("User selected:", answer);
+}

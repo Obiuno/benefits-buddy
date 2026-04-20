@@ -1,31 +1,34 @@
-document.getElementById("form-box").addEventListener("submit", async (e) => {
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const form = new FormData(e.target);
+  const login = document.getElementById("loginField").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-  const options = {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username: form.get("username"),
-      password: form.get("password"),
-    }),
-  };
+  try {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        login,
+        password,
+      }),
+    });
 
-  const response = await fetch(
-    "https://six-seven-quizzes.onrender.com/login",
-    options,
-  );
-  const data = await response.json();
+    const data = await response.json();
 
-  if (response.status == 200) {
-    localStorage.setItem("token", data.token);
-    window.location.assign("main.html");
-  } else {
-    alert(data.error);
+    if (!response.ok) {
+      alert(data.message || "Login failed");
+      return;
+    }
+
+    localStorage.setItem("buddyLoggedInUser", JSON.stringify(data.user));
+
+    alert("Login successful!");
+    window.location.href = "buddy.html";
+  } catch (error) {
+    console.error(error);
+    alert("Server error. Please try again.");
   }
 });
-
