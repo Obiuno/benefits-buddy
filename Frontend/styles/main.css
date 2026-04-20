@@ -24,16 +24,19 @@ body{
 }
 
 .logo-img{
-  width:70px;
-  height:70px;
+  width:300px;
+  height:auto;
   object-fit:contain;
+  margin-left:-80px;
+  margin-top:12px;   /* pushes logo down */
 }
-
 .nav-links{
   display:flex;
   gap:15px;
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
 }
-
 .nav-btn{
   text-decoration:none;
   color:white;
