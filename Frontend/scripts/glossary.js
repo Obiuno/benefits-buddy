@@ -123,8 +123,16 @@ search.addEventListener("keypress", function (e) {
 loadGlossary();
 
 function submitFeedback(answer) {
-  document.getElementById("feedbackMessage").innerText =
-    "Thank you for your feedback.";
+  const message = document.getElementById("feedbackMessage");
 
-  console.log("User selected:", answer);
+  if (answer === "Yes") {
+    message.textContent = "Thank you for your feedback!";
+  } else {
+    message.textContent = "Thank you for your feedback! Please let us know what can be improved.";
+    
+    // Redirect after 2 seconds
+    setTimeout(() => {
+        window.location.href = "/about.html#contact-form"; 
+    }, 2000);
+  }
 }
