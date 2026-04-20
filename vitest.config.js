@@ -15,7 +15,12 @@ export default defineConfig({
       exclude: [
         "Backend/index.js",
         "Backend/db/setup-db.js",
-        "Backend/de/index.js",
+        "Backend/db/index.js",
+        "Backend/middleware/*.js",
+        "Backend/models/userModel.js",
+        "Backend/routes/authRoutes.js",
+        "Backend/controller/authController.js",
+        "Backend/services/geminiAIServices.js",
       ],
     },
   },
