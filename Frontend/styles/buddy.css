@@ -30,11 +30,11 @@ body{
    SIDEBAR
 ========================= */
 .left-panel{
-  width:280px;
-  padding:20px;
-  border-radius:26px;
+  width:290px;
+  padding:22px;
+  border-radius:28px;
   background:linear-gradient(180deg,#17384d,#244e69);
-  box-shadow:0 18px 35px rgba(16,32,48,0.18);
+  box-shadow:0 20px 40px rgba(0,0,0,0.18);
   display:flex;
   flex-direction:column;
 }
@@ -47,8 +47,12 @@ body{
   margin-bottom:18px;
 }
 
+/* =========================
+   BUTTONS
+========================= */
 .new-chat,
-.history-btn{
+.history-btn,
+.download-btn{
   width:100%;
   border:none;
   cursor:pointer;
@@ -64,10 +68,14 @@ body{
 }
 
 .new-chat:hover,
-.history-btn:hover{
+.history-btn:hover,
+.download-btn:hover{
   transform:translateY(-2px);
 }
 
+/* =========================
+   HISTORY
+========================= */
 .history-box{
   display:none;
   margin-top:10px;
@@ -95,18 +103,19 @@ body{
 }
 
 /* =========================
-   CHAT AREA
+   CHAT CARD
 ========================= */
 .chatgpt-main{
   flex:1;
   min-width:0;
   border-radius:28px;
   padding:18px;
-  background:rgba(255,255,255,0.82);
+  background:#ffffffee;
   backdrop-filter:blur(18px);
-  box-shadow:0 18px 40px rgba(0,0,0,0.12);
+  box-shadow:0 15px 35px rgba(0,0,0,0.08);
   display:flex;
   flex-direction:column;
+  overflow:hidden;
 }
 
 /* =========================
@@ -114,19 +123,21 @@ body{
 ========================= */
 .welcome-title{
   text-align:center;
-  padding:30px 10px 10px;
+  padding:18px 10px 20px;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  margin-bottom:8px;
 }
 
 .welcome-title h1{
-  font-size:52px;
+  font-size:42px;
   font-weight:800;
   color:#17384d;
 }
 
 .welcome-title h2{
-  margin-top:10px;
-  font-size:24px;
-  color:#4da6ff;
+  margin-top:8px;
+  font-size:18px;
+  color:#5b84a1;
   font-weight:500;
 }
 
@@ -136,10 +147,10 @@ body{
 .chat-stream{
   flex:1;
   overflow-y:auto;
-  padding:10px 8px;
+  padding:24px 18px;
   display:flex;
   flex-direction:column;
-  gap:18px;
+  gap:14px;
   scroll-behavior:smooth;
 }
 
@@ -152,13 +163,18 @@ body{
   border-radius:10px;
 }
 
+.chat-stream > *{
+  max-width:100%;
+}
+
 /* =========================
-   CHAT ROWS
+   CHAT ROW
 ========================= */
 .chat-row{
   display:flex;
   align-items:flex-end;
   gap:10px;
+  width:100%;
   animation:fadeIn .25s ease;
 }
 
@@ -170,8 +186,13 @@ body{
   justify-content:flex-end;
 }
 
-.chat-row.user .avatar{order:2;}
-.chat-row.user .msg{order:1;}
+.chat-row.user .avatar{
+  order:2;
+}
+
+.chat-row.user .msg{
+  order:1;
+}
 
 /* =========================
    AVATAR
@@ -180,7 +201,7 @@ body{
   width:42px;
   height:42px;
   border-radius:50%;
-  background:#fff;
+  background:#e0dcdc;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -193,26 +214,26 @@ body{
    MESSAGE BUBBLES
 ========================= */
 .msg{
-  max-width:62%;
+  max-width:720px;
+  width:fit-content;
   padding:14px 18px;
-  border-radius:22px;
+  border-radius:20px;
   font-size:15px;
-  line-height:1.7;
-  box-shadow:0 8px 20px rgba(0,0,0,0.06);
+  line-height:1.65;
   word-wrap:break-word;
+  box-shadow:0 8px 18px rgba(0,0,0,0.05);
 }
 
 .msg.bot{
-  background:#e8eaf0;
+  background:linear-gradient(#e8e9ec,#e2e5e6);
   color:#17384d;
- 
-  border-bottom-left-radius:8px;
+  border-bottom-left-radius:6px;
 }
 
 .msg.user{
-  color:#fff;
   background:linear-gradient(135deg,#4da6ff,#2d8cff);
-  border-bottom-right-radius:8px;
+  color:#fff;
+  border-bottom-right-radius:6px;
 }
 
 .time{
@@ -226,15 +247,15 @@ body{
    INPUT BAR
 ========================= */
 .composer-wrap{
-  margin-top:12px;
-  padding:10px;
-  border-radius:20px;
-  background:#fff;
-  border:1px solid #e5edf5;
-  box-shadow:0 10px 25px rgba(0,0,0,0.06);
+  margin-top:14px;
+  padding:10px 12px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.96);
+  border:1px solid #dfe8f1;
+  box-shadow:0 12px 28px rgba(0,0,0,0.07);
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
 }
 
 #messageInput{
@@ -243,7 +264,7 @@ body{
   outline:none;
   resize:none;
   background:transparent;
-  font-size:16px;
+  font-size:15px;
   color:#17384d;
   padding:12px 8px;
 }
@@ -253,19 +274,20 @@ body{
 }
 
 .send-btn{
-  width:52px;
-  height:52px;
+  width:50px;
+  height:50px;
   border:none;
   border-radius:16px;
   cursor:pointer;
   color:#fff;
-  font-size:22px;
+  font-size:20px;
   background:linear-gradient(135deg,#17384d,#2d8cff);
+  box-shadow:0 10px 20px rgba(45,140,255,0.22);
   transition:.25s ease;
 }
 
 .send-btn:hover{
-  transform:translateY(-2px) scale(1.03);
+  transform:translateY(-2px) scale(1.04);
 }
 
 /* =========================
@@ -330,11 +352,16 @@ body{
   animation:bounce 1.2s infinite;
 }
 
-.typing span:nth-child(2){animation-delay:.2s;}
-.typing span:nth-child(3){animation-delay:.4s;}
+.typing span:nth-child(2){
+  animation-delay:.2s;
+}
+
+.typing span:nth-child(3){
+  animation-delay:.4s;
+}
 
 /* =========================
-   POPUP MODAL
+   MODAL
 ========================= */
 .rename-overlay{
   position:fixed;
@@ -417,28 +444,46 @@ body{
    ANIMATIONS
 ========================= */
 @keyframes fadeIn{
-  from{opacity:0;transform:translateY(8px);}
-  to{opacity:1;transform:translateY(0);}
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 @keyframes bounce{
-  0%,80%,100%{transform:scale(0);}
-  40%{transform:scale(1);}
+  0%,80%,100%{
+    transform:scale(0);
+  }
+  40%{
+    transform:scale(1);
+  }
 }
 
 @keyframes popUp{
-  from{opacity:0;transform:scale(.95);}
-  to{opacity:1;transform:scale(1);}
+  from{
+    opacity:0;
+    transform:scale(.95);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
 }
 
 /* =========================
-   MOBILE
+   RESPONSIVE
 ========================= */
 @media(max-width:900px){
+
   .buddy-app{
     flex-direction:column;
-    height:auto;
     padding:12px;
+    gap:14px;
+    height:auto;
   }
 
   .left-panel{
@@ -446,23 +491,52 @@ body{
   }
 
   .chatgpt-main{
-    min-height:80vh;
+    min-height:78vh;
+    border-radius:24px;
   }
 
   .welcome-title h1{
-    font-size:34px;
+    font-size:30px;
   }
 
   .welcome-title h2{
-    font-size:18px;
+    font-size:16px;
   }
 
   .msg{
-    max-width:84%;
+    max-width:85%;
     font-size:14px;
   }
 
   .cards-wrap{
     grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+
+  .welcome-title h1{
+    font-size:24px;
+  }
+
+  .welcome-title h2{
+    font-size:14px;
+  }
+
+  .msg{
+    max-width:92%;
+    padding:12px 14px;
+  }
+
+  .avatar{
+    width:36px;
+    height:36px;
+    font-size:16px;
+  }
+
+  .send-btn{
+    width:46px;
+    height:46px;
+    font-size:18px;
   }
 }
