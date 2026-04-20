@@ -1,61 +1,54 @@
 
+/* HERO */
 .hero{
-  padding:70px 20px 85px;
+  padding:50px 20px 55px;
   text-align:center;
   color:#fff;
 }
 
 .hero h1{
-  font-size:58px;
+  font-size:48px;
   font-weight:800;
-  margin-bottom:14px;
-  line-height:1.1;
-  text-shadow:0 4px 12px rgba(0,0,0,0.25);
+  margin-bottom:10px;
+  line-height:1.15;
 }
 
 .hero p{
-  font-size:18px;
-  font-weight:400;
-  margin-bottom:28px;
+  font-size:17px;
+  margin-bottom:20px;
   color:rgba(255,255,255,0.92);
 }
 
-
+/* SEARCH BAR */
 .search-box{
-  width:530px;
-  max-width:92%;
+  width:420px;
+  max-width:90%;
+  height:48px;
   margin:0 auto;
   background:#fff;
-  border-radius:40px;
+  border-radius:30px;
   display:flex;
   align-items:center;
   overflow:hidden;
-  box-shadow:0 10px 25px rgba(0,0,0,0.18);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
 
 .search-box input{
   flex:1;
   border:none;
   outline:none;
-  padding:15px 22px;
-  font-size:16px;
-  color:#333;
-  background:transparent;
-}
-
-.search-box input::placeholder{
-  color:#888;
+  padding:0 18px;
+  font-size:15px;
 }
 
 .search-btn{
-  width:68px;
-  height:52px;
+  width:55px;
+  height:48px;
   border:none;
   background:#4da6ff;
   color:#fff;
-  font-size:20px;
+  font-size:16px;
   cursor:pointer;
-  transition:0.25s ease;
 }
 
 .search-btn:hover{

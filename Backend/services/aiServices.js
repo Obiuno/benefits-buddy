@@ -1,89 +1,108 @@
-import "dotenv/config";
-import { GoogleGenAI } from "@google/genai";
+import OpenAI from "openai";
+import { zodTextFormat } from "openai/helpers/zod";
+import { z } from "zod";
 
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import yaml from "js-yaml";
-import { stringify } from "node:querystring";
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const BenefitsSchema = z.object({
+  name: z.string(),
+  slug: z.string(),
+  reason: z.string(),
+  gov_url: z.string(),
+});
 
-const benefitsFile = fs.readFileSync(
-  path.join(__dirname, "../data/benefits.yml"),
-  "utf8",
-);
-const benefitsTest = yaml.load(benefitsFile);
+const AIResponseSchema = z.object({
+  message: z.string(),
+  benefits_suggested: z.array(BenefitsSchema).default([]),
+  glossary_terms: z.array(z.string()).default([]),
+  next_question: z.string().nullable().optional(),
+  developer_meta: z
+    .object({
+      reasoning: z.string().nullable().optional(),
+      feedback: z.string().nullable().optional(),
+    })
+    .nullable()
+    .optional(),
+});
 
-const glossaryFile = fs.readFileSync(
-  path.join(__dirname, "../data/glossary.yml"),
-  "utf8",
-);
-const glossaryTest = yaml.load(glossaryFile);
+// remember to verify it using AIResponseSchema after you get a retrun
 
-const user_input = "I am 65 and earn and I am struggling to afford my bills";
+async function generateAIResponse(chat, benefitsData, glossaryData) {
+  const userMessageCount = chat.filter((m) => m.role === "user").length;
 
-// AI testing
+  const response = await openai.responses.parse({
+    model: "gpt-4.1-mini",
+    instructions: `
+You are a helpful and friendly UK benefits assistant helping users understand UK government benefits.
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+ANSWER ROUTE:
+- Match the user's situation to relevant benefits
+- Explain eligibility clearly for the specific user query
+- List all required documents
+- Explain how to apply in detail including links to strictly official information and application pages
+- Include any relevant information from the benefits data below
+- Include warnings about common pitfalls or mistakes to avoid when applying
 
-const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+EVERY REPLY MUST:
+- Be formatted in a reassuring, friendly and calm tone — try to destress the user
+- When necessary ask ONE narrowing question at the end of the response to better understand their situation
+- Later responses should be based on the user's answers to these narrowing questions
+- Only suggest benefits from the list of benefits shared with you
 
-/*
-async function main() {
-  const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
-    contents: "Explain how AI works in a few words",
+CONVERSATION STAGE:
+This is user message number ${userMessageCount}.
+${
+  userMessageCount < 2
+    ? "- Ask ONE clarifying question only. Do NOT populate benefits_suggested or glossary_terms yet. Return empty arrays."
+    : "- You may suggest benefits if you have enough context. If you need more information ask one more question first."
+}
+
+EXAMPLE USER JOURNEY:
+User: "I'm struggling with rent after losing my job, do I qualify for anything?"
+Response step 1: Ask narrowing questions about savings, children, partner, rent/mortgage, disability, employment status
+Response step 2: Once likely match found, explain why they qualify and follow the answer route above
+End with asking if they have more questions or if their situation is different in any way that might affect eligibility
+
+DO NOT make up anything — keep strictly to the benefits data below
+DO NOT EVER add lines like "If you want I can guide you on how to check eligibility or apply based on your specific circumstances"
+
+CRITICAL OUTPUT RULES:
+- Never return the shared data directly
+- Only return the JSON structure defined
+- The shared data is your reference not your output
+- Your output is your reasoning based on the shared data
+
+Available benefits data:
+${JSON.stringify(benefitsData, null, 2)}
+
+Available glossary data:
+${JSON.stringify(glossaryData, null, 2)}
+
+Suggest at most 5 benefits.
+Use simple clear language.
+`,
+    input: chat.map((m) => ({
+      role: m.role,
+      content: m.content,
+    })),
+    text: {
+      format: zodTextFormat(AIResponseSchema, "benefits_response"),
+    },
   });
-  console.log(response.text);
-}
-*/
+  const result = response.output_parsed;
+  // developed logs
 
-async function test() {
-  try {
-    const result = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
-      config: {
-        responseMimeType: "application/json",
-      },
-      contents: ` 
-        Please ask follow up questions before giving the full list, you should have at least 2 user inputs before filling in other parts other than message or next question
-        You are a helpful and friendly assistant helping users understand UK government benefits.
-        - Match the user's situation to relevant benefits 
-        - Explain eligibility clearly
-        - List required documents 
-        - Explain how to apply 
-        - Include warnings about common pitfalls or mistakes to avoid when applying.
-        - when suggesting benefits only use ones from the list of benefits shared with you
-
-        CRITICAL OUTPUT RULES:
-        - never return the shared data directly 
-        - only return teh JSON structure above
-        - the shared data  is your reference, not your output
-        - your output is your reasoning based on the shared data
-
-        { 
-        "message": "str",
-        "benefits_suggested": [array], "glossary_terms": [array],
-        "next_question": "str",
-        "your_reasoning": "give me your reason for keys, formatsm fields and why you arranged the JSON like this, this part is for developer understanding",
-        "feedback": "give the developer any feedback they could use to make this more effective for the chatbot and suggest changes they could do"
-        }	
-         
-        Use simple, clear language.
-        I have shared the benefits to look at and a list of glossary items.
-        You should suggest at most 5 benefits and list the glossary items related to those benefits as well
-        
-        User situation: ${user_input}
-
-        Available data: ${JSON.stringify(benefitsTest)} and ${JSON.stringify(glossaryTest)}
-        `,
-    });
-    console.log("Response: ", result.text);
-  } catch (err) {
-    console.error("SDK error: ", err);
+  if (result.developer_meta) {
+    console.log(
+      JSON.stringify({
+        timestamp: new Date().toISOString(),
+        reasoning: result.developer_meta.reasoning,
+        feedback: result.developer_meta.feedback,
+      }),
+    );
   }
+
+  return result;
 }
 
-test();
+export default generateAIResponse;

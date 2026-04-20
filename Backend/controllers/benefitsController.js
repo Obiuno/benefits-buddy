@@ -72,7 +72,7 @@ const getBenefitsForFrontend = async (req, res) => {
       };
     });
     res.status(200).send(shapedBenefits);
-  } catch (error) {
+  } catch (err) {
     console.error("Error shapping benefit: ", err);
     res.status(500).send({ error: err.message });
   }

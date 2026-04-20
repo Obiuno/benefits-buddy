@@ -5,23 +5,16 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
 import { stringify } from "node:querystring";
+import { BenefitYAMLSchema } from "../schemas/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 class Benefits {
   /**
-   * Represents a benefit and its details from the database
-   * @constructor Benefits
-   * @param {Object} benefit - the row object from the benefits table
-   * @param {number} benefit.benefits_id - PK (auto incremented)
-   * @param {string} benefit.slug - computer readable version of name containing _
-   * @param {string} benefit.name - the name of the benefit item to de defined
-   * @param {string} benefit.description - decription of benefit
-   * @param {string} benefit.category - category of benefit
-   * @param {object} benefit.urls - URLs to GOV.UK and application
-   * @param {object} benefit.details - all details pertaining to benefit
-   * @param {boolean} benefit.active - active toggle
+   * Represents a benefit and its details
+   * @constructor
+   * @param {z.infer<typeof BenefitYAMLSchema>}
    */
   constructor(benefit) {
     this.id = benefit.benefits_id ?? 999;
@@ -46,7 +39,7 @@ class Benefits {
         "utf8",
       );
       const benefitsData = yaml.load(benefitsFile);
-      console.log("raw data", JSON.stringify(benefitsData.benefits, null, 2));
+      //console.log("raw data", JSON.stringify(benefitsData.benefits, null, 2));
 
       return benefitsData.benefits
         .sort((a, b) => (a.display_order || 99) - (b.display_order || 99))
