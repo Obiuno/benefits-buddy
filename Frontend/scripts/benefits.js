@@ -48,13 +48,13 @@ function renderBenefits(list, searchText = "") {
 
             <button class="btn secondary"
               onclick="openModal(${index})">
-              Learn More
+              Learn more
             </button>
 
             <a href="${item.urls?.apply_url || "#"}"
                target="_blank"
                class="btn primary">
-               Apply
+               Apply at GOV.UK
             </a>
 
           </div>
