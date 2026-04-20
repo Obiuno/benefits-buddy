@@ -6,4 +6,5 @@
 
 # other files to block
 node_modules
-package-lock.json.env.development
+package-lock.json
+coverage/
