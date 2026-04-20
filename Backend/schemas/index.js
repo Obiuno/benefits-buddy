@@ -1,73 +1,80 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 export const BenefitUrlsSchema = z.object({
-    gov_url: z.string(),
-    apply_url: z.string()
-})
+  gov_url: z.string(),
+  apply_url: z.string(),
+});
 
 // YAML schema - no id required
 export const BenefitYAMLSchema = z.object({
-    name: z.string(),
-    slug: z.string(),
-    description: z.string(),
-    category: z.array(z.string()).nullable().optional(),
-    urls: BenefitUrlsSchema,
-    details: z.record(z.unknown()),
-    active: z.boolean().default(true)
-})
+  name: z.string(),
+  slug: z.string(),
+  description: z.string(),
+  category: z.array(z.string()).nullable().optional(),
+  urls: BenefitUrlsSchema,
+  details: z.record(z.unknown()),
+  active: z.boolean().default(true),
+});
 
 // DB schema - extends YAML schema with id
 export const BenefitSchema = BenefitYAMLSchema.extend({
-    benefits_id: z.number().int().positive().default(999)
-})
+  benefits_id: z.number().int().positive().default(999),
+});
 
 export const GlossaryYAMLSchema = z.object({
-    glossary_slug: z.string(),
-    term: z.string(),
-    definition: z.string(),
-    related_benefits: z.array(z.string()).nullable().optional().default([]),
-    active: z.boolean().default(true)
-})
+  glossary_slug: z.string(),
+  term: z.string(),
+  definition: z.string(),
+  related_benefits: z.array(z.string()).nullable().optional().default([]),
+  active: z.boolean().default(true),
+});
 
 export const GlossarySchema = GlossaryYAMLSchema.extend({
-    glossary_id: z.number().int().positive().default(999)
-})
+  glossary_id: z.number().int().positive().default(999),
+});
 
 export const FaqYAMLSchema = z.object({
-    question: z.string(),
-    answer: z.string(),
-    benefit_slug: z.string().nullable().optional(),
-    category: z.string().nullable().optional(),
-    display_order: z.number().int().default(999),
-    active: z.boolean().default(true)
-})
+  question: z.string(),
+  answer: z.string(),
+  benefit_slug: z.string().nullable().optional(),
+  category: z.string().nullable().optional(),
+  display_order: z.number().int().default(999),
+  active: z.boolean().default(true),
+});
 
 export const FaqSchema = FaqYAMLSchema.extend({
-    faqs_id: z.number().int().positive().default(999)
-})
+  faqs_id: z.number().int().positive().default(999),
+});
 
 export const ChatMessageSchema = z.object({
-    role: z.enum(['user', 'assistant']),
-    content: z.string().min(1),
-    timestamp: z.string().datetime().optional()
-})
+  role: z.enum(["user", "assistant"]),
+  content: z.string().min(1),
+  timestamp: z.string().datetime().optional(),
+});
 
 export const ChatRequestSchema = z.object({
-    messages: z.array(ChatMessageSchema).min(1, 'At least one message required')
-})
+  messages: z.array(ChatMessageSchema).min(1, "At least one message required"),
+});
 
 export const AIResponseSchema = z.object({
-    message: z.string(),
-    benefits_suggested: z.array(z.object({
+  message: z.string(),
+  benefits_suggested: z
+    .array(
+      z.object({
         name: z.string(),
         slug: z.string(),
         reason: z.string(),
-        gov_url: z.string()
-    })).default([]),
-    glossary_terms: z.array(z.string()).default([]),
-    next_question: z.string().nullable().optional(),
-    developer_meta: z.object({
-        reasoning: z.string().nullable().optional(),
-        feedback: z.string().optional()
-    }).nullable().optional()
-})
+        gov_url: z.string(),
+      }),
+    )
+    .default([]),
+  glossary_terms: z.array(z.string()).default([]),
+  next_question: z.string().nullable().optional(),
+  developer_meta: z
+    .object({
+      reasoning: z.string().nullable().optional(),
+      feedback: z.string().optional(),
+    })
+    .nullable()
+    .optional(),
+});

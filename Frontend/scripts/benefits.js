@@ -48,7 +48,7 @@ function renderBenefits(list, searchText = "") {
 
             <button class="btn secondary"
               onclick="openModal(${index})">
-              Learn more
+              Learn More
             </button>
 
             <a href="${item.urls?.apply_url || "#"}"
@@ -95,7 +95,11 @@ function highlight(text, keyword) {
 function formatCategory(text) {
   if (!text) return "General";
 
-  return String(text).replace(/_/g, " ");
+  const formatted = String(text)
+    .replace(/_/g, " ")
+    .toLowerCase();
+
+  return formatted.charAt(0).toUpperCase() + formatted.slice(1);
 }
 
 /* LEARN MORE MODEL*/
@@ -162,9 +166,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function submitFeedback(answer) {
-  document.getElementById("feedbackMessage").innerText =
-    "Thank you for your feedback.";
 
-  console.log("User selected:", answer);
+function submitFeedback(answer) {
+  const message = document.getElementById("feedbackMessage");
+
+  if (answer === "Yes") {
+    message.textContent = "Thank you for your feedback!";
+  } else {
+    message.textContent = "Thank you for your feedback! Please let us know what can be improved.";
+    
+    // Redirect after 2 seconds
+    setTimeout(() => {
+        window.location.href = "/about.html#contact-form"; 
+    }, 2000);
+  }
 }
+

@@ -4,22 +4,16 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
+import { FaqYAMLSchema } from "../schemas/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 class Faqs {
   /**
-   * Represents an FAQ record from the database
-   * @constructor FAQs
-   * @param {Object} faq - the row object from the faqs table
-   * @param {number} [faq.faqs_id] - PK (auto incremented)
-   * @param {string} faq.question - the FAQ question text
-   * @param {string} faq.answer - the FAQ answer text
-   * @param {string} faq.benefit_slug - FK referencing benefits(slug)
-   * @param {array} [faq.category] - optional grouping category
-   * @param {number} [faq.display_order=0] - Sorting prioirty
-   * @param {boolean} [faq.active=true] - active toggle
+   * Represents an FAQ record
+   * @constructor
+   * @param {z.infer<typeof FaqYAMLSchema>}
    */
   constructor(faq) {
     this.id = faq.faqs_id ?? 999;
