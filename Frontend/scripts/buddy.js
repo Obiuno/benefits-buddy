@@ -279,7 +279,7 @@ function renderAssistantResponse(data) {
 
       card.innerHTML = `
         <h3>📘 Helpful Term</h3>
-        <p>${term}</p>
+        <p>${term.replace(/_/g, " ")}</p>
       `;
 
       wrap.appendChild(card);
