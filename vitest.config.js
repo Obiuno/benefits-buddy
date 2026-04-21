@@ -19,7 +19,7 @@ export default defineConfig({
         "Backend/middleware/*.js",
         "Backend/models/userModel.js",
         "Backend/routes/authRoutes.js",
-        "Backend/controller/authController.js",
+        "Backend/controllers/authControllers.js",
         "Backend/services/geminiAIServices.js",
       ],
     },
