@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { zodTextFormat } from "openai/helpers/zod";
 import { z } from "zod";
-import { AIResponseSchema } from "../schemas";
+import { AIResponseSchema } from "../schemas/index.js";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 

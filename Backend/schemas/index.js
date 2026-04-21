@@ -49,7 +49,7 @@ export const FaqSchema = FaqYAMLSchema.extend({
 export const ChatMessageSchema = z.object({
   role: z.enum(["user", "assistant"]),
   content: z.string().min(1),
-  timestamp: z.string().datetime().optional(),
+  timestamp: z.string().datetime().nullable().optional(),
 });
 
 export const ChatRequestSchema = z.object({
@@ -64,7 +64,7 @@ export const GlossaryResponseSchema = z.object({
 export const DeveloperMetaSchema = z
   .object({
     reasoning: z.string().nullable().optional(),
-    feedback: z.string().optional(),
+    feedback: z.string().nullable().optional(),
     confidence: z.enum(["low", "medium", "high"]),
     severity_category: z.enum(["low", "medium", "high"]),
     distress_category: z.enum(["low", "medium", "high"]),
