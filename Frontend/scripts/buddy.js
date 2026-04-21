@@ -110,10 +110,13 @@ function renderCurrentChat() {
     return;
   }
 
-  current.messages.forEach((msg) => {
-    addMessage(msg.role === "user" ? "user" : "bot", msg.content, msg.time);
-  });
-
+ current.messages.forEach((msg) => {
+  if (msg.role === "assistant") {
+    renderAssistantResponse(msg);
+  } else {
+    addMessage("user", msg.content, msg.time);
+  }
+});
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
@@ -212,13 +215,16 @@ async function sendMessage() {
 
     loading.remove();
 
-    renderAssistantResponse(data);
+   current.messages.push({
+  role: "assistant",
+  content: data.message || "No response.",
+  benefits: data.benefits_suggested || [],
+  glossary: data.glossary_terms || [],
+  nextQuestion: data.next_question || null,
+  time: getTime(),
+});
 
-    current.messages.push({
-      role: "assistant",
-      content: data.message || "No response.",
-      time: getTime(),
-    });
+renderAssistantResponse(current.messages[current.messages.length - 1]);
 
     saveAllChats();
   } catch (error) {
@@ -244,16 +250,16 @@ async function sendMessage() {
 /* =====================================================
    AI RESPONSE
 ===================================================== */
-function renderAssistantResponse(data) {
-  addMessage("bot", data.message || "No response.");
+function renderAssistantResponse(msg) {
+ addMessage("bot", msg.content || "No response.");
 
   /* Benefits Cards */
-  if (data.benefits_suggested?.length > 0) {
+if (msg.benefits?.length > 0) {
     const wrap = document.createElement("div");
     wrap.className = "cards-wrap";
 
-    data.benefits_suggested.forEach((item) => {
-      const card = document.createElement("div");
+msg.benefits.forEach((item) => {
+        const card = document.createElement("div");
       card.className = "info-card";
 
       card.innerHTML = `
@@ -269,11 +275,11 @@ function renderAssistantResponse(data) {
   }
 
   /* Glossary Cards */
-  if (data.glossary_terms?.length > 0) {
+  if (msg.glossary?.length > 0) {
     const wrap = document.createElement("div");
     wrap.className = "cards-wrap";
 
-    data.glossary_terms.forEach((term) => {
+    msg.glossary.forEach((term) => {
       const card = document.createElement("div");
       card.className = "info-card glossary-card";
 
@@ -289,8 +295,8 @@ function renderAssistantResponse(data) {
   }
 
   /* Next Question */
-  if (data.next_question) {
-    addMessage("bot", `<strong>Next:</strong> ${data.next_question}`);
+ if (msg.nextQuestion) {
+    addMessage("bot", `<strong>Next:</strong> ${msg.nextQuestion}`);
   }
 
   chatBox.scrollTop = chatBox.scrollHeight;
