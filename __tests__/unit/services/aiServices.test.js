@@ -93,4 +93,23 @@ describe("AI services", () => {
   it.todo(
     "handles malformed JSON - handled by Zod structured outputs on OpenAI side",
   );
+
+  it("developer_meta logging", async () => {
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+
+    mockOpenAIParse.mockResolvedValueOnce({
+      output_parsed: mockParsedResponse,
+    });
+
+    const result = await generateAIResponse(
+      mockChat,
+      mockBenefits,
+      mockGlossary,
+    );
+
+    expect(consoleSpy).toHaveBeenCalled(
+      expect.stringContaining('"reasoning": "test"') &&
+        expect.stringContaining('"feedback": "good"'),
+    );
+  });
 });

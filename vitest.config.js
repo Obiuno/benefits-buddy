@@ -14,9 +14,8 @@ export default defineConfig({
       include: ["Backend/**/*.js"],
       exclude: [
         "Backend/index.js",
-        "Backend/db/setup-db.js",
-        "Backend/db/index.js",
-        "Backend/middleware/*.js",
+        "Backend/db/*.js",
+        "Backend/middleware/auth.js",
         "Backend/models/userModel.js",
         "Backend/routes/authRoutes.js",
         "Backend/controllers/authControllers.js",
