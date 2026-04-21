@@ -11,6 +11,8 @@ import benefitsRouter from "./routes/benefitsRoutes.js";
 import aiRouter from "./routes/aiRoutes.js";
 
 import { errorHandler } from "./middleware/errorHandler.js";
+import { validate } from "./middleware/validate.js";
+import { ChatRequestSchema } from "./schemas/index.js";
 
 const app = express();
 
@@ -43,7 +45,7 @@ app.get("/", (req, res) => {
 app.use("/api/faqs", faqsRouter);
 app.use("/api/glossary", glossaryRouter);
 app.use("/api/benefits", benefitsRouter);
-app.use("/api/ai", aiRouter);
+app.use("/api/ai", validate(ChatRequestSchema), aiRouter);
 
 // error handler
 // last as everything should go right. Right?

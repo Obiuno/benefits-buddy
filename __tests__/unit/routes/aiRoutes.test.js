@@ -91,4 +91,6 @@ describe("AI routes", () => {
     expect(parsed).toHaveProperty("feedback");
     expect(parsed).toHaveProperty("timestamp");
   });
+
+  it.todo("strips developer_meta before sending (your_reasoning, feedback)");
 });

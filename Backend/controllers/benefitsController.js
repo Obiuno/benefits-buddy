@@ -58,15 +58,7 @@ const getBenefitsForFrontend = async (req, res) => {
           gotchas,
           preparation_tips,
           related_benefits,
-          questions_to_ask: [
-            ...questions_to_ask,
-            {
-              id: "shameless_plug",
-              question:
-                "for more information consider using our Benefits Buddy of visiting GOV.UK",
-              type: null,
-            },
-          ],
+          info: ["Consider using our Benefit Buddy or visiting GOV.UK"],
           gov_url: urls.gov_url,
         },
       };

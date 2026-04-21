@@ -13,6 +13,9 @@ import {
 } from "../../../Backend/schemas/index.js";
 
 describe("Benefit Schemas", () => {
+  it.todo("another validation, essentially just seeing if zod is working");
+  it.todo("honestly don't see why I am doing this, as in zod we trust");
+
   it.todo("valid benefit data passes BenefitYAMLSchema");
   it.todo("missing required name, slug field throws ZodError");
   it.todo("missing urls throws ZodError");

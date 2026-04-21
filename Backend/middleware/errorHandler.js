@@ -2,6 +2,7 @@ import { ZodError } from "zod";
 
 export function errorHandler(err, req, res, next) {
   if (err instanceof ZodError) {
+    console.error("Validation error: ", err.errors);
     return res.status(400).json({
       error: "Validation failed",
       details: err.errors.map((e) => ({

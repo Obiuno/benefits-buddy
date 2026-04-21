@@ -1,32 +1,23 @@
 import OpenAI from "openai";
 import { zodTextFormat } from "openai/helpers/zod";
 import { z } from "zod";
+import {
+  ChatRequestSchema,
+  GlossaryYAMLSchema,
+  BenefitYAMLSchema,
+  AIResponseSchema,
+} from "../schemas/index.js";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const BenefitsSchema = z.object({
-  name: z.string(),
-  slug: z.string(),
-  reason: z.string(),
-  gov_url: z.string(),
-});
-
-const AIResponseSchema = z.object({
-  message: z.string(),
-  benefits_suggested: z.array(BenefitsSchema).default([]),
-  glossary_terms: z.array(z.string()).default([]),
-  next_question: z.string().nullable().optional(),
-  developer_meta: z
-    .object({
-      reasoning: z.string().nullable().optional(),
-      feedback: z.string().nullable().optional(),
-    })
-    .nullable()
-    .optional(),
-});
-
 // remember to verify it using AIResponseSchema after you get a retrun
-
+/**
+ *
+ * @param {z.infer<typeof ChatRequestSchema} chat
+ * @param {z.infer<typeof BenefitYAMLSchema} benefitsData
+ * @param {z.infer<typeof GlossaryYAMLSchema} glossaryData
+ * @returns
+ */
 async function generateAIResponse(chat, benefitsData, glossaryData) {
   const userMessageCount = chat.filter((m) => m.role === "user").length;
 

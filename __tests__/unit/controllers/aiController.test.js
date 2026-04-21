@@ -1,14 +1,60 @@
 /*
 aiChat:
-- strips developer_meta before sending (your_reasoning, feedback)
-- returns correct shape (zod should enforce this)
-- returns console log of developer_meta
 - console.error("Error talking to Benefits Buddy: ", err);
     res.status(500).send({ error: err.message });
 */
 
-import { describe, it } from "vitest";
+import { describe, it, expect, beforeAll, vi, afterEach } from "vitest";
+
+it.todo("fix HTTP response and error response");
+
+vi.mock("../../../Backend/services/aiServices.js", () => ({
+  default: vi.fn(),
+}));
+
+import request from "supertest";
+import app from "../../../Backend/app";
+import generateAIResponse from "../../../Backend/services/aiServices.js";
 
 describe("AI controller", () => {
-  it.todo("create tests - see comments above");
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it.todo("returns 500 error", async () => {
+    generateAIResponse.mockRejectedValueOnce(new Error("Failed to load"));
+
+    const res = await request(app)
+      .post("/api/ai/chat")
+      .send([
+        {
+          role: "user",
+          content: "can you help me test?",
+          timestamp: new Date().toISOString(),
+        },
+      ]);
+    expect(res.status).toBe(500);
+  });
+
+  it.todo("logs error when model throws error", async () => {
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    generateAIResponse.mockRejectedValueOnce(new Error("Failed to load"));
+
+    await request(app)
+      .post("/api/ai/chat")
+      .send([
+        {
+          role: "user",
+          content: "can you help me test?",
+          timestamp: new Date().toISOString(),
+        },
+      ]);
+
+    expect(consoleSpy).toHaveBeenCalled();
+    expect(consoleSpy).toHaveBeenCalledWith(
+      "Error talking to Benefits Buddy: ",
+      expect.any(Error),
+    );
+    vi.resetAllMocks();
+  });
 });
