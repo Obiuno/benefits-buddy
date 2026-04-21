@@ -566,3 +566,12 @@ body{
 .glossary-card p{
   font-size:14px;
 }
+.chat-link {
+  color: #0066cc;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.chat-link:hover {
+  color: #004999;
+}
