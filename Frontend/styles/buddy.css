@@ -558,6 +558,8 @@ body{
 .glossary-card{
 padding: 14px;
   max-width: 250px;
+padding: 12px;
+  max-width: 250px;
 }
 
 .glossary-card h3{
@@ -569,6 +571,14 @@ padding: 14px;
   color: #374151;
   line-height: 1.5;
   font-size: 14px;
+ font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.glossary-definition {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #555;
 }
 
 .glossary-card p{
