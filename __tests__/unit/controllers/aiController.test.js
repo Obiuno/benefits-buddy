@@ -8,7 +8,6 @@ import { describe, it, expect, beforeAll, vi, afterEach } from "vitest";
 
 it.todo("fix HTTP response and error response");
 
-/*
 vi.mock("../../../Backend/services/aiServices.js", () => ({
   default: vi.fn(),
 }));
@@ -22,7 +21,7 @@ describe("AI controller", () => {
     vi.clearAllMocks();
   });
 
-  it("returns 500 error", async () => {
+  it.todo("returns 500 error", async () => {
     generateAIResponse.mockRejectedValueOnce(new Error("Failed to load"));
 
     const res = await request(app)
@@ -37,7 +36,7 @@ describe("AI controller", () => {
     expect(res.status).toBe(500);
   });
 
-  it("logs error when model throws error", async () => {
+  it.todo("logs error when model throws error", async () => {
     const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     generateAIResponse.mockRejectedValueOnce(new Error("Failed to load"));
 
@@ -59,4 +58,3 @@ describe("AI controller", () => {
     vi.resetAllMocks();
   });
 });
-*/
