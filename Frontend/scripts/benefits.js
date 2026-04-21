@@ -138,9 +138,9 @@ function openModal(index) {
     </ul>
 
     <h3>For more Information</h3>
-    <ul>
-      ${(info.info || []).map((x) => `<li>${x.info}</li>`).join("")}
-    </ul>
+  <div class="more-info-text">
+    ${(info.info || []).join("<br><br>")}
+  </div>
 
     <a href="${info.gov_url || "#"}"
        target="_blank"
