@@ -26,6 +26,11 @@ const aiChat = async (req, res) => {
           timestamp: new Date().toISOString(),
           reasoning: developer_meta.reasoning,
           feedback: developer_meta.feedback,
+          confidence: developer_meta.confidence,
+          severity_category: developer_meta.severity_category,
+          distress_category: developer_meta.distress_category,
+          complexity_category: developer_meta.complexity_category,
+          key_points: developer_meta.key_points,
         }),
       );
     }
