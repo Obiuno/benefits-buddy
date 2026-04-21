@@ -260,7 +260,7 @@ if (msg.benefits?.length > 0) {
 
 msg.benefits.forEach((item) => {
         const card = document.createElement("div");
-      card.className = "info-card";
+     card.className = "info-card benefit-card";
 
       card.innerHTML = `
         <h3>🎯 ${item.name}</h3>
@@ -293,6 +293,20 @@ msg.benefits.forEach((item) => {
 
     chatBox.appendChild(wrap);
   }
+  //msg.glossary.forEach((item) => {
+  //const card = document.createElement("div");
+  //card.className = "info-card glossary-card";
+
+  //const term = item.term.replace(/_/g, " ");
+
+  //card.innerHTML = `
+   // <h3>📘 ${term}</h3>
+  //  <p class="glossary-definition">${item.definition}</p>
+ // `;
+
+  //wrap.appendChild(card);
+ // });
+
 
   /* Next Question */
  if (msg.nextQuestion) {
