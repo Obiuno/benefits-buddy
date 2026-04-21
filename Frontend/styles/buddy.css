@@ -301,7 +301,7 @@ body{
 }
 
 .info-card{
-  background:linear-gradient(145deg,#e4eff1,#ecf0f7);
+  background:linear-gradient(145deg,#d1d9da,#ecf0f7);
   border-radius:20px;
   padding:20px;
   border:1px solid rgba(77,166,255,0.15);
@@ -320,7 +320,7 @@ body{
 }
 
 .info-card p{
-  color:#5d6f82;
+  color:#2e3033;
   line-height:1.6;
   margin-bottom:14px;
 }
@@ -539,4 +539,30 @@ body{
     height:46px;
     font-size:18px;
   }
+}
+/*
+   BENEFIT CARDS
+*/
+.benefit-card{
+  background:linear-gradient(145deg,#d6ecff,#eef6ff);
+  border:1px solid rgba(45,140,255,0.25);
+}
+
+/*
+   GLOSSARY CARDS
+ */
+.glossary-card{
+  background:linear-gradient(145deg,#dbe9f0,#e2f3f4);
+  border:1px solid rgba(16,163,127,0.25);
+}
+.glossary-card{
+  padding:16px;
+}
+
+.glossary-card h3{
+  font-size:18px;
+}
+
+.glossary-card p{
+  font-size:14px;
 }
