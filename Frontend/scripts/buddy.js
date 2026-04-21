@@ -133,7 +133,7 @@ function addMessage(sender, text, time = getTime()) {
     </div>
 
     <div class="msg ${sender}">
-      <div>${text}</div>
+      <div>${linkify(text)}</div>
       <span class="time">${time}</span>
     </div>
   `;
@@ -280,26 +280,33 @@ if (msg.glossary?.length > 0) {
   const wrap = document.createElement("div");
   wrap.className = "cards-wrap";
 
-  msg.glossary.forEach((item) => {
-    const card = document.createElement("div");
-    card.className = "info-card glossary-card";
+    msg.glossary.forEach((term) => {
+      const card = document.createElement("div");
+      card.className = "info-card glossary-card";
 
-    const cleanTerm = (item.term || "")
-      .replace(/_/g, " ")
-      .replace(/\b\w/g, c => c.toUpperCase());
+      card.innerHTML = `
+        <h3>📘 Helpful Term</h3>
+        <p>${term.replace(/_/g, " ")}</p>
+      `;
 
-    const definition = item.definition || "No definition available.";
+      wrap.appendChild(card);
+    });
 
-    card.innerHTML = `
-      <h3>📘 ${cleanTerm}</h3>
-      <p class="glossary-definition">${definition}</p>
-    `;
+    chatBox.appendChild(wrap);
+  }
+  //msg.glossary.forEach((item) => {
+  //const card = document.createElement("div");
+  //card.className = "info-card glossary-card";
 
-    wrap.appendChild(card);
-  });
+  //const term = item.term.replace(/_/g, " ");
 
-  chatBox.appendChild(wrap);
-}
+  //card.innerHTML = `
+   // <h3>📘 ${term}</h3>
+  //  <p class="glossary-definition">${item.definition}</p>
+ // `;
+
+  //wrap.appendChild(card);
+ // });
 
 
   /* Next Question */
