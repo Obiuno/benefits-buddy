@@ -310,9 +310,12 @@ msg.benefits.forEach((item) => {
 
   /* Next Question */
  if (msg.nextQuestion) {
-    addMessage("bot", `<strong>Next:</strong> ${msg.nextQuestion}`);
-  }
+  const label = msg.nextQuestion
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, c => c.toUpperCase());
 
+  addMessage("bot", `<strong>Next:</strong> ${label}`);
+}
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
