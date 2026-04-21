@@ -24,10 +24,10 @@ class Faqs {
     this.display_order = faq.display_order ?? 999;
     this.active = faq.active ?? true;
   }
-  /**Get all FAQs from the faq.yml
-   * @static
-   * @async
-   * @returns {Promise<Faqs[]>} A promise that resolves to an array of FAQ instances
+
+  /**
+   *
+   * @returns {Promise<z.infer<typeof FaqYAMLSchema>[]>}
    */
   static async getAllFaqs() {
     try {
@@ -47,6 +47,7 @@ class Faqs {
         .map((f) => new Faqs(f)); //would want to filer for active, sort based on display order
     } catch (err) {
       console.error("Failed to read FAQs: ", err);
+      throw err; // rethrow so errorHandler catches it
     }
   }
 }

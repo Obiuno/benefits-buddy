@@ -27,10 +27,9 @@ class Benefits {
     this.active = benefit.active ?? true;
   }
 
-  /**Get all benefit from benefits.yml
-   * @static
-   * @async
-   * @returns {Promise<Faqs[]>} A promise that resolves to an array of glossary item instances
+  /**
+   *
+   * @returns {Promise<z.infer<typeof BenefitYAMLSchema>[]>}
    */
   static async getAllBenefits() {
     try {
@@ -46,6 +45,7 @@ class Benefits {
         .map((i) => new Benefits(i));
     } catch (err) {
       console.error("Failed to load Benefits: ", err);
+      throw err; // rethrow so errorHandler catches it
     }
   }
 }

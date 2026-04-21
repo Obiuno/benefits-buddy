@@ -23,10 +23,10 @@ class Glossary {
     this.active = item.active ?? true;
     this.slug = item.glossary_slug;
   }
-  /**Get all glossary items from the glossary.yml
-   * @static
-   * @async
-   * @returns {Promise<Faqs[]>} A promise that resolves to an array of glossary item instances
+
+  /**
+   *
+   * @returns {Promise<z.infer<typeof GlossaryYAMLSchema>[]>}
    */
   static async getAllGlossaryItems() {
     try {
