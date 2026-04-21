@@ -177,7 +177,7 @@ function submitFeedback(answer) {
     
     // Redirect after 2 seconds
     setTimeout(() => {
-        window.location.href = "about.html#contact-form"; 
+        window.location.href = "About.html#contact-form"; 
     }, 2000);
   }
 }
