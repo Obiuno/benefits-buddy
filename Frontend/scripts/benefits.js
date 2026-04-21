@@ -137,9 +137,9 @@ function openModal(index) {
       ${(info.related_benefits || []).map((x) => `<li>${formatCategory(x)}</li>`).join("")}
     </ul>
 
-    <h3>Questions To Ask</h3>
+    <h3>For more Information</h3>
     <ul>
-      ${(info.questions_to_ask || []).map((x) => `<li>${x.question}</li>`).join("")}
+      ${(info.info || []).map((x) => `<li>${x.info}</li>`).join("")}
     </ul>
 
     <a href="${info.gov_url || "#"}"
@@ -177,7 +177,7 @@ function submitFeedback(answer) {
     
     // Redirect after 2 seconds
     setTimeout(() => {
-        window.location.href = "/about.html#contact-form"; 
+        window.location.href = "About.html#contact-form"; 
     }, 2000);
   }
 }
