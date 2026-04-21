@@ -556,11 +556,19 @@ body{
   border:1px solid rgba(16,163,127,0.25);
 }
 .glossary-card{
-  padding:16px;
+padding: 14px;
+  max-width: 250px;
 }
 
 .glossary-card h3{
-  font-size:18px;
+ margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.glossary-definition {
+  color: #374151;
+  line-height: 1.5;
+  font-size: 14px;
 }
 
 .glossary-card p{
