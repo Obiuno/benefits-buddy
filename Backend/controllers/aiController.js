@@ -18,14 +18,14 @@ const aiChat = async (req, res) => {
     );
     //console.log("🟥 this is the response shape: ", response);
 
-    const { developer_meta, ...frontendResponse } = response;
+    const { developer_meta, buddy_context, ...frontendResponse } = response;
 
     if (response.developer_meta) {
       console.log(
         JSON.stringify({
           timestamp: new Date().toISOString(),
-          reasoning: developer_meta.reasoning,
-          feedback: developer_meta.feedback,
+          ...developer_meta,
+          ...buddy_context,
         }),
       );
     }
