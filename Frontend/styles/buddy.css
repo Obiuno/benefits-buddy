@@ -46,7 +46,16 @@ body{
   font-weight:800;
   margin-bottom:18px;
 }
-
+.sidebar-disclaimer{
+  margin-top:auto;   
+  padding:12px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(36, 35, 35, 0.12);
+  color:#ffffff;
+  font-size:13px;
+  line-height:1.5;
+}
 /* =========================
    BUTTONS
 ========================= */
@@ -592,3 +601,4 @@ padding: 12px;
 .chat-link:hover {
   color: #004999;
 }
+
