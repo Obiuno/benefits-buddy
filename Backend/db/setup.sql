@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS ai_logs;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS conversations;
 DROP TABLE IF EXISTS glossary;
@@ -11,7 +12,7 @@ CREATE TABLE benefits (
     name VARCHAR(250) NOT NULL,
     description TEXT NOT NULL,
     category JSONB,
-    urls JSONB UNIQUE NOT NULL,
+    urls JSONB NOT NULL,
     details JSONB NOT NULL,
     active BOOLEAN DEFAULT TRUE,
     updated_at TIMESTAMP DEFAULT NOW()
@@ -33,7 +34,8 @@ CREATE TABLE glossary (
     term VARCHAR(100) UNIQUE NOT NULL,
     definition TEXT NOT NULL,
     related_benefits JSONB,
-    active BOOLEAN DEFAULT TRUE
+    active BOOLEAN DEFAULT TRUE,
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE users (
@@ -56,8 +58,24 @@ CREATE TABLE conversations (
 CREATE TABLE messages (
     message_id SERIAL PRIMARY KEY,
     conversation_id INTEGER REFERENCES conversations(conversation_id) ON DELETE CASCADE,
-    sender VARCHAR(20) CHECK (sender IN ('user', 'ai')),
+    role VARCHAR(20) CHECK (role IN ('user', 'assistant')),
     content TEXT NOT NULL,
-    metadata JSONB, -- Stores things like suggested benefit slug or question_id
+    metadata JSONB, -- Stores AI context, buddy context and maybe developer meta
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE ai_logs (
+    log_id SERIAL PRIMARY KEY,
+    conversation_id INTEGER REFERENCES conversations(conversation_id),
+    message_id INTEGER REFERENCES messages(message_id),
+    reasoning TEXT,
+    feedback TEXT,
+    confidence VARCHAR(6) CHECK (confidence IN ('low', 'medium', 'high')),
+    severity_category VARCHAR(6) CHECK (severity_category IN ('low', 'medium', 'high')),
+    distress_category VARCHAR(6) CHECK (distress_category IN ('low', 'medium', 'high')),
+    complexity_category VARCHAR(6) CHECK (complexity_category IN ('low', 'medium', 'high')),
+    tone_mode VARCHAR(10) CHECK (tone_mode IN ('normal', 'supportive', 'urgent')),
+    key_points JSONB,
+    legacy_risk BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT NOW()
 );
