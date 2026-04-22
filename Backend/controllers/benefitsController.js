@@ -7,7 +7,7 @@ import Benefits from "../models/benefitsModel.js";
  */
 const getAllBenefits = async (req, res) => {
   try {
-    const benefits = await Benefits.getAllBenefits();
+    const benefits = await Benefits.getBenefitsFromDB();
     res.status(200).send(benefits);
   } catch (err) {
     console.error("Error fetching each benefit: ", err);
@@ -20,7 +20,7 @@ const getBenefitsForFrontend = async (req, res) => {
   const host = req.get("host");
   const baseURL = `${protocol}://${host}`;
   try {
-    const rawBenefits = await Benefits.getAllBenefits();
+    const rawBenefits = await Benefits.getBenefitsFromDB();
 
     const shapedBenefits = rawBenefits.map((benefit) => {
       // 1. Destructure the top-level fields from the benefit record

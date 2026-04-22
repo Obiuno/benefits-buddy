@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
-import { FaqYAMLSchema } from "../schemas/index.js";
+import { FaqYAMLSchema, FaqSchema } from "../schemas/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,6 +53,23 @@ class Faqs {
     } catch (err) {
       console.error("Failed to read FAQs: ", err.message);
       throw err; // rethrow so errorHandler catches it
+    }
+  }
+  /**
+   *
+   * @returns {Promise<z.infer<typeof FaqSchema>[]>}
+   */
+  static async getFaqsFromDB() {
+    try {
+      const { rows } = await db.query("SELECT * FROM faqs WHERE active = true");
+
+      return rows.map((i) => {
+        const validated = FaqSchema.parse(i);
+        return new Faqs(validated);
+      });
+    } catch (err) {
+      console.error("❌Failed to load FAQs from DB: ", err.message);
+      throw err;
     }
   }
 }
