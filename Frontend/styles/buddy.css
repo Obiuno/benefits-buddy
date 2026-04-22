@@ -296,7 +296,7 @@ body{
 .cards-wrap{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:18px;
+  gap:10px;
   margin:14px 0;
 }
 
