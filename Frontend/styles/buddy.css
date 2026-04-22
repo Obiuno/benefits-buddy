@@ -295,10 +295,10 @@ body{
 ========================= */
 .cards-wrap{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:10px;
-  row-gap:6px,
-  margin:14px 0;
+  grid-template-columns:repeat(auto-fit,minmax(220px,max-content));
+  column-gap:8px;
+  row-gap:8px;
+  justify-content:start;
 }
 
 .info-card{
@@ -507,11 +507,9 @@ body{
   .msg{
     max-width:85%;
     font-size:14px;
+    
   }
 
-  .cards-wrap{
-    grid-template-columns:1fr;
-  }
 }
 
 @media(max-width:600px){
