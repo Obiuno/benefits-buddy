@@ -13,7 +13,7 @@ import Faqs from "../models/faqModel.js";
  */
 const getAllFaqs = async (req, res) => {
   try {
-    const faqs = await Faqs.getAllFaqs();
+    const faqs = await Faqs.getFaqsFromDB();
     res.status(200).send(faqs);
   } catch (err) {
     console.error("Error fetching FAQs: ", err);

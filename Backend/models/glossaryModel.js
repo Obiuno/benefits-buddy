@@ -1,10 +1,10 @@
-//import db from "../db/connect.js";
+import db from "../db/connect.js";
 
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
-import { GlossaryYAMLSchema } from "../schemas/index.js";
+import { GlossaryYAMLSchema, GlossarySchema } from "../schemas/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -47,6 +47,22 @@ class Glossary {
     } catch (err) {
       console.error("Failed to load Glossary:", err);
       throw err; // rethrow so errorHandler catches it
+    }
+  }
+
+  static async getGlossaryFromDB() {
+    try {
+      const { rows } = await db.query(
+        "SELECT glossary_id, slug AS glossary_slug, term, definition, related_benefits, active FROM glossary WHERE active = true",
+      );
+
+      return rows.map((i) => {
+        const validated = GlossarySchema.parse(i);
+        return new Glossary(validated);
+      });
+    } catch (err) {
+      console.error("❌Failed to load Glossary from DB: ", err.message);
+      throw err;
     }
   }
 }

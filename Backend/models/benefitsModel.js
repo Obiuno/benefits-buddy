@@ -5,7 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
 import { stringify } from "node:querystring";
-import { BenefitYAMLSchema } from "../schemas/index.js";
+import { BenefitYAMLSchema, BenefitSchema } from "../schemas/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -51,6 +51,25 @@ class Benefits {
     } catch (err) {
       console.error("Failed to load Benefits: ", err);
       throw err; // rethrow so errorHandler catches it
+    }
+  }
+  /**
+   *
+   * @returns {Promise<z.infer<typeof BenefitSchema>[]>}
+   */
+  static async getBenefitsFromDB() {
+    try {
+      const { rows } = await db.query(
+        "SELECT * FROM benefits WHERE active = true",
+      );
+
+      return rows.map((i) => {
+        const validated = BenefitSchema.parse(i);
+        return new Benefits(validated);
+      });
+    } catch (err) {
+      console.error("❌Failed to load Beneftis from DB: ", err.message);
+      throw err;
     }
   }
 }

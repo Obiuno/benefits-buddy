@@ -7,7 +7,7 @@ import Glossary from "../models/glossaryModel.js";
  */
 const getAllGlossaryItems = async (req, res) => {
   try {
-    const glossaryItems = await Glossary.getAllGlossaryItems();
+    const glossaryItems = await Glossary.getGlossaryFromDB();
     res.status(200).send(glossaryItems);
   } catch (err) {
     console.error("Error fetching Glossary items: ", err);
