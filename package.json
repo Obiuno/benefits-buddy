@@ -23,8 +23,8 @@
     "start": "node ./Backend/index.js"
   },
   "dependencies": {
-    "@scalar/express-api-reference": "^0.9.7",
     "@google/genai": "^1.50.1",
+    "@scalar/express-api-reference": "^0.9.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
@@ -33,7 +33,7 @@
     "openai": "^6.34.0",
     "pg": "^8.20.0",
     "swagger-jsdoc": "^6.2.8",
-    "zod": "^4.3.6"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.1.4",

@@ -10,7 +10,7 @@ export const BenefitYAMLSchema = z.object({
   name: z.string(),
   slug: z.string(),
   description: z.string(),
-  category: z.array(z.string()).nullable().optional(),
+  category: z.array(z.string()).nullable().optional().default([]),
   urls: BenefitUrlsSchema,
   details: z.record(z.unknown()),
   active: z.boolean().default(true),
@@ -37,8 +37,8 @@ export const FaqYAMLSchema = z.object({
   question: z.string(),
   answer: z.string(),
   benefit_slug: z.string().nullable().optional(),
-  category: z.string().nullable().optional(),
-  display_order: z.number().int().default(999),
+  category: z.array(z.string()).nullable().optional().default([]),
+  display_order: z.number().int().nullable().optional().default(999),
   active: z.boolean().default(true),
 });
 

@@ -40,7 +40,10 @@ class Glossary {
         .map((i) => GlossaryYAMLSchema.parse(i)) // Zod validates each item
         .filter((i) => i.active)
         .sort((a, b) => (a.display_order || 99) - (b.display_order || 99))
-        .map((i) => new Glossary(i));
+        .map((i) => {
+          const validated = GlossaryYAMLSchema.parse(i);
+          return new Glossary(validated);
+        });
     } catch (err) {
       console.error("Failed to load Glossary:", err);
       throw err; // rethrow so errorHandler catches it

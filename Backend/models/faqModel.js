@@ -41,12 +41,17 @@ class Faqs {
       );
       const faqData = yaml.load(faqFile);
       //console.log("raw data", JSON.stringify(faqData.faqs, null, 2));
+
+      console.log("Schema:", FaqYAMLSchema);
       return faqData.faqs
-        .filter((f) => f.active)
+        .filter((f) => f.active !== false)
         .sort((a, b) => (a.display_order || 99) - (b.display_order || 99))
-        .map((f) => new Faqs(f)); //would want to filer for active, sort based on display order
+        .map((f) => {
+          const validated = FaqYAMLSchema.parse(f);
+          return new Faqs(validated);
+        }); //would want to filer for active, sort based on display order
     } catch (err) {
-      console.error("Failed to read FAQs: ", err);
+      console.error("Failed to read FAQs: ", err.message);
       throw err; // rethrow so errorHandler catches it
     }
   }

@@ -40,9 +40,14 @@ class Benefits {
       const benefitsData = yaml.load(benefitsFile);
       //console.log("raw data", JSON.stringify(benefitsData.benefits, null, 2));
 
+      console.log("Schema:", BenefitYAMLSchema);
+
       return benefitsData.benefits
         .sort((a, b) => (a.display_order || 99) - (b.display_order || 99))
-        .map((i) => new Benefits(i));
+        .map((i) => {
+          const validated = BenefitYAMLSchema.parse(i);
+          return new Benefits(validated);
+        });
     } catch (err) {
       console.error("Failed to load Benefits: ", err);
       throw err; // rethrow so errorHandler catches it
