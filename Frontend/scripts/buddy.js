@@ -283,40 +283,31 @@ msg.benefits.forEach((item) => {
     chatBox.appendChild(wrap);
   }
 
-  /* Glossary Cards */
-  if (msg.glossary?.length > 0) {
-    const wrap = document.createElement("div");
-    wrap.className = "cards-wrap";
+ /* Glossary Cards */
+if (msg.glossary?.length > 0) {
+  const wrap = document.createElement("div");
+  wrap.className = "cards-wrap";
 
-    msg.glossary.forEach((term) => {
-      const card = document.createElement("div");
-      card.className = "info-card glossary-card";
+  msg.glossary.forEach((item) => {
+    const card = document.createElement("div");
+    card.className = "info-card glossary-card";
 
-      card.innerHTML = `
-        <h3>📘 Helpful Term</h3>
-        <p>${term.replace(/_/g, " ")}</p>
-      `;
+    const cleanTerm = (item.term || "")
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, c => c.toUpperCase());
 
-      wrap.appendChild(card);
-    });
+    const definition = item.definition || "No definition available.";
 
-    chatBox.appendChild(wrap);
-  }
-  //msg.glossary.forEach((item) => {
-  //const card = document.createElement("div");
-  //card.className = "info-card glossary-card";
+    card.innerHTML = `
+      <h3>📘 ${cleanTerm}</h3>
+      <p class="glossary-definition">${definition}</p>
+    `;
 
-  //const term = item.term.replace(/_/g, " ");
+    wrap.appendChild(card);
+  });
 
-  //card.innerHTML = `
-   // <h3>📘 ${term}</h3>
-  //  <p class="glossary-definition">${item.definition}</p>
- // `;
-
-  //wrap.appendChild(card);
- // });
-
-
+  chatBox.appendChild(wrap);
+}
   /* Next Question */
  if (msg.nextQuestion) {
   const label = msg.nextQuestion

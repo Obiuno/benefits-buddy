@@ -8,16 +8,17 @@
 
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/buddy.css" />
-    <link rel="stylesheet" href="/styles/responsive.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   </head>
 
   <body>
     <!-- NAVBAR -->
-    <nav class="navbar">
-      <div class="nav-left">
-     <img src="/Images/bb.png" alt="Logo" class="logo-img" />
-      </div>
+     <nav class="navbar">
+  <div class="nav-left">
+    <a href="main.html">
+      <img src="/Images/bb.png" alt="Benefit Buddy Logo" class="logo-img">
+    </a>
+  </div>
 
       <div class="nav-links">
         <a href="/main.html" class="nav-btn">Home</a>
@@ -34,12 +35,6 @@
           <img src="/Images/user.jpg" alt="User" class="profile-img" />
         </label>
 
-        <div class="profile-dropdown">
-          <a href="/login.html">Login</a>
-          <a href="/signup.html">Add new account</a>
-          <a href="#">Settings</a>
-          <a href="/main.html">Logout</a>
-        </div>
       </div>
     </nav>
 
@@ -47,15 +42,23 @@
     <div class="buddy-app">
       <!-- LEFT PANEL -->
       <aside class="left-panel">
+        
         <button class="new-chat" onclick="newChat()">+ New Chat</button>
+          <div class="side-actions">
         <button class="history-btn" onclick="toggleHistory()">
-          View History
-        </button>
-        <button class="history-btn" onclick="downloadChat()">
-          Download Chat
+        View History
         </button>
 
+        <button class="history-btn" onclick="downloadChat()">
+         Download Chat
+        </button>
+        </div>
         <div id="historyBox" class="history-box"></div>
+    <div class="buddy-disclaimer">
+    ⚠️ <strong>Benefit Buddy</strong> is an informational guide only and not for official financial, medical, or mental health advice. Always confirm eligibility via GOV.UK or a qualified adviser. If you need urgent support, visit 
+    <a href="https://www.nhs.uk/mental-health/" target="_blank">NHS</a> or 
+    <a href="https://www.samaritans.org/" target="_blank">Samaritans</a>.
+    </div>
       </aside>
 
       <!-- MAIN CHAT -->
@@ -84,8 +87,6 @@
  
     <script src="/scripts/buddy.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="chat.js"></script>
  
-
   </body>
 </html>
