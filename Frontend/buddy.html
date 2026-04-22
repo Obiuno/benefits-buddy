@@ -13,10 +13,12 @@
 
   <body>
     <!-- NAVBAR -->
-    <nav class="navbar">
-      <div class="nav-left">
-     <img src="/Images/bb.png" alt="Logo" class="logo-img" />
-      </div>
+     <nav class="navbar">
+  <div class="nav-left">
+    <a href="main.html">
+      <img src="/Images/bb.png" alt="Benefit Buddy Logo" class="logo-img">
+    </a>
+  </div>
 
       <div class="nav-links">
         <a href="/main.html" class="nav-btn">Home</a>
@@ -40,18 +42,23 @@
     <div class="buddy-app">
       <!-- LEFT PANEL -->
       <aside class="left-panel">
+        
         <button class="new-chat" onclick="newChat()">+ New Chat</button>
+          <div class="side-actions">
         <button class="history-btn" onclick="toggleHistory()">
-          View History
-        </button>
-        <button class="history-btn" onclick="downloadChat()">
-          Download Chat
+        View History
         </button>
 
-        <div id="historyBox" class="history-box"></div>
-        <div class="sidebar-disclaimer">
-        ⚠️ Benefit Buddy gives general guidance only. Please check official GOV.UK sources or speak with an adviser before making decisions.
+        <button class="history-btn" onclick="downloadChat()">
+         Download Chat
+        </button>
         </div>
+        <div id="historyBox" class="history-box"></div>
+    <div class="buddy-disclaimer">
+    ⚠️ <strong>Benefit Buddy</strong> is an informational guide only and not for official financial, medical, or mental health advice. Always confirm eligibility via GOV.UK or a qualified adviser. If you need urgent support, visit 
+    <a href="https://www.nhs.uk/mental-health/" target="_blank">NHS</a> or 
+    <a href="https://www.samaritans.org/" target="_blank">Samaritans</a>.
+    </div>
       </aside>
 
       <!-- MAIN CHAT -->
