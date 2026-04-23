@@ -24,19 +24,25 @@ body{
   position:relative;
 }
 .nav-left a{
-  display:flex;
+  display:inline-flex;
   align-items:center;
   text-decoration:none;
+  width:auto;
+  padding:0;
+  margin:0;
 }
 
 .logo-img{
   width:300px;
   height:auto;
   object-fit:contain;
-  margin-left:-100px;
-  margin-top:12px;
+  margin:0;
   transition:transform 0.2s ease, opacity 0.2s ease;
   cursor:pointer;
+}
+.nav-left{
+  margin-left:-100px;
+  margin-top:12px;
 }
 
 

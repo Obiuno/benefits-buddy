@@ -23,8 +23,8 @@
     "start": "node ./Backend/index.js"
   },
   "dependencies": {
-    "@scalar/express-api-reference": "^0.9.7",
     "@google/genai": "^1.50.1",
+    "@scalar/express-api-reference": "^0.9.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
@@ -37,9 +37,10 @@
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.1.4",
+    "jsdom": "^29.0.2",
     "mintlify": "^4.2.515",
     "nodemon": "^3.1.14",
     "supertest": "^7.2.2",
-    "vitest": "^4.1.4"
+    "vitest": "^4.1.5"
   }
 }
