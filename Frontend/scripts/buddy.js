@@ -110,13 +110,13 @@ function renderCurrentChat() {
     return;
   }
 
- current.messages.forEach((msg) => {
-  if (msg.role === "assistant") {
-    renderAssistantResponse(msg);
-  } else {
-    addMessage("user", msg.content, msg.time);
-  }
-});
+  current.messages.forEach((msg) => {
+    if (msg.role === "assistant") {
+      renderAssistantResponse(msg);
+    } else {
+      addMessage("user", msg.content, msg.time);
+    }
+  });
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
@@ -224,16 +224,16 @@ async function sendMessage() {
 
     loading.remove();
 
-   current.messages.push({
-  role: "assistant",
-  content: data.message || "No response.",
-  benefits: data.benefits_suggested || [],
-  glossary: data.glossary_terms || [],
-  nextQuestion: data.next_question || null,
-  time: getTime(),
-});
+    current.messages.push({
+      role: "assistant",
+      content: data.message || "No response.",
+      benefits: data.benefits_suggested || [],
+      glossary: data.glossary_terms || [],
+      nextQuestion: data.next_question || null,
+      time: getTime(),
+    });
 
-renderAssistantResponse(current.messages[current.messages.length - 1]);
+    renderAssistantResponse(current.messages[current.messages.length - 1]);
 
     saveAllChats();
   } catch (error) {
@@ -260,16 +260,16 @@ renderAssistantResponse(current.messages[current.messages.length - 1]);
    AI RESPONSE
 ===================================================== */
 function renderAssistantResponse(msg) {
- addMessage("bot", msg.content || "No response.");
+  addMessage("bot", msg.content || "No response.");
 
   /* Benefits Cards */
-if (msg.benefits?.length > 0) {
+  if (msg.benefits?.length > 0) {
     const wrap = document.createElement("div");
     wrap.className = "cards-wrap";
 
-msg.benefits.forEach((item) => {
-        const card = document.createElement("div");
-     card.className = "info-card benefit-card";
+    msg.benefits.forEach((item) => {
+      const card = document.createElement("div");
+      card.className = "info-card benefit-card";
 
       card.innerHTML = `
         <h3>🎯 ${item.name}</h3>
@@ -283,39 +283,39 @@ msg.benefits.forEach((item) => {
     chatBox.appendChild(wrap);
   }
 
- /* Glossary Cards */
-if (msg.glossary?.length > 0) {
-  const wrap = document.createElement("div");
-  wrap.className = "cards-wrap";
+  /* Glossary Cards */
+  if (msg.glossary?.length > 0) {
+    const wrap = document.createElement("div");
+    wrap.className = "cards-wrap";
 
-  msg.glossary.forEach((item) => {
-    const card = document.createElement("div");
-    card.className = "info-card glossary-card";
+    msg.glossary.forEach((item) => {
+      const card = document.createElement("div");
+      card.className = "info-card glossary-card";
 
-    const cleanTerm = (item.term || "")
-      .replace(/_/g, " ")
-      .replace(/\b\w/g, c => c.toUpperCase());
+      const cleanTerm = (item.term || "")
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
 
-    const definition = item.definition || "No definition available.";
+      const definition = item.definition || "No definition available.";
 
-    card.innerHTML = `
+      card.innerHTML = `
       <h3>📘 ${cleanTerm}</h3>
       <p class="glossary-definition">${definition}</p>
     `;
 
-    wrap.appendChild(card);
-  });
+      wrap.appendChild(card);
+    });
 
-  chatBox.appendChild(wrap);
-}
+    chatBox.appendChild(wrap);
+  }
   /* Next Question */
- if (msg.nextQuestion) {
-  const label = msg.nextQuestion
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, c => c.toUpperCase());
+  if (msg.nextQuestion) {
+    const label = msg.nextQuestion
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase());
 
-  addMessage("bot", `<strong>Next:</strong> ${label}`);
-}
+    addMessage("bot", `<strong>Next:</strong> ${label}`);
+  }
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
@@ -657,7 +657,7 @@ function downloadChat() {
       msg.glossary.forEach((term) => {
         const clean = term
           .replace(/_/g, " ")
-          .replace(/\b\w/g, c => c.toUpperCase());
+          .replace(/\b\w/g, (c) => c.toUpperCase());
 
         addWrapped(`• ${clean}`, margin + 3, 10);
         y += 1;
@@ -670,7 +670,7 @@ function downloadChat() {
 
       const next = msg.nextQuestion
         .replace(/_/g, " ")
-        .replace(/\b\w/g, c => c.toUpperCase());
+        .replace(/\b\w/g, (c) => c.toUpperCase());
 
       addWrapped(next, margin + 3, 10);
     }
@@ -690,3 +690,8 @@ input.addEventListener("keydown", (e) => {
     sendMessage();
   }
 });
+
+export default {
+  linkify,
+  sendMessage,
+};
