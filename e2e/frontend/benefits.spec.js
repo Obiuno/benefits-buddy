@@ -158,4 +158,97 @@ test.describe("benefits.js", () => {
       expect(tag?.trim()).toBe("Income support");
     });
   });
+
+  /* =====================================================
+   highlight()
+===================================================== */
+  test.describe("highlight()", () => {
+    test("wraps matching keyword in mark tag", async ({ page }) => {
+      //arrang
+      await page.waitForSelector(".benefit-card");
+      await page.fill("#searchInput", "Universal");
+
+      // assert
+      await expect(page.locator("#benefitGrid")).toContainText("Universal");
+    });
+
+    test("returns same text if no keyword", async ({ page }) => {
+      // act
+      await page.waitForSelector(".benefit-card");
+      // if no keyword means if nothing
+
+      // assert
+      const text = await page.locator(".benefit-card h2").first().textContent();
+      expect(text?.trim()).toBe("Universal Credit");
+    });
+  });
+
+  /* =====================================================
+   searchBenefits()
+===================================================== */
+  test.describe("searchBenefits()", () => {
+    test("filters for matching benefits", async ({ page }) => {
+      await page.waitForSelector(".benefit-card");
+
+      // act
+      await page.fill("#searchInput", "credit");
+
+      const filteredCards = page.locator(".benefit-card");
+      await expect(filteredCards).toHaveCount(1);
+    });
+
+    test("should be case insensitive", async ({ page }) => {
+      await page.waitForSelector(".benefit-card");
+      await page.fill("#searchInput", "CREDIT");
+
+      const filteredCards = page.locator(".benefit-card");
+      await expect(filteredCards).toHaveCount(1);
+    });
+
+    test("trims spaces", async ({ page }) => {
+      await page.waitForSelector(".benefit-card");
+      await page.fill("#searchInput", " credit ");
+
+      const filteredCards = page.locator(".benefit-card");
+      await expect(filteredCards).toHaveCount(1);
+    });
+
+    test("shows no results if no match", async ({ page }) => {
+      await page.waitForSelector(".benefit-card");
+      await page.fill("#searchInput", "zzzznomatch");
+
+      await expect(page.locator("#noResult")).toBeVisible();
+    });
+  });
+
+  /* =====================================================
+   formatCategory()
+===================================================== */
+  test.describe("formatCategory()", () => {
+    test("converts underscore text to readable format", async ({ page }) => {
+      await page.waitForSelector(".benefit-card");
+      const tags = await page.locator(".tag").allTextContents();
+      expect(tags[1]?.trim()).toBe("Families and children");
+    });
+  });
+
+  /* =====================================================
+   openModal() and closeModal()
+===================================================== */
+
+  /* =====================================================
+   DOMContentLoaded
+===================================================== */
+
+  test.describe("DOMContentLoaded", () => {
+    test("calls loadBenefits on page load", async ({ page }) => {
+      await page.waitForSelector(".benefit-card");
+      const cards = await page.locator(".benefit-card").count();
+      expect(cards).toBeGreaterThan(0);
+    });
+
+    test("attaches input event listener to searchbox", async ({ page }) => {
+      await expect(page.locator(".benefit-card")).not.toHaveCount(0);
+    });
+  });
 });

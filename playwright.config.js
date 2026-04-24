@@ -10,4 +10,14 @@ export default defineConfig({
     url: "http://localhost:3000",
     reuseExistingServer: true,
   },
+  reporter: [
+    ["monocart-reporter", {
+      name: "Benefits Buddy E2E Coverage",
+      outputFile: "./coverage/e2e/index.html",
+      coverage: {
+        entryFilter: (entry) => entry.url.includes("Frontend"),
+        sourceFilter: (sourcePath) => sourcePath.includes("Frontend/scripts"),
+      }
+    }]
+  ],
 });
